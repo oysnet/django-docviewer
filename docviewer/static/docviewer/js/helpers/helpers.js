@@ -292,7 +292,7 @@ docviewer.Schema.helpers = {
 
     // Is the given URL on a remote domain?
     isCrossDomain : function(url) {
-    	return false
+    	return false;
       var match = url.match(this.HOST_EXTRACTOR);
       return match && (match[1] != window.location.host);
     },
