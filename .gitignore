@@ -1,5 +1,6 @@
 .project
 .pydevproject
+.settings
 *.pyc
 *.mo
 django_docviewer.egg-info
