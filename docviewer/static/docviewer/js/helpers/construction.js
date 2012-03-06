@@ -178,8 +178,7 @@ _.extend(docviewer.Schema.helpers, {
     var showAnnotations = this.showAnnotations();
     var showPages       = this.models.document.totalPages > 1;
     var showSearch      = (this.viewer.options.search !== false) &&
-                          (this.viewer.options.text !== false) &&
-                          (!this.viewer.options.width || this.viewer.options.width >= 540);
+                          (this.viewer.options.text !== false);
     var noFooter = (!showAnnotations && !showPages && !showSearch && !this.viewer.options.sidebar);
 
 
