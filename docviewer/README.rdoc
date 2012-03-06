@@ -19,15 +19,15 @@ All core functionality is supported as far back as IE7. However, users with mode
 
 Take a peek at the viewer.html template to see how to load in a Document. All you really need to do is point to a Document Viewer JSON file and specify the target element to embed the viewer:
 
-  DV.load(JSON_FILE, { container: element_selector });
+  docview.load(JSON_FILE, { container: element_selector });
 
 *JSON_FILE*: Either an inline json object, or the path to a remote json object - https://www.documentcloud.org/documents/19864-goldman-sachs-internal-emails.json 
 
-* *container*: The element to contain the Document Viewer - '#DV-container'
+* *container*: The element to contain the Document Viewer - '#docview-container'
 
 
 == Data Formats: Documents
-All data should be formatted as JSON. When provided a cross domain url, DV will attempt a JSONP request. 
+All data should be formatted as JSON. When provided a cross domain url, docview will attempt a JSONP request. 
 Examples of this in use can be found here:
 https://www.documentcloud.org/documents/19864-goldman-sachs-internal-emails.json
 
@@ -108,7 +108,7 @@ This is the production facing view that uses the latest compressed assets and vi
 ===viewer-debug.html
 Should only be used for development and debugging purposes. You'll need to keep this up to date should add or remove new assets.
 
-All view templates can be found in javascripts/DV/views
+All view templates can be found in javascripts/docview/views
 To see your changes you'll need to be sure to run the jammit command to re-render your views. 
 
 == Copyright
