@@ -1,0 +1,37 @@
+/* ========== */
+/* = Header = */
+/* ========== */
+
+.docviewer-docViewer .docviewer-narrowControls .docviewer-searchBar {
+  right: 16px;
+}
+
+.docviewer-docViewer .docviewer-narrowControls .docviewer-searchInput {
+  width: 80px;
+}
+
+/* ================== */
+/* = Page Container = */
+/* ================== */
+
+.docviewer-autoZoom .docviewer-textPage {
+  margin-left: 35px;
+}
+
+.docviewer-autoZoom .p0,
+.docviewer-autoZoom .p1,
+.docviewer-autoZoom .p2 {
+  padding-left: 35px;
+}
+
+/* ================= */
+/* = Page Elements = */
+/* ================= */
+
+.docviewer-autoZoom .docviewer-pageNumber,
+.docviewer-autoZoom .docviewer-textCurrentPage {
+  text-align: center;
+  width: 30px;
+  padding-left: 0px;
+}
+

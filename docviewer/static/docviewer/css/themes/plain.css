@@ -1,0 +1,128 @@
+/* DocumentCloud overrides to the DocViewer CSS go here: */
+
+.docviewer-docViewer {
+  border: 1px solid #aaa;
+  line-height: normal;
+}
+.docviewer-headerHat, .docviewer-title, .docviewer-contentsHeader {
+  display: none !important;
+}
+.docviewer-header {
+  padding: 0;
+  border-bottom: 1px solid #777;
+  position: relative;
+  z-index: 20000;
+  box-shadow: 0 0 25px rgba(0,0,0,.35); -webkit-box-shadow: 0 0 25px rgba(0,0,0,.35); -moz-box-shadow: 0 0 25px rgba(0,0,0,.35);
+}
+  .docviewer-controls {
+    margin-top: 0;
+    border: 0;
+    background: url(../../img/embed/headerbg.png);
+    text-shadow: 0px 1px 0px #ddd;
+    color: #000;
+  }
+    .docviewer-searchInput {
+      border: 1px solid #999;
+      border-radius: 16px; -webkit-border-radius: 16px; -moz-border-radius: 16px;
+    }
+
+.docviewer-docViewer-Container {
+  margin: 0;
+  border: 0;
+}
+
+.docviewer-pages, .docviewer-paper {
+  background: #f5f6f7 url(../../img/embed/pagesbg.jpg);
+}
+  .docviewer-paper {
+    padding-top: 1px; /* needed to uncollapse the margin */
+  }
+
+.docviewer-privateLock, .docviewer-showEdit, .docviewer-permalink {
+  width: 16px; height: 16px;
+  float: left;
+  margin: -2px 0 0 10px;
+  margin-left: 10px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+.docviewer-privateLock {
+  cursor: default;
+}
+.docviewer-permalink {
+  display: block;
+  width: 16px; height: 16px;
+  float: left;
+  padding: 0;
+  margin-left: 10px;
+  left: 0; top: 0;
+}
+
+.docviewer-annotationTitleInput,
+.docviewer-annotationTextArea {
+  border: 1px solid #D0D0D0;
+  -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px;
+  font: 12px/15px Arial;
+  outline: 0;
+}
+  .docviewer-annotationTextArea {
+    padding: 7px;
+    margin: 10px 0;
+    height: 110px;
+    outline: 0;
+    resize: none;
+  }
+  .docviewer-annotationTitleInput {
+    padding: 4px;
+    width: 300px;
+  }
+.docviewer-annotationEditControls .minibutton {
+  width: 60px;
+}
+  .docviewer-cancelEdit {
+    margin-right: 10px;
+  }
+
+.docviewer-overlay {
+  left: 0; right: 282px; bottom: 0;
+}
+
+.docviewer-well {
+  padding-bottom: 16px;
+}
+.docviewer-descriptionHead {
+  text-transform: none;
+  color: black;
+}
+.docviewer-descriptionText {
+  background: white;
+  padding: 5px 14px 10px;
+}
+
+.docviewer-logo {
+  margin-top: 16px;
+}
+  .docviewer-logo a {
+    display: block;
+    width: 105px; height: 19px;
+    background: url(../../img/embed/dc_inline_logo.png);
+  }
+
+.docviewer-footerLogoLink {
+  display: block;
+  width: 33px; height: 24px;
+  background: url(../../img/embed/dc_mini_logo.png) no-repeat center center;
+  position: absolute;
+  right: 5px; top: 5px;
+}
+
+.docviewer-views {
+  position: relative;
+  z-index: 10;
+}
+  .docviewer-views .docviewer-first span {
+    -webkit-border-top-left-radius: 5px; -moz-border-radius-topleft: 5px;
+  }
+  .docviewer-views .docviewer-last span {
+    -webkit-border-top-right-radius: 5px; -moz-border-radius-topright: 5px;
+  }

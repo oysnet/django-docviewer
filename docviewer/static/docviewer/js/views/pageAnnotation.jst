@@ -1,0 +1,63 @@
+<div class="docviewer-annotation docviewer-pageNote <%= orderClass %> <%= accessClass %> <% if (owns_note) { %>docviewer-ownsAnnotation<% } %>" style="top:<%= top %>px;" id="docviewer-annotation-<%= id %>" data-id="<%= id %>">
+  <div class="docviewer-annotationTab">
+    <div class="docviewer-annotationClose docviewer-trigger">p. <%= pageNumber %></div>
+  </div>
+
+  <div class="docviewer-annotationContent">
+    <!-- Header -->
+    <div class="docviewer-annotationHeader docviewer-clearfix">
+      <div class="docviewer-pagination docviewer-editHidden">
+        <span class="docviewer-trigger docviewer-annotationPrevious" title="Previous Annotation">Previous</span>
+        <span class="docviewer-trigger docviewer-annotationNext" title="Next Annotation">Next</span>
+      </div>
+      <div class="docviewer-annotationGoto docviewer-editHidden"><div class="docviewer-trigger">p. <%= pageNumber %></div></div>
+      <div class="docviewer-annotationTitle docviewer-editHidden"><%= title %></div>
+      <input class="docviewer-annotationTitleInput docviewer-editVisible" type="text" placeholder="Annotation Title" value="<%= title.replace(/"/g, '&quot;') %>" />
+      <% if (access == 'exclusive') { %>
+        <div class="docviewer-annotationDraftLabel docviewer-editHidden docviewer-interface">Draft</div>
+      <% } else if (access == 'private') { %>
+        <div class="docviewer-privateLock docviewer-editHidden" title="Private note"></div>
+      <% } %>
+      <span class="docviewer-permalink docviewer-editHidden" title="Link to this note"></span>
+      <div class="docviewer-showEdit docviewer-editHidden <%= accessClass %>"></div>
+    </div>
+
+    <div class="docviewer-annotationBody docviewer-editHidden">
+      <%= text %>
+    </div>
+    <textarea class="docviewer-annotationTextArea docviewer-editVisible" style="width: <%= bWidth %>px;"><%= text %></textarea>
+
+    <div class="docviewer-annotationMeta <%= accessClass %>">
+      <% if (author) { %>
+        <div class="docviewer-annotationAuthor docviewer-interface docviewer-editHidden">
+          Annotated by: <%= author %><% if (author_organization) { %>, <i><%= author_organization %></i><% } %>
+        </div>
+      <% } %>
+      <% if (access == 'exclusive') { %>
+        <div class="docviewer-annotationWarning docviewer-interface docviewer-editHidden">
+          This draft is only visible to you and collaborators.
+        </div>
+      <% } else if (access == 'private') { %>
+        <div class="docviewer-annotationWarning docviewer-interface docviewer-editHidden">
+          This private note is only visible to you.
+        </div>
+      <% } %>
+      <div class="docviewer-annotationEditControls docviewer-editVisible">
+        <div class="docviewer-clearfix">
+          <div class="minibutton warn docviewer-deleteAnnotation float_left">Delete</div>
+          <div class="minibutton default docviewer-saveAnnotation float_right">
+            <% if (access == 'exclusive') { %>
+              Publish
+            <% } else { %>
+              Save
+            <% } %>
+          </div>
+          <% if (access == 'public' || access == 'exclusive') { %>
+            <div class="minibutton docviewer-saveAnnotationDraft float_right">Save as Draft</div>
+          <% } %>
+          <div class="minibutton docviewer-cancelEdit float_right">Cancel</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

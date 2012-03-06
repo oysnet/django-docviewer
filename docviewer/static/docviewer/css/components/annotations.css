@@ -1,0 +1,596 @@
+
+ .docviewer-annotations{
+    position:relative;
+    left:1px;
+    top:1px;
+    z-index:10001;
+  }
+
+  .docviewer-annotation{
+    position:absolute;
+    left:0;
+    right:0;
+    padding:3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius:  3px;
+    border-radius:  3px;
+  }
+  .docviewer-annotationRegion {
+    background: rgb(255, 227, 37);
+    background: rgba(255, 227, 37, 0.2);
+
+    border:3px solid rgb(225, 200, 0);
+    border:3px solid rgba(255, 227, 37, 0.5);
+
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+
+    position:relative;
+    left: -2px;
+    top: -1px;
+
+    z-index: 5;
+
+    cursor:pointer;
+  }
+  .docviewer-coverVisible .docviewer-annotationRegion {
+    background: rgb(255, 227, 37);
+    background: rgba(255, 227, 37, 0.1);
+    border:3px solid rgb(255, 227, 37);
+    border:3px solid rgba(255, 227, 37, 0.2);
+  }
+  .docviewer-coverVisible .docviewer-annotationTab {
+    opacity: 0.3;
+  }
+  .docviewer-coverVisible .docviewer-activeAnnotation .docviewer-annotationTab,
+  .docviewer-coverVisible .docviewer-annotation:hover .docviewer-annotationTab {
+    opacity: 1;
+  }
+  .docviewer-ie .docviewer-annotationRegion{
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+    filter: alpha(opacity=30);
+  }
+  .docviewer-accessPrivate .docviewer-annotationRegion, .docviewer-accessPrivate.docviewer-annotationRegion {
+    background: rgb(107, 194, 248);
+    background: rgba(107, 194, 248, 0.2);
+    border:3px solid rgb(95, 175, 235);
+    border:3px solid rgba(107, 194, 248, 0.5);
+  }
+  .docviewer-accessRedact .docviewer-annotationRegion, 
+  .docviewer-accessRedact.docviewer-annotationRegion {
+    background: #000;
+    border: 0;
+    border-radius: 0; -moz-border-radius: 0; -webkit-border-radius: 0;
+    filter: none;
+    -ms-filter: none;
+  }
+    .docviewer-redRedactions .docviewer-accessRedact .docviewer-annotationRegion, 
+    .docviewer-redRedactions .docviewer-accessRedact.docviewer-annotationRegion {
+      background: #800;
+    }
+  .docviewer-coverVisible .docviewer-accessPrivate .docviewer-annotationRegion {
+    background: rgb(107, 194, 248);
+    background: rgba(107, 194, 248, 0.1);
+    border:3px solid rgb(107, 194, 248);
+    border:3px solid rgba(107, 194, 248, 0.2);
+  }
+  .docviewer-annotationRegion:hover{
+    border: 3px solid rgb(255, 227, 37);
+    -webkit-box-shadow: 1px 2px 7px rgb(0,0,0);
+    -webkit-box-shadow: 1px 2px 7px rgba(0,0,0,.2);
+
+    -moz-box-shadow: 1px 2px 7px rgb(0,0,0);
+    -moz-box-shadow: 1px 2px 7px rgba(0,0,0,.2);
+
+    box-shadow: 1px 2px 7px rgb(0,0,0);
+    box-shadow: 1px 2px 7px rgba(0,0,0,.2);
+  }
+  .docviewer-accessPrivate .docviewer-annotationRegion:hover,
+  .docviewer-accessPrivate.docviewer-annotationRegion:hover {
+    border: 3px solid rgb(107, 194, 248);
+  }
+  .docviewer-annotationContent{
+    display:none;
+    background-color:#fff;
+    border:1px solid #fff;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    padding:10px;
+    cursor:default;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+  }
+  .docviewer-annotationClose{
+    padding:7px 9px 0 10px;
+    color:#000;
+    text-transform:lowercase;
+    font-size:10px;
+    line-height:10px;
+    font-family:Arial,Helvetica,sans-serif;
+    width:15px;
+    height:19px;
+    text-indent:-1000em;
+  }
+  /* ---------------------------------------------------- annotations - active */
+  .docviewer-activeAnnotation .docviewer-annotationRegion{
+    display:none;
+  }
+  .docviewer-activeAnnotation .docviewer-annotationContent{
+    display:block;
+  }
+  .docviewer-activeAnnotation .docviewer-annotationClose{
+    display:block;
+    background: transparent url(../../img/embed/close_tab.png) no-repeat 6px 7px;
+  }
+
+  .docviewer-activeAnnotation.docviewer-annotation{
+    background: rgb(255, 227, 37);
+    padding:3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius:  3px;
+    border-radius:  3px;
+    margin: -37px -14px 0 -14px;
+    z-index:10003;
+
+    -webkit-box-shadow: 1px 1px 3px rgb(0,0,0);
+    -webkit-box-shadow: 1px 1px 3px rgba(0,0,0,.2);
+
+    -moz-box-shadow: 1px 1px 3px rgb(0,0,0);
+    -moz-box-shadow: 1px 1px 3px rgba(0,0,0,.2);
+
+    box-shadow: 1px 1px 3px rgb(0,0,0);
+    box-shadow: 1px 1px 3px rgba(0,0,0,.2);
+  }
+  .docviewer-activeAnnotation.docviewer-annotation.docviewer-accessPrivate {
+    background: rgb(107, 194, 248);
+  }
+  .docviewer-activeAnnotation.docviewer-annotation.docviewer-accessRedact {
+    background: #000;
+  }
+    .docviewer-redRedactions .docviewer-activeAnnotation.docviewer-annotation.docviewer-accessRedact {
+      background: #800;
+    }
+
+  /* ---------------------------------------------------- annotations - decoration */
+  .docviewer-annotationGoto{
+    float:right;
+    display:none;
+    width:15%;
+    text-align:right;
+    padding: 2px 0 0;
+    font-size:10px;
+    font-family:Arial,Helvetica,sans-serif;
+    font-weight:bold;
+    color:#004276;
+    text-decoration:none;
+  }
+  .docviewer-annotationTitle{
+    float:left;
+    display:inline;
+    font-weight:bold;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:12px;
+    color:#000;
+    padding:0;
+    max-width: 75%;
+    cursor: pointer;
+  }
+    .docviewer-annotationTitle:hover {
+      text-decoration: underline;
+    }
+
+  .docviewer-permalink {
+    zoom: 1;
+    font-size: 16px;
+    background: url(../../img/embed/link.png) no-repeat 0 0;
+    padding-left: 16px;
+    cursor: pointer;
+    position: relative;
+    visibility: hidden;
+    left: 7px; top: -2px;
+  }
+    .docviewer-annotation:hover .docviewer-permalink {
+      visibility: visible;
+    }
+    .docviewer-permalink:hover {
+      background-position: 0 -32px;
+    }
+
+  /* ---------------------------------------------------- excerpt */
+  .docviewer-annotationExcerpt{
+    -moz-box-shadow: inset 0 0 5px rgb(0,0,0);
+    -moz-box-shadow: inset 0 0 5px rgba(0,0,0,.3);
+
+    -webkit-box-shadow: inset 0 0 5px rgb(0,0,0);
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,.3);
+
+    box-shadow: inset 0 0 5px rgb(0,0,0);
+    box-shadow: inset 0 0 5px rgba(0,0,0,.3);
+    margin: 10px 0 10px;
+    border:1px solid #d0d0d0;
+    -webkit-border-radius: 2px;
+    -moz-border-radius:  2px;
+    border-radius:  2px;
+    background-color: white;
+
+    position:relative;
+    z-index:10000;
+    overflow:hidden;
+  }
+  .docviewer-annotationExcerptImage{
+    opacity:.2;
+
+    -moz-box-shadow: inset 0 0 5px rgb(0,0,0);
+    -moz-box-shadow: inset 0 0 5px rgba(0,0,0,.3);
+
+    -webkit-box-shadow: inset 0 0 5px rgb(0,0,0);
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,.3);
+
+    box-shadow: inset 0 0 5px rgb(0,0,0);
+    box-shadow: inset 0 0 5px rgba(0,0,0,.3);
+    z-index:10000;
+    overflow:hidden;
+  }
+  .docviewer-ie .docviewer-annotationExcerptImage img{
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+    filter: alpha(opacity=20);
+  }
+
+  .docviewer-annotationExcerptImageTop{
+    position:absolute;
+    top:0;
+    z-index:15000;
+    overflow:hidden;
+/*    margin-left:-10px;*/
+/*    -moz-box-shadow: inset 0 0 5px rgb(0,0,0);
+    -moz-box-shadow: inset 0 0 5px rgba(0,0,0,.3);
+*/
+/*    -webkit-box-shadow: inset 0 0 5px rgb(0,0,0);*/
+/*    -webkit-box-shadow: inset 0 0 5px #f00;    */
+/*    display:none;*/
+/*    box-shadow: 0 0 5px rgb(0,0,0);*/
+  border-left:1px solid #ddd;
+  border-left:1px solid rgba(221,221,221,.4);
+  border-right:1px solid #ddd;
+  border-right:1px solid rgba(221,221,221,.4);
+  -webkit-box-shadow: inset 0 0 5px #000;
+
+  }
+  .docviewer-annotationExcerptImageTop img{
+/*    margin-left:-16px;*/
+  }
+  .docviewer-annotationExcerptImage img{
+/*    left:-25px;*/
+      left: -1px;
+  }
+
+  .docviewer-annotationExcerptImage{
+    left:0;
+  }
+  .docviewer-annotationExcerptImage img,
+  .docviewer-annotationExcerptImageTop img{
+    -moz-box-shadow: inset 0 0 5px rgb(0,0,0);
+    -moz-box-shadow: inset 0 0 5px rgba(0,0,0,.3);
+
+    -webkit-box-shadow: inset 0 0 5px rgb(0,0,0);
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,.3);
+
+    box-shadow: inset 0 0 5px rgb(0,0,0);
+    box-shadow: inset 0 0 5px rgba(0,0,0,.3);
+    position:absolute;
+  }
+
+  .docviewer-annotationBody{
+    font: 13px/18px Georgia, Times, serif;
+    cursor:text;
+    color: #333;
+  }
+
+  .docviewer-annotationAuthor {
+    float: right;
+    color: #999;
+    padding: 10px 0 0;
+    line-height: 14px;
+    font-size: 10px;
+  }
+
+  .docviewer-annotationWarning {
+    color: #999;
+    font-size: 10px;
+    padding: 10px 0 0;
+    line-height: 14px;
+  }
+
+  .docviewer-annotationMeta {
+    display: none;
+    height: 24px;
+  }
+
+  .docviewer-annotationDraftLabel {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 9px;
+    padding: 0px 1px 0px 2px;
+    line-height: 11px;
+    border: 2px solid #b55;
+    color: #a33;
+    margin: -1px 2px 0 12px;
+    float: left;
+  }
+  /* ---------------------------------------------------- tabs */
+  .docviewer-annotationTab{
+    background: url(../../img/embed/tabs.png) no-repeat 0 0;
+    height:26px;
+    position:absolute;
+    left: -35px;
+    width: 50px;
+  }
+    .docviewer-accessPrivate .docviewer-annotationTab {
+      background-position: 0 -26px;
+    }
+  .docviewer-activeAnnotation .docviewer-annotationTab{
+    background-position: 0 -52px;
+    margin-top: 37px;
+    left: -30px;
+  }
+  .docviewer-activeAnnotation.docviewer-accessPrivate .docviewer-annotationTab {
+    background-position: 0 -78px;
+  }
+  .docviewer-annotationTab .docviewer-annotationDraftDot {
+    width: 11px;
+    height: 11px;
+    background: transparent url(../../img/embed/draft_dot.png) no-repeat 0 0;
+    margin: 0 0 0 -3px;
+  }
+    .docviewer-activeAnnotation .docviewer-annotationTab .docviewer-annotationDraftDot {
+      display: none;
+    }
+
+  /* ---------------------------------------------------- active annotation */
+  .docviewer-activeAnnotation .docviewer-page{
+    background-color:#555;
+  }
+  .docviewer-activeAnnotation .docviewer-pageImage{
+    opacity:.5;
+  }
+  .docviewer-ie .docviewer-activeAnnotation .docviewer-pageImage{
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=50);
+  }
+
+/* ---------------------------------------------------- pagination */
+
+.docviewer-pagination{
+  height: 18px;
+  text-align:center;
+  float:right;
+  display:inline;
+  color:#666;
+  text-decoration:uppercase;
+  background-color:#fff;
+  font-family:Arial,Helvetica,sans-serif;
+}
+  .docviewer-annotation .docviewer-pagination {
+    display: none;
+  }
+  .docviewer-activeAnnotation .docviewer-pagination {
+    display: block;
+  }
+
+.docviewer-pagination .docviewer-trigger
+{
+  color:#004276;
+  font-weight:bold;
+  text-decoration:none;
+  text-transform:uppercase;
+  font-size:10px;
+  position: relative;
+  top: -3px;
+}
+
+.docviewer-annotation .docviewer-trigger:hover{
+  text-decoration:underline;
+}
+
+.docviewer-resultPrevious,
+.docviewer-annotationPrevious {
+  background: url(../../img/embed/leftArrow.png) no-repeat left 1px;
+}
+
+.docviewer-annotationPrevious{
+  padding-left:16px;
+  padding-right:4px;
+}
+
+.docviewer-lastAnnotation .docviewer-annotationPrevious{
+  padding-right:0;
+}
+.docviewer-lastAnnotation .docviewer-annotationNext{
+  display:none;
+}
+
+
+.docviewer-annotationPrevious:hover{
+  text-decoration:underline;
+}
+
+.docviewer-resultNext,
+.docviewer-annotationNext {
+  background:transparent url(../../img/embed/rightArrow.png) no-repeat right 1px;
+}
+
+.docviewer-annotationNext{
+  padding-right:16px;
+  padding-left:8px;
+}
+
+.docviewer-annotationNext:hover{
+  text-decoration:underline;
+}
+
+.docviewer-firstAnnotation .docviewer-annotationPrevious,
+.docviewer-lastAnnotation .docviewer-annotationNext{
+  display:none;
+}
+/* ---------------------------------------------------- pageNote */
+
+.docviewer-pageNote{
+  z-index:1000;
+  position:relative;
+  left:0;
+  top:0;
+  cursor: default !important;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom:20px;
+
+  background: rgb(255, 227, 37);
+  background: rgba(255, 227, 37, 0.9);
+
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  border-radius:3px;
+
+  -webkit-box-shadow: 1px 1px 3px rgb(0,0,0);
+  -webkit-box-shadow: 1px 1px 3px rgba(0,0,0,.2);
+
+  -moz-box-shadow: 1px 1px 3px rgb(0,0,0);
+  -moz-box-shadow: 1px 1px 3px rgba(0,0,0,.2);
+
+  box-shadow: 1px 1px 3px rgb(0,0,0);
+  box-shadow: 1px 1px 3px rgba(0,0,0,.2);
+}
+.docviewer-pageNote.docviewer-accessPrivate {
+  background: rgb(107, 194, 248);
+  background: rgba(107, 194, 248, 0.9);
+}
+.docviewer-coverVisible .docviewer-pageNote {
+  opacity: 0.25;
+}
+.docviewer-activeAnnotation.docviewer-pageNote{
+  opacity: 1;
+  margin: 0 10px 20px;
+}
+.docviewer-pageNote .docviewer-annotationContent{
+  display:block;
+}
+.docviewer-pageNote .docviewer-annotationTitle{
+  margin-bottom:10px;
+}
+
+.docviewer-pageNote .docviewer-annotationTab{
+ display:none;
+}
+.docviewer-layer-page .docviewer-pageNumber{
+  margin-top:15px;
+}
+
+.docviewer-pageNoteInsert {
+  display: none;
+}
+
+/* ---------------------------------------------------- hack for load */
+.docviewer-getHeights{
+  display:block !important;
+}
+
+/*-------------------------- Annotation Borders ------------------------------*/
+.docviewer-annotationEdge, .docviewer-annotationCorner {
+  position: absolute;
+  width: 10px; height: 10px;
+  z-index: 10;
+}
+  .docviewer-annotationCorner {
+    z-index: 20;
+  }
+  .docviewer-annotationEdgeTop {
+    top: -7px;
+    width: 100%;
+    cursor: n-resize;
+  }
+  .docviewer-annotationEdgeRight {
+    right: -7px;
+    height: 100%;
+    cursor: e-resize;
+  }
+  .docviewer-annotationEdgeBottom {
+    bottom: -7px;
+    width: 100%;
+    cursor: s-resize;
+  }
+  .docviewer-annotationEdgeLeft {
+    left: -7px;
+    height: 100%;
+    cursor: w-resize;
+  }
+  .docviewer-annotationCornerTopLeft {
+    top: -7px; left: -7px;
+    cursor: nw-resize;
+  }
+  .docviewer-annotationCornerTopRight {
+    top: -7px; right: -7px;
+    cursor: ne-resize;
+  }
+  .docviewer-annotationCornerBottomLeft {
+    bottom: -7px; left: -7px;
+    cursor: sw-resize;
+  }
+  .docviewer-annotationCornerBottomRight {
+    bottom: -7px; right: -7px;
+    cursor: se-resize;
+  }
+
+/*------------------------ annotation controls ---------------------------------*/
+
+.docviewer-annotation .docviewer-annotationEditControls .docviewer-saveAnnotationDraft {
+  margin-right: 10px;
+  width: 80px;
+}
+
+/*------------------------ show/hide the edit UI ---------------------------------*/
+.docviewer-annotation .docviewer-editVisible {
+  display: none;
+}
+
+.docviewer-editing .docviewer-editVisible {
+  display: block;
+}
+
+.docviewer-editing .docviewer-editHidden {
+  display: none !important;
+}
+
+.docviewer-annotation .docviewer-saveAnnotationDraft {
+  display: none;
+}
+
+.docviewer-annotation .docviewer-accessExclusive,
+.docviewer-annotation .docviewer-accessPrivate,
+.docviewer-annotation .docviewer-accessPublic {
+  display: none;
+}
+
+.docviewer-isContributor .docviewer-annotation .docviewer-accessPrivate,
+.docviewer-isOwner .docviewer-annotation .docviewer-accessPrivate,
+.docviewer-isOwner .docviewer-annotation .docviewer-accessExclusive,
+.docviewer-isOwner .docviewer-annotation .docviewer-accessPublic,
+.docviewer-isReviewer .docviewer-annotation.docviewer-ownsAnnotation .docviewer-accessPrivate,
+.docviewer-isReviewer .docviewer-annotation.docviewer-ownsAnnotation .docviewer-accessExclusive,
+.docviewer-isReviewer .docviewer-annotation.docviewer-ownsAnnotation .docviewer-accessPublic {
+  display: block;
+}
+
+.docviewer-isContributor .docviewer-annotation.docviewer-accessPrivate .docviewer-annotationMeta,
+.docviewer-isOwner .docviewer-annotation .docviewer-annotationMeta,
+.docviewer-isReviewer .docviewer-annotation .docviewer-annotationMeta {
+  display: block;
+}
+
+.docviewer-isContributor .docviewer-annotation .docviewer-saveAnnotationDraft,
+.docviewer-isOwner .docviewer-annotation .docviewer-saveAnnotationDraft,
+.docviewer-isReviewer .docviewer-annotation .docviewer-saveAnnotationDraft {
+  display: block;
+}

@@ -1,0 +1,142 @@
+.docviewer-viewThumbnails .docviewer-allAnnotations,
+.docviewer-viewThumbnails .docviewer-text,
+.docviewer-viewThumbnails .docviewer-search,
+.docviewer-viewThumbnails .docviewer-pageCollection,
+.p0,
+.p1,
+.p2{
+  display:none;
+}
+
+.docviewer-viewThumbnails .docviewer-currentAnnotationPrefix,
+.docviewer-viewThumbnails .docviewer-totalAnnotations{
+  display:none;
+}
+
+.docviewer-viewThumbnails .docviewer-thumbnails,
+.docviewer-viewThumbnails .docviewer-pages {
+  display: block;
+}
+
+.docviewer-thumbnails {
+  padding: 12px 4px;
+  overflow: hidden;
+  display: none;
+}
+  .docviewer-thumbnails .docviewer-thumbnail {
+    float: left;
+    padding: 8px 16px;
+    text-align: center;
+    position: relative;
+  }
+    .docviewer-thumbnails .docviewer-thumbnail .docviewer-overlay {
+      cursor: pointer;
+      z-index: 10002;
+      position: absolute;
+      top: 10px;
+      width: 0px;
+      height: 75%;
+      display: none;
+    }
+    .docviewer-thumbnails .docviewer-thumbnail .docviewer-pageNumber {
+      margin: 2px 0 0 0;
+      width: auto;
+      float: none;
+      display: block;
+      height: 14px;
+      z-index: 0;
+    }
+      .docviewer-thumbnails .docviewer-thumbnail .docviewer-pageNumber .docviewer-pageNumberText {
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+        border-radius: 8px;
+        padding: 2px 8px;
+      }
+      .docviewer-thumbnails .docviewer-thumbnail.docviewer-selected .docviewer-pageNumber .docviewer-pageNumberText {
+        background-color: #3875D7;
+        color: white;
+      }
+      .docviewer-thumbnails .docviewer-thumbnail-page .docviewer-pageNumber:hover {
+        text-decoration: none;
+      }
+      .docviewer-thumbnails .docviewer-thumbnail-page:hover .docviewer-pageNumber .docviewer-pageNumberTextUnderline {
+        text-decoration: underline;
+      }
+      .docviewer-thumbnails .docviewer-selected .docviewer-thumbnail-page:hover .docviewer-pageNumber .docviewer-pageNumberTextUnderline {
+        text-decoration: none;
+      }
+    .docviewer-thumbnails .docviewer-thumbnail-page {
+      cursor: pointer;
+    }
+    .docviewer-thumbnails .docviewer-thumbnail-select {
+      position: relative;
+      padding: 2px;
+      -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;
+      position: relative;
+      top: -2px; left: -2px;
+    }
+      .docviewer-thumbnail.docviewer-selected .docviewer-thumbnail-select {
+        background: #09f;
+      }
+    .docviewer-thumbnails .docviewer-thumbnail .docviewer-thumbnail-shadow {
+      position: absolute;
+      top: 6px; left: 6px; right: 0px; bottom: 0px;
+      background-color: #cacaca;
+      margin: 0 auto;
+    }
+      .docviewer-thumbnails .docviewer-thumbnail-page:hover .docviewer-thumbnail-shadow {
+        background-color: #bababa;
+      }
+      .docviewer-thumbnails .docviewer-thumbnail.docviewer-selected .docviewer-thumbnail-shadow {
+        background-color: transparent;
+      }
+    .docviewer-thumbnails .docviewer-thumbnail-image {
+      position: relative;
+      border: 1px solid #b0b0b0;
+      border-top-color: #c0c0c0;
+      border-bottom-color: #999;
+      background: white;
+      display: block;
+      min-height: 40px;
+      padding: 0 !important;
+      z-index: 2;
+      margin: 0 auto;
+    }
+      .docviewer-thumbnails .docviewer-thumbnail-page:hover .docviewer-thumbnail-image {
+        border: 1px solid #a0a0a0;
+        border-top-color: #b0b0b0;
+        border-bottom-color: #888;
+      }
+      .docviewer-thumbnails .docviewer-thumbnail.docviewer-selected .docviewer-thumbnail-image {
+        border-color: #09f;
+      }
+    .docviewer-thumbnails.docviewer-zoom-0 .docviewer-thumbnail {
+      width: 66px; height: 103px;
+    }
+      .docviewer-thumbnails.docviewer-zoom-0 .docviewer-thumbnail-image {
+        width: 60px; height: 75px;
+      }
+    .docviewer-thumbnails.docviewer-zoom-1 .docviewer-thumbnail {
+      width: 96px; height: 138px;
+    }
+      .docviewer-thumbnails.docviewer-zoom-1 .docviewer-thumbnail-image {
+        width: 90px; height: 112px;
+      }
+    .docviewer-thumbnails.docviewer-zoom-2 .docviewer-thumbnail {
+      width: 126px; height: 178px;
+    }
+      .docviewer-thumbnails.docviewer-zoom-2 .docviewer-thumbnail-image {
+        width: 120px; height: 150px;
+      }
+    .docviewer-thumbnails.docviewer-zoom-3 .docviewer-thumbnail {
+      width: 156px; height: 216px;
+    }
+      .docviewer-thumbnails.docviewer-zoom-3 .docviewer-thumbnail-image {
+        width: 150px; height: 188px;
+      }
+    .docviewer-thumbnails.docviewer-zoom-4 .docviewer-thumbnail {
+      width: 186px; height: 253px;
+    }
+      .docviewer-thumbnails.docviewer-zoom-4 .docviewer-thumbnail-image {
+        width: 180px; height: 225px;
+      }

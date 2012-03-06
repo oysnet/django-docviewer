@@ -1,0 +1,35 @@
+.docviewer-unsupported {
+  text-align: center;
+  font: 16px Helvetica, Arial, sans-serif;
+  width: 400px;
+  margin: 30px;
+}
+.docviewer-unsupported .docviewer-intro {
+  font-weight: bold;
+}
+.docviewer-unsupported .docviewer-browsers {
+  margin: 20px 20px;
+  height: 90px;
+}
+.docviewer-unsupported .docviewer-browser {
+  float: left;
+  width: 70px;
+  margin: 0 20px;
+  line-height: 30px;
+}
+.docviewer-unsupported .docviewer-image {
+  width: 70px; height: 67px;
+  clear: both;
+}
+.docviewer-unsupported .docviewer-safari {
+  background: url(../../img/browsers/safari.gif);
+}
+.docviewer-unsupported .docviewer-chrome {
+  background: url(../../img/browsers/chrome.gif);
+}
+.docviewer-unsupported .docviewer-firefox {
+  background: url(../../img/browsers/firefox.gif);
+}
+.docviewer-unsupported .docviewer-after {
+  margin-top: 20px;
+}

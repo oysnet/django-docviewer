@@ -1,0 +1,331 @@
+.docviewer-description{
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  color:#333;
+  display:block;
+  line-height:16px;
+  margin-bottom: 15px;
+}
+
+.docviewer-supplemental{
+  margin-top: 15px;
+  padding: 8px 0 0 14px;
+  border-top:1px solid #ccc;
+}
+  .docviewer-supplemental.docviewer-noNavigation {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .docviewer-supplemental.docviewer-noNavigationMargin {
+    margin: 0;
+    padding: 0 0 0 14px;
+    border: 0;
+  }
+
+.docviewer-storyLink,
+.docviewer-pdfLink,
+.docviewer-printNotesLink {
+  padding-left: 0;
+  padding-bottom: 4px;
+}
+
+.docviewer-storyLink a,
+.docviewer-pdfLink a,
+.docviewer-printNotesLink a,
+.docviewer-contributor {
+  font: normal 11px Arial, sans-serif;
+  text-decoration: none;
+}
+
+.docviewer-contributor {
+  padding-top: 3px;
+  color: #333;
+}
+
+.docviewer-storyLink a:hover,
+.docviewer-pdfLink a:hover,
+.docviewer-printNotesLink a:hover {
+  text-decoration:underline;
+}
+
+.docviewer-previous, .docviewer-next {
+  border: 1px solid #bbb; border-top-color: #ccc; border-bottom-color: #999;
+  background-image:url(../../img/embed/controlsArrows.png);
+  background-repeat: no-repeat;
+  width:32px; height:22px;
+  position:absolute;
+  top: 0px;
+  cursor:pointer;
+  text-indent:-1000em;
+  -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px;
+}
+
+.docviewer-previous{
+  background-position: 0 0;
+  left:10px;
+}
+
+.docviewer-previous:hover{
+  background-position: -32px 0;
+}
+
+.docviewer-previous:active {
+  background-position: -64px 0;
+}
+
+.docviewer-previous:focus {
+  outline: 0;
+}
+
+.docviewer-next{
+  background-position: -96px 0;
+  right: 10px;
+}
+
+.docviewer-next:hover{
+  background-position: -128px 0;
+}
+
+.docviewer-next:active{
+  background-position: -160px 0;
+}
+
+.docviewer-next:focus {
+  outline: 0;
+}
+
+.docviewer-pageNumberContainer{
+  width:154px;
+  text-align:center;
+  margin: 0 auto;
+}
+
+.docviewer-ie .docviewer-pageNumberContainer{
+  margin-top:5px;
+}
+
+.docviewer-currentPagePrefix,
+.docviewer-currentPageSuffix,
+.docviewer-currentAnnotationPrefix{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:12px;
+  color:#333;
+}
+
+.docviewer-ie .docviewer-currentPagePrefix,
+.docviewer-ie .docviewer-currentPageSuffix,
+.docviewer-ie .docviewer-currentAnnotationPrefix{
+  vertical-align:top;
+}
+
+.docviewer-currentPage{
+  background-color:#fff;
+  text-align:center;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:12px;
+  color:#333;
+  border:1px solid #d7d7d7;
+  border-left:1px solid #aaa;
+  border-top:1px solid #aaa;
+  padding:4px 8px;
+  width:27px;
+  display:-moz-inline-stack;
+  display:inline-block;
+  margin-left:5px;
+  margin-right:5px;
+  position:relative;
+}
+
+.docviewer-ie .docviewer-currentPage{
+  margin-top:-5px;
+}
+
+.docviewer-well .docviewer-navControls {
+  position: relative;
+  height: 40px;
+  background-position: 0 bottom;
+}
+
+.docviewer-navigation{
+  padding: 10px;
+}
+
+.docviewer-contentsHeader,
+.docviewer-descriptionHead{
+  text-transform:uppercase;
+  color:#666;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:12px;
+  margin: 0 0 5px;
+  padding:0;
+  font-weight:bold;
+  clear:left;
+  display:block;
+}
+
+.docviewer-chapter,
+.docviewer-annotationMarker {
+  margin: 0 0 12px 0;
+  padding: 0;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+}
+  .docviewer-collapsed .docviewer-annotationMarker {
+    display: none;
+  }
+
+.docviewer-annotationMarker{
+  margin-left: 14px;
+}
+
+.docviewer-annotationMarker .docviewer-navPageNumber {
+  visibility: hidden;
+}
+
+.docviewer-annotationMarker .docviewer-trigger:hover .docviewer-navPageNumber {
+  visibility:visible;
+}
+
+.docviewer-chapter .docviewer-annotationMarker{
+  margin-left: 14px;
+}
+
+.docviewer-hasChildren .docviewer-annotationMarker{
+  margin:0 0 4px;
+  padding:0 0 0 8px;
+  background: transparent url(../../img/embed/bullet4x4.gif) no-repeat 0 4px;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:11px;
+  font-weight:normal;
+  margin-left:12px;
+}
+
+.docviewer-ie .docviewer-annotationMarker{
+  margin-bottom:3px;
+}
+
+.docviewer-chapter div.docviewer-first{
+  margin: 0 0 3px 0;
+  background:none;
+  display:block;
+  padding:0;
+  font-weight:bold;
+}
+
+.docviewer-chapter div.docviewer-first:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.docviewer-chapter div.docviewer-first {
+  display: inline-block;
+}
+
+.docviewer-navigation .docviewer-noChildren{
+  margin-left:14px;
+}
+
+.docviewer-navigation div.docviewer-first span.docviewer-trigger{
+  font-size: 12px;
+  float: left;
+  display: inline;
+  width: 210px;
+  margin-left: 5px;
+}
+
+.docviewer-navigation .docviewer-noChildren div.docviewer-first span.docviewer-trigger{
+  margin-left:0px;
+}
+
+.docviewer-descriptionToggle, .docviewer-navigation div.docviewer-first span.docviewer-expander {
+  background: url(../../img/embed/expanders.png) no-repeat 0 5px;
+}
+
+.docviewer-navigation div.docviewer-first span.docviewer-expander{
+  width:7px;
+  height:13px;
+  padding-right:0;
+  text-indent:-1000em;
+  float:left;
+  display:inline;
+  margin:0; padding:0;
+}
+
+.docviewer-navigation div.docviewer-collapsed div.docviewer-first span.docviewer-expander{
+  background-position: 0 -31px;
+}
+
+.docviewer-navigation div span{
+  text-decoration:none;
+  color:#004276;
+}
+
+.docviewer-navigation div span:focus {
+  outline:0;
+}
+
+.docviewer-navigation .docviewer-trigger:hover .docviewer-navAnnotationTitle {
+  text-decoration:underline;
+}
+
+.docviewer-navigation .docviewer-navPageNumber {
+  color:#666;
+  font-size:10px;
+  padding-left:4px;
+  font-weight:normal;
+}
+
+.docviewer-navigation .docviewer-selected span{
+  color:#000;
+  font-weight:bold;
+}
+
+.docviewer-descriptionToggle{
+  float:left;
+  display:inline;
+  text-decoration:none;
+  text-indent:-1000em;
+  width:7px;
+  height:13px;
+  margin-right:6px;
+  background-position: 0 -31px;
+}
+
+.docviewer-descriptionToggle.docviewer-showDescription{
+  background-position: 0 5px;
+}
+
+.docviewer-descriptionText{
+  clear:left;
+  padding:14px;
+  background-color:#f7f7f7;
+}
+/* ---------------------------------------------------- page number text entry*/
+.docviewer-pageNumberContainer input{
+  background-color:#FFFFFF;
+  border-color:#7b9ed3 #d2deef #d2deef #7b9ed3;
+  border-style:solid;
+  border-width:1px;
+  color:#333333;
+  display:inline-block;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:12px;
+  margin-left:5px;
+  margin-right:5px;
+  padding:4px 8px;
+  position:relative;
+  text-align:center;
+  width:27px;
+  margin-top:0;
+}
+
+.docviewer-ie .docviewer-pageNumberContainer input{
+  margin-top:-5px;
+}
+

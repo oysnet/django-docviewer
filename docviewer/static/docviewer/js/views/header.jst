@@ -1,0 +1,42 @@
+<div class="docviewer-header">
+  <div class="docviewer-headerHat" class="docviewer-clearfix">
+    <div class="docviewer-branding">
+      <% if (story_url) { %>
+        <span class="docviewer-storyLink"><%= story_url %></span>
+      <% } %>
+    </div>
+    <div class="docviewer-title">
+      <%= title %>
+    </div>
+  </div>
+
+  <div class="docviewer-controls">
+    
+    <div class="docviewer-views">
+      <div class="docviewer-documentView"><span class="docviewer-trigger docviewer-selected">Document</span></div>
+      <div class="docviewer-thumbnailsView"><span class="docviewer-trigger">Pages</span></div>
+      <div style="display:none;" class="docviewer-annotationView"><span class="docviewer-trigger">Notes</span></div>
+      <div class="docviewer-textView"><span class="docviewer-trigger">Text</span></div>
+    </div>
+
+    <div class="docviewer-collapsibleControls">
+
+      <div class="docviewer-searchBox docviewer-clearfix">
+        <form action="#" method="get" class="docviewer-searchDocument">
+          <div class="docviewer-searchInputWrap">
+            <div class="docviewer-searchInput-cancel"></div>
+            <input class="docviewer-searchInput" type="text" autosave="docviewer-<%= id %>" results="10" placeholder="Search" />
+          </div>
+        </form>
+      </div>
+      
+      <div class="docviewer-zoomControls">
+        <span class="docviewer-zoomLabel">Zoom</span>
+        <div class="docviewer-zoomBox"></div>
+      </div>
+      
+    </div>
+    
+  </div>
+
+</div>

@@ -1,0 +1,91 @@
+<!--[if lte IE 8]><div class="docviewer-docViewer docviewer-clearfix docviewer-viewDocument docviewer-ie <% if (autoZoom) { %>docviewer-autoZoom<% } %> <% if (!options.sidebar) { %>docviewer-hideSidebar<% } else { %>docviewer-hideFooter<% } %>"><![endif]-->
+<!--[if (!IE)|(gte IE 9)]><!--><div class="docviewer-docViewer docviewer-clearfix docviewer-viewDocument <% if (autoZoom) { %>docviewer-autoZoom<% } %> <% if (!options.sidebar) { %>docviewer-hideSidebar<% } else { %>docviewer-hideFooter<% } %>"><!-- <![endif]-->
+  
+  <div class="docviewer-docViewerWrapper">
+  
+    <%= header %>
+    <div class="docviewer-docViewer-Container">
+    
+      <div class="docviewer-searchBarWrapper">
+        <div class="docviewer-searchBar">
+          <span class="docviewer-trigger docviewer-closeSearch">CLOSE</span>
+          <div class="docviewer-searchPagination docviewer-foundResult">
+            <div class="docviewer-searchResults">
+              <span class="docviewer-resultPrevious docviewer-trigger">Previous</span>
+              <span class="docviewer-currentSearchResult"></span>
+              <span class="docviewer-totalSearchResult"></span>
+              <span> for &ldquo;<span class="docviewer-searchQuery"></span>&rdquo;</span>
+              <span class="docviewer-resultNext docviewer-trigger">Next</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="docviewer-pages <% if (!options.sidebar) { %>docviewer-hide-sidebar<% } %>">
+        <div class="docviewer-paper">
+          <div class="docviewer-thumbnails"></div>
+          <div class="docviewer-pageCollection">
+            <div class="docviewer-bar" style=""></div>
+            <div class="docviewer-allAnnotations">
+            </div>
+            <div class="docviewer-text">
+              <div class="docviewer-textSearch docviewer-clearfix">
+          
+              </div>
+              <div class="docviewer-textPage">
+                <span class="docviewer-textCurrentPage"></span>
+                <pre class="docviewer-textContents"></pre>
+              </div>
+            </div>
+            <%= pages %>
+          </div>
+        </div>
+      </div>
+    
+      <div width="265px" class="docviewer-sidebar <% if (!options.sidebar) { %>docviewer-hide<% } %>" style="display:none;">
+        <div class="docviewer-well">
+    
+          <div class="docviewer-sidebarSpacer"></div>
+          
+          <% if (options.sidebar) { %>
+            <div class="docviewer-navControlsContainer">
+            </div>
+          <% } %>
+              
+          <div class="docviewer-navigation">
+            <%= descriptionContainer %>
+            <div class="docviewer-contentsHeader">Contents</div>
+            <div class="docviewer-chaptersContainer">
+            </div>
+            <div class="docviewer-supplemental">
+              <% if (pdf_url) { %>
+                <div class="docviewer-pdfLink"><%= pdf_url %></div>
+              <% } %>
+              <% if (print_notes_url) { %>
+                <div class="docviewer-printNotesLink">
+                  <a target="_blank" href="<%= print_notes_url %>">Print Notes &raquo;</a>
+                </div>
+              <% } %>
+              <div class="docviewer-storyLink" style="<%= story_url ? '' : 'display:none' %>">
+                <a target="_blank" href="<%= story_url %>">Related Article &raquo;</a>
+              </div>
+              <% if (contributors) { %>
+                <div class="docviewer-contributor">Contributed by: <%= contributors %></div>
+              <% } %>
+            </div>
+            <div class="docviewer-logo"><a class="docviewer-logoLink" href="http://www.documentcloud.org"></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <%= footer %>
+    
+  </div>
+  
+  <div class="docviewer-printMessage">
+    To print the document, click the "Original Document" link to open the original 
+    PDF. At this time it is not possible to print the document with annotations.
+  </div>
+
+</div>
