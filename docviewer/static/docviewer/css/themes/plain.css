@@ -99,23 +99,6 @@
   padding: 5px 14px 10px;
 }
 
-.docviewer-logo {
-  margin-top: 16px;
-}
-  .docviewer-logo a {
-    display: block;
-    width: 105px; height: 19px;
-    background: url(../../img/embed/dc_inline_logo.png);
-  }
-
-.docviewer-footerLogoLink {
-  display: block;
-  width: 33px; height: 24px;
-  background: url(../../img/embed/dc_mini_logo.png) no-repeat center center;
-  position: absolute;
-  right: 5px; top: 5px;
-}
-
 .docviewer-views {
   position: relative;
   z-index: 10;
