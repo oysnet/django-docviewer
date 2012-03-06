@@ -25,10 +25,19 @@ class Command(BaseCommand):
         
         if options.get('task_id', None) is not None and document.task_id != options.get('task_id'):
             raise Exception("Celery task ID doesn't match")
+        try:
+            docsplit(options.get('filepath'))
         
-        docsplit(options.get('filepath'))
-        
-        document.generate()
-        document.status = document.STATUS.ready
-        document.task_id = None
-        document.save()
+            document.generate()
+            document.status = document.STATUS.ready
+            document.task_id = None
+            document.save()
+        except Exception, e:
+            
+            try:
+                document.task_error = str(e)
+                document.save()
+            except:
+                pass
+            
+            raise

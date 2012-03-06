@@ -27,7 +27,8 @@ class Document(TimeStampedModel, StatusModel):
     contributor_organization = models.CharField(_('Contributor organization'), max_length=255, null=True, blank=True)
     
     task_id = models.CharField(_('Celery task ID'), max_length=50, null=True, blank=True)
-        
+    task_error = models.TextField(_('Celery error'), null=True, blank=True)
+    
     @property
     def text_url(self):
         return "%s/%s.txt" % (self.get_root_url(), self.slug)
