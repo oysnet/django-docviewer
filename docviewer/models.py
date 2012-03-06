@@ -1,16 +1,12 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from django.conf import settings
 from model_utils.models import TimeStampedModel, StatusModel
 from model_utils import Choices
 from autoslug.fields import AutoSlugField
 import os, re, codecs
-from django.utils.encoding import force_unicode
 
-DOCUMENT_ROOT = getattr(settings, "DOCVIEWER_DOCUMENT_ROOT", "/docs/")
-DOCUMENT_URL = getattr(settings, "DOCVIEWER_DOCUMENT_URL", "/docs/")
-IMAGE_FORMAT = getattr(settings, "DOCVIEWER_IMAGE_FORMAT", "gif")
+from docviewer.settings import *
 
 
 RE_PAGE = re.compile(r'^.*_([0-9]+)\.txt')
@@ -30,6 +26,7 @@ class Document(TimeStampedModel, StatusModel):
     contributor = models.CharField(_('Contributor'), max_length=255, null=True, blank=True)
     contributor_organization = models.CharField(_('Contributor organization'), max_length=255, null=True, blank=True)
     
+    task_id = models.CharField(_('Celery task ID'), max_length=50, null=True, blank=True)
         
     @property
     def text_url(self):
@@ -74,7 +71,16 @@ class Document(TimeStampedModel, StatusModel):
         super(Document, self).save(*args, **kwargs)
         if create:
             os.makedirs(self.get_root_path())
+    
+    def set_file(self, path):
         
+        file = open(path, 'r')
+        filepath = "%s/%s.%s" % (self.get_root_path(), self.slug, path.split('.')[-1])
+        f = open(filepath, "w")
+        f.write(file.read())
+        f.close()
+        file.close()
+        return filepath
     
     def generate(self):
         
@@ -97,7 +103,7 @@ class Document(TimeStampedModel, StatusModel):
                 tmp_file.close()
                     
         all_txt.close()
-        self.save()
+       
         
 class Page(models.Model):
     " Model used to index pages "
