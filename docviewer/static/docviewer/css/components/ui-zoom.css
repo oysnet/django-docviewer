@@ -1,0 +1,62 @@
+.docviewer-zoomControls{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:11px;
+  float: right;
+  margin: 7px 20px 0 0;
+  position: relative;
+}
+  .docviewer-narrowControls .docviewer-zoomControls {
+    margin-right: 15px;
+  }
+
+.docviewer-zoomLabel{
+  color: #333;
+  display:inline;
+  float:left;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:11px;
+  padding:3px 16px 0 0;
+  margin: 3px 0 0 6px;
+  position:relative;
+}
+
+.docviewer-zoomBox{
+  background: url(../../img/embed/bar.png) repeat-x 0 88%;
+  height:20px;
+  width:85px;
+  float: left;
+  position:relative;
+  cursor: pointer;
+}
+  .docviewer-narrowControls .docviewer-zoomBox {
+    background: url(../../img/embed/bar_small.png) repeat-x 0 88%;
+    width:49px;
+  }
+
+.docviewer-zoomBox .ui-slider-handle{
+  height:12px;
+  width:12px;
+  position:absolute;
+  left:0;
+  top:0;
+  margin-top:5px;
+  margin-left:-5px;
+  background: transparent url(../../img/embed/slider.png) no-repeat 0 0;
+  outline: none;
+}
+
+.docviewer-zoomControls .docviewer-trigger{
+  font-size:11px;
+  text-decoration:none;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#004276;
+}
+
+.docviewer-triggers .docviewer-selected{
+  font-weight:bold;
+  color:#000;
+}
+
+.docviewer-zoomControls.docviewer-hide {
+  display: none !important;
+}

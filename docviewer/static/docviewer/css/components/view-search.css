@@ -1,0 +1,45 @@
+.docviewer-viewSearch .docviewer-pageCollection{
+  cursor: text;
+}
+
+.docviewer-viewSearch .docviewer-allAnnotations,
+.docviewer-viewSearch .docviewer-bar{
+  display:none;
+}
+
+.docviewer-viewSearch .docviewer-search,
+.docviewer-viewSearch .docviewer-searchBar{
+  display:block;
+}
+
+.docviewer-viewSearch .docviewer-totalAnnotations,
+.docviewer-viewSearch .docviewer-currentAnnotationPrefix{
+  display:none;
+}
+
+.docviewer-viewSearch .docviewer-textPage{
+  margin-top:50px;
+}
+
+.docviewer-viewSearch .docviewer-textCurrentPage{
+  top:60px;
+}
+
+.docviewer-viewSearch .docviewer-sidebar .docviewer-well .docviewer-chaptersContainer div.docviewer-hasChildren div,
+.docviewer-viewSearch .docviewer-sidebar .docviewer-well .docviewer-chaptersContainer span.docviewer-expander,
+.docviewer-viewSearch .docviewer-annotationMarker{
+  display:none !important;
+}
+
+.docviewer-viewSearch .docviewer-sidebar .docviewer-well .docviewer-chaptersContainer div.docviewer-hasChildren div.docviewer-first{
+  display:block !important;
+}
+
+.docviewer-viewSearch .docviewer-sidebar .docviewer-well .docviewer-chaptersContainer div.docviewer-hasChildren div.docviewer-first span.docviewer-trigger{
+  margin-left:-1px;
+}
+
+.docviewer-viewSearch .docviewer-annotationMarker,
+.docviewer-viewSearch .docviewer-chapter{
+  margin-left:14px;
+}

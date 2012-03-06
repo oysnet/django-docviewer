@@ -1,0 +1,15 @@
+<% for (; page <= endPage; page++) { %>
+  <% var url = imageUrl.replace(/\{page\}/, page) ; %>
+  <div class="docviewer-thumbnail" id="docviewer-thumbnail-<%= page %>" data-pageNumber="<%= page %>">
+    <div class="docviewer-overlay">
+      <div class='docviewer-caret'></div>
+    </div>
+    <div class="docviewer-thumbnail-page">
+      <div class="docviewer-thumbnail-select">
+        <div class="docviewer-thumbnail-shadow"></div>
+        <img class="docviewer-thumbnail-image" data-src="<%= url %>" />
+      </div>
+      <div class="docviewer-pageNumber docviewer-pageMeta"><span class="docviewer-pageNumberText"><span class="docviewer-pageNumberTextUnderline">p. <%= page %></span></span></div>
+    </div>
+  </div>
+<% } %>

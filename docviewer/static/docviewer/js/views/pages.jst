@@ -1,0 +1,17 @@
+<div class="docviewer-set p<%= pageIndex %>" data-id="p<%= pageIndex %>" style="top:0;left:0px;height:893px;width:700px;">
+  <div class="docviewer-overlay"></div>
+  <div class="docviewer-pageNoteInsert" title="Click to Add a Page Note">
+    <div class="docviewer-annotationTab">
+      <div class="docviewer-annotationClose"></div>
+    </div>
+    <div class="docviewer-annotationDivider"></div>
+  </div>
+  <div class="docviewer-pageMeta"><span class="docviewer-pageNumber">p. <%= pageNumber %></span></div>
+  <div class="docviewer-annotations"></div>
+  <div class="docviewer-page" style="height:863px;width:700px;">
+    <span class="docviewer-loading-top">Loading</span>
+    <span class="docviewer-loading-bottom">Loading</span>
+    <div class="docviewer-cover"></div>
+    <img class="docviewer-pageImage" <%= pageImageSource ? 'src="' + pageImageSource + '"' : '' %> height="863" />
+  </div>
+</div>

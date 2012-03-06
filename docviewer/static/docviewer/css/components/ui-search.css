@@ -1,0 +1,236 @@
+.docviewer-searchPagination{
+  text-align:center;
+  float:none;
+  display:inline;
+  color:#666;
+  text-decoration:uppercase;
+  background-color:#fff;
+  font-family:Arial,Helvetica,sans-serif;
+  line-height: 22px;
+}
+
+.docviewer-searchBox.docviewer-clearfix {
+  position: absolute;
+  right: 8px; top: 7px;
+  display: none;
+}
+
+.docviewer-docViewer .docviewer-searchBox {
+  display: none;
+  position: static;
+  float: right;
+/*  width: 255px;*/
+  margin: 6px 6px 0 0;
+}
+
+.docviewer-docViewer.docviewer-searchable .docviewer-searchBox {
+  display:inline;
+}
+
+.docviewer-docViewer .docviewer-searchInput {
+  display: block;
+  border: 1px solid #777;
+  font-family: Arial;
+  margin: 2px 5px 0 0;
+  padding: 4px 20px 3px;
+  width:210px;
+  font-size: 11px;
+  line-height: 14px;
+  background: #FFF url(../../img/embed/search_icon.png) no-repeat 5px 5px;
+  outline: none;
+}
+
+.docviewer-searchInput[type="search"] {
+  margin: 4px 10px 0 0;
+}
+.docviewer-searchInput.placeholder {
+  color: #A0A0A0;
+}
+
+.docviewer-searchInput:focus{
+  border:1px solid #aaa;
+}
+
+.docviewer-searchInputWrap {
+  position: relative;
+}
+
+.docviewer-searchInput{
+  float: left;
+  display: block;
+}
+
+.docviewer-searchDocument .docviewer-searchInput-cancel {
+  visibility: hidden;
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  background: transparent url(../../img/embed/close.png) no-repeat 0 0;
+  width: 11px;
+  height: 11px;
+  cursor: pointer;
+  z-index: 5;
+}
+  .docviewer-ie .docviewer-searchDocument .docviewer-searchInput-cancel {
+    top: 7px;
+  }
+
+.docviewer-searchDocument .docviewer-searchInputWrap.docviewer-searchInput-show-search-cancel .docviewer-searchInput-cancel {
+  visibility: visible;
+}
+
+.docviewer-searchBarWrapper {
+  position: absolute;
+  width: 100%;
+  z-index:10002;
+}
+
+.docviewer-searchBar{
+  position: absolute;
+  top: 0px; left: 0px; right: 282px;
+  height: 50px;
+  background: url(../../img/embed/shadow.png) repeat-x 0 bottom;
+  font-family: Arial,Helvetica,sans-serif;
+  display: none;
+}
+  .docviewer-hideSidebar .docviewer-searchBar {
+    right: 15px;
+  }
+  
+.docviewer-hideFooter .docviewer-footer {
+  display: none;
+}
+
+.docviewer-searchBar ::selection {
+  background: transparent;
+}
+
+.docviewer-searchBar ::-moz-selection {
+  background: transparent;
+}
+
+.docviewer-searchMatch{
+  background-color:#f5f5e5;
+  -moz-box-shadow: 0 1px 5px #999;
+  -webkit-box-shadow: 0 1px 5px #999;
+  padding: 1px;
+  border:1px solid #ffa;
+  color:#000;
+}
+
+.docviewer-highlightedMatch{
+  background: #f1e90f url(../../img/embed/highlight.gif) repeat-x 0 bottom;
+  padding: 3px 3px 2px;
+  -moz-border-radius: 3px;
+  background-color:#fff;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-box-shadow: 0 0 5px #666;
+  -webkit-box-shadow: 0 0 5px #666;
+  border: 1px solid #f5e800;
+  padding: 1px;
+  color:#000;
+}
+
+.docviewer-closeSearch{
+  float:right;
+  display:inline;
+  margin: 16px 15px 0 0;
+  font-size: 10px;
+  color:#777;
+  text-decoration:none;
+}
+
+.docviewer-resultPrevious,
+.docviewer-resultNext{
+  text-decoration:none;
+}
+
+.docviewer-closeSearch:hover,
+.docviewer-resultPrevious:hover,
+.docviewer-resultNext:hover{
+  text-decoration:underline;
+}
+
+.docviewer-noResult .docviewer-resultPrevious,
+.docviewer-noResult .docviewer-resultNext{
+  display:none;
+}
+
+.docviewer-foundResult .docviewer-resultPrevious,
+.docviewer-foundResult .docviewer-resultNext{
+  display:inline;
+}
+
+.docviewer-resultPrevious{
+  padding-left:19px;
+  padding-right:8px;
+  font-size:10px;
+  font-weight:bold;
+  text-transform:uppercase;
+  border-right:1px solid #ccc;
+  margin-right:10px;
+}
+
+.docviewer-resultNext{
+  padding-left:8px;
+  padding-right:19px;
+  font-size:10px;
+  font-weight:bold;
+  text-transform:uppercase;
+  border-left:1px solid #ccc;
+  margin-left:10px;
+}
+
+.docviewer-searchResults span{
+  font-weight:bold;
+  font-size:11px;
+  color:#000;
+}
+
+.docviewer-searchResults{
+  margin: 10px auto;
+  padding-left:45px;
+  text-align:center;
+  width:auto;
+}
+.docviewer-searchResults.docviewer-noResults .docviewer-resultPrevious,
+.docviewer-searchResults.docviewer-noResults .docviewer-resultNext{
+  display:none;
+}
+
+span.docviewer-searchItem{
+  background-color:#fff;
+  border:1px solid #bababa;
+  padding: 2px 1px;
+}
+
+span.docviewer-highlighted{
+  background-color:#fff;
+  border:1px solid #bababa;
+  padding: 2px 1px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+
+.docviewer-textSearch{
+  display:none;
+}
+
+.docviewer-searchingText .docviewer-textSearch{
+  position:absolute;
+  display:block;
+  top:0;
+  left:0;
+  width:300px;
+  height:25px;
+  background-color:#fff;
+  opacity:.8;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+  border-bottom:1px solid #ddd;
+}
+
+.docviewer-searchBox.docviewer-hide {
+  display: none !important;
+}

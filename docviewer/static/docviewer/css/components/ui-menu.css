@@ -1,0 +1,66 @@
+.docviewer-controls {
+  background-color: #f0f4f5;
+  height: 37px;
+  border-bottom: 1px solid #aaa;
+  border-top: 1px solid #aaa;
+  margin-top: 10px;
+  position: relative;
+}
+  .docviewer-collapsibleControls {
+    height: 37px;
+    overflow: hidden;
+  }
+
+.docviewer-views{
+  list-style-type:none;
+  float:left;
+  display:inline;
+  margin:0 0 0 8px; padding:0;
+}
+.docviewer-views.docviewer-hide {
+  display: none;
+}
+.docviewer-views div{
+  float: left;
+  display: inline;
+  margin: 7px 0 0;
+  padding: 0;
+}
+.docviewer-views .docviewer-hide {
+  display: none;
+}
+.docviewer-ie6 .docviewer-views{
+  position:absolute;
+}
+
+.docviewer-views div span{
+  display: block;
+  padding: 9px 14px 8px;
+  background: #bfbfbf url(../../img/embed/tabbg.png);
+  border: 1px solid #777; border-top-color: #888;
+  font: 10px Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  height: 12px;
+  border-left: none;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.docviewer-views div.docviewer-first span{
+  border-left:1px solid #777;
+}
+
+.docviewer-views div a:focus{
+  outline:0;
+}
+
+.docviewer-viewDocument .docviewer-views .docviewer-documentView span,
+.docviewer-viewThumbnails .docviewer-views .docviewer-thumbnailsView span,
+.docviewer-viewAnnotations .docviewer-views .docviewer-annotationView span,
+.docviewer-viewText .docviewer-views .docviewer-textView span,
+.docviewer-viewSearch .docviewer-views .docviewer-textView span{
+  background-position: 0 -40px;
+  font-weight:bold;
+  text-shadow: 0px 1px 0px #fff;
+  border-bottom-color: #a0a0a0;
+}
