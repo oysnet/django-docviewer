@@ -42,7 +42,7 @@ class JsonDocumentView(BaseDetailView):
         document = self.get_object()
         
         json = {}
-        json['id'] = "%s-%s" % (document.id, document.slug)
+        json['id'] = "doc-%s" % (document.id,)
         json['title'] = document.title
         json['pages'] = document.page_count
         json['description'] = document.description
