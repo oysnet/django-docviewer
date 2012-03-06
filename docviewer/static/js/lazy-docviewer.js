@@ -1,6 +1,7 @@
 $(window).load(function() {
 			var docviewer_index = 0;
 			var targeting = {};
+      this.viewer.$.support.cors
 			$('.docviewer').each(function() {
 						if (typeof($(this).attr('id')) === 'undefined') {
 							$(this).attr('id', 'docviewer-' + docviewer_index);
