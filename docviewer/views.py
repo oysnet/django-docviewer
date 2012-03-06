@@ -2,6 +2,8 @@ from django.views.generic.detail import  BaseDetailView
 from django.core.urlresolvers import reverse
 from docviewer.models import Document
 from django.utils.feedgenerator import rfc2822_date
+from django.http import HttpResponse
+from django.utils import simplejson
 
 class JsonDocumentView(BaseDetailView):
     
@@ -33,5 +35,15 @@ class JsonDocumentView(BaseDetailView):
         json['resources']['search'] = reverse("docviewer_search_view", kwargs = {'pk' : document.pk})
         json['resources']['print_annotations'] = reverse("docviewer_printannotations_view", kwargs = {'pk' : document.pk})
         json['resources']['page'] = {}
-        json['resources']['page']['text'] = reverse("docviewer_pagetext_view", kwargs = {'pk' : document.pk, 'page':'{page}'})
-        json['resources']['page']['image'] = reverse("docviewer_pageimage_view", kwargs = {'pk' : document.pk, 'page':'{page}'})
+        json['resources']['page']['text'] = document.text_page_url % {'page' : '{page}'}
+        json['resources']['page']['image'] = document.image_page_url % {'page' : '{page}', 'size' : '{size}'}
+        
+        json['resources']['related_article'] = ""
+        json['resources']['published_url'] = json['canonical_url']
+        
+        json['sections'] = list(document.sections_set.all().values('title', 'page'))
+        
+        json['annotations'] = list(document.annotations_set.all().values('location', 'title', 'id', 'page', 'content'))
+        
+        
+        return HttpResponse(simplejson.dumps(json), content_type="application/json")

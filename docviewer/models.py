@@ -27,10 +27,20 @@ class Document(models.Model):
     @property
     def text_url(self):
         return "%s.txt" % self.get_root_url()
-        
+    
     @property
     def thumbnail_url(self):
         return "%s.%s" % (self.get_root_url(), IMAGE_FORMAT)
+    
+    @property
+    def text_page_url(self):
+        return "%s_%%(page)s.txt" % self.get_root_url()
+    
+    @property
+    def image_page_url(self):
+        return "%s/%%(size)s/%s_%%(page)s.%s" % (self.get_root_url(), self.pk, IMAGE_FORMAT)
+        
+    
         
     def get_root_path(self):
         return "%s%s" % (MEDIA_ROOT, self.id)
@@ -75,7 +85,7 @@ class Annotation(models.Model):
     document = models.ForeignKey(Document, related_name='annotations_set')
     
     title = models.CharField(_('Title'), max_length=255)
-    location = models.CommaSeparatedIntegerField(_('Coordinates'))
+    location = models.CommaSeparatedIntegerField(_('Coordinates'), max_length=50)
     page = models.PositiveIntegerField(_('Page ID'))
     content = models.TextField(_('Content'))
     
