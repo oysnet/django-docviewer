@@ -25,7 +25,7 @@ _.extend(docviewer.Schema.helpers, {
 
     var searchURI = this.viewer.schema.document.resources.search.replace('{query}', encodeURIComponent(query));
     if (this.viewer.helpers.isCrossDomain(searchURI)) searchURI += '&callback=?';
-    docviewer.jQuery.ajax({url : searchURI, dataType : 'json', success : handleResponse, error : failResponse});
+    docviewer.jQuery.ajax({url : searchURI, dataType : 'json', success : handleResponse, error : failResponse.bind(this)});
   },
   acceptInputCallBack: function(){
     var pageIndex = parseInt(this.elements.currentPage.text(),10) - 1;
