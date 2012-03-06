@@ -6,7 +6,7 @@ from docviewer.models import Page
 
 class PageIndex(RealTimeSearchIndex):
     
-    body = CharField(document=True)
+    fulltext = CharField(document=True)
     document_id =  IntegerField(model_attr='document__id')
     page = IntegerField(model_attr="page")
     
