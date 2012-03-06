@@ -2,51 +2,63 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from django.conf import settings
+from model_utils.models import TimeStampedModel, StatusModel
+from model_utils import Choices
+from autoslug.fields import AutoSlugField
+
+import os, re
 
 DOCUMENT_ROOT = getattr(settings, "DOCVIEWER_DOCUMENT_ROOT", "documents/")
 MEDIA_ROOT = settings.MEDIA_ROOT
 MEDIA_URL = settings.MEDIA_URL
 IMAGE_FORMAT = getattr(settings, "DOCVIEWER_IMAGE_FORMAT", "gif")
 
-class Document(models.Model):
+
+RE_PAGE = re.compile(r'^.*_([0-9]+)\.txt')
+
+class Document(TimeStampedModel, StatusModel):
     
-    created = models.DateTimeField(_('Creation date'), auto_now_add=True, editable=False)
-    modified = models.DateTimeField(_('Last update date'), auto_now=True, editable=False)
+    STATUS = Choices('waiting', 'ready')
+        
+    slug = AutoSlugField(_('Slug'),max_length=255, unique=True, populate_from='title')
     
     title = models.CharField(_('Title'), max_length=255)
     description = models.TextField(_('Description'), null=True, blank=True)
     
-    source_url=models.URLField(_('Source URL of the document'), max_length=1024, null=True, blank=True)
+    source_url = models.URLField(_('Source URL of the document'), max_length=1024, null=True, blank=True)
     page_count = models.PositiveIntegerField(null=True, blank=True)
     
     contributor = models.CharField(_('Contributor'), max_length=255, null=True, blank=True)
     contributor_organization = models.CharField(_('Contributor organization'), max_length=255, null=True, blank=True)
     
-    file = models.FileField(upload_to="%s/%%Y/%%m/" % DOCUMENT_ROOT)
         
     @property
     def text_url(self):
-        return "%s.txt" % self.get_root_url()
+        return "%s/%s.txt" % (self.get_root_url(), self.slug)
     
     @property
     def thumbnail_url(self):
-        return "%s.%s" % (self.get_root_url(), IMAGE_FORMAT)
+        return "%s/%s.%s" % (self.get_root_url(),  self.slug, IMAGE_FORMAT)
+    
+    @property
+    def pdf_url(self):
+        return "%s/%s.pdf" % (self.get_root_url(),  self.slug)
     
     @property
     def text_page_url(self):
-        return "%s_%%(page)s.txt" % self.get_root_url()
+        return "%s/%s_%%(page)s.txt" % (self.get_root_url(), self.slug)
     
     @property
     def image_page_url(self):
-        return "%s/%%(size)s/%s_%%(page)s.%s" % (self.get_root_url(), self.pk, IMAGE_FORMAT)
+        return "%s/%%(size)s/%s_%%(page)s.%s" % (self.get_root_url(), self.slug, IMAGE_FORMAT)
         
     
         
     def get_root_path(self):
-        return "%s%s" % (MEDIA_ROOT, self.id)
+        return "%s%s%s" % (MEDIA_ROOT, DOCUMENT_ROOT,self.id)
     
     def get_root_url(self):
-        return "%s%s" % (MEDIA_URL, self.id)
+        return "%s%s%s" % (MEDIA_URL, DOCUMENT_ROOT,self.id)
     
     @property
     def text(self):
@@ -56,6 +68,38 @@ class Document(models.Model):
         f.close()
         return data
     
+    
+    def save(self, *args, **kwargs):
+        
+        create = self.pk is None
+        super(Document, self).save(*args, **kwargs)
+        if create:
+            os.makedirs(self.get_root_path())
+        
+    
+    def generate(self):
+        
+        # concatenate all text files
+        
+        all_txt = open("%s/%s.txt" % (self.get_root_path(), self.slug), "w")
+        
+        self.page_count = 0
+        self.pages_set.all().delete()
+        for f in os.listdir(self.get_root_path()):
+            if f[-4:] == '.txt' and f != "%s.txt" % self.slug:
+                
+                self.page_count += 1
+                
+                tmp_file = open("%s/%s" % (self.get_root_path(), f))
+                all_txt.write(tmp_file.read())
+                
+                Page(document=self, page=RE_PAGE.match(f).group(1)).save()
+                
+                tmp_file.close()
+                    
+        all_txt.close()
+        self.save()
+        
 class Page(models.Model):
     " Model used to index pages "
     document = models.ForeignKey(Document, related_name='pages_set')
