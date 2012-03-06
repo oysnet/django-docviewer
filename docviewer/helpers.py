@@ -1,3 +1,4 @@
+import os
 from subprocess import Popen, PIPE
 from docviewer.settings import IMAGE_FORMAT
 from docviewer.models import Document
@@ -16,6 +17,10 @@ def docsplit(path):
         if len(result) > 0:
             raise Exception(result)
         
+    # rename directories
+    os.rename("%s/%s" % (output, "1000x"), "%s/%s" % (output, "large"))
+    os.rename("%s/%s" % (output, "700x"), "%s/%s" % (output, "normal"))
+    os.rename("%s/%s" % (output, "180x"), "%s/%s" % (output, "small"))    
         
 def create_document(filepath, doc_attributes):
     
