@@ -5,12 +5,11 @@ from django.conf import settings
 from model_utils.models import TimeStampedModel, StatusModel
 from model_utils import Choices
 from autoslug.fields import AutoSlugField
+import os, re, codecs
+from django.utils.encoding import force_unicode
 
-import os, re
-
-DOCUMENT_ROOT = getattr(settings, "DOCVIEWER_DOCUMENT_ROOT", "documents/")
-MEDIA_ROOT = settings.MEDIA_ROOT
-MEDIA_URL = settings.MEDIA_URL
+DOCUMENT_ROOT = getattr(settings, "DOCVIEWER_DOCUMENT_ROOT", "/docs/")
+DOCUMENT_URL = getattr(settings, "DOCVIEWER_DOCUMENT_URL", "/docs/")
 IMAGE_FORMAT = getattr(settings, "DOCVIEWER_IMAGE_FORMAT", "gif")
 
 
@@ -55,10 +54,10 @@ class Document(TimeStampedModel, StatusModel):
     
         
     def get_root_path(self):
-        return "%s%s%s" % (MEDIA_ROOT, DOCUMENT_ROOT,self.id)
+        return "%s%s" % (DOCUMENT_ROOT,self.id)
     
     def get_root_url(self):
-        return "%s%s%s" % (MEDIA_URL, DOCUMENT_ROOT,self.id)
+        return "%s%s" % (DOCUMENT_URL,self.id)
     
     @property
     def text(self):
@@ -107,8 +106,8 @@ class Page(models.Model):
     
     @property
     def text(self):
-        path = "%s%s.txt" %( self.document.get_root_path(), self.page)
-        f = open(path, 'r').read()
+        path = "%s/%s_%s.txt" %( self.document.get_root_path(), self.document.slug, self.page)
+        f = codecs.open(path, 'r', 'ascii')
         data = f.read()
         f.close()
         return data
