@@ -1,4 +1,4 @@
-PIPELINE_CSS['docviewer'] = {
+PIPELINE_CSS['docviewer-base'] = {
     'source_filenames': (
         'docviewer/css/components/reset.css',
         'docviewer/css/components/structure.css',
@@ -21,17 +21,25 @@ PIPELINE_CSS['docviewer'] = {
         'docviewer/css/components/minimode.css',
         'docviewer/css/themes/plain.css',
         ),
-    'output_filename': 'c/docviewer.r?.css',
+    'output_filename': 'c/docviewer-base.r?.css',
 }
 
 PIPELINE_CSS['docviewer-print'] = {
     'source_filenames': (
-        'docviewer/css/print.css'
+        'docviewer/css/print.css',
         ),
+    'extra_context': {
+        'media': 'print',
+    },
     'output_filename': 'c/docviewer-print.r?.css',
 }
-
-PIPELINE_JS['docviewer'] = {
+PIPELINE_JS['docviewer-template'] = {
+    'source_filenames': (
+        'docviewer/js/views/*.jst',
+    ),
+    'output_filename': 'c/docviewer-template.r?.js',
+}
+PIPELINE_JS['docviewer-base'] = {
     'source_filenames': (
         'docviewer/js/vendor/jquery-1.5.1.js',
         'docviewer/js/vendor/jquery-ui-1.8.1.custom.min.js',
@@ -70,6 +78,6 @@ PIPELINE_JS['docviewer'] = {
         'docviewer/js/controllers/document_viewer.js',
         'docviewer/js/controllers/api.js',
     ),
-    'output_filename': 'c/docviewer.r?.js',
+    'output_filename': 'c/docviewer-base.r?.js',
 }
 
