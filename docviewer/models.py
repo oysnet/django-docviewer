@@ -107,10 +107,11 @@ class Page(models.Model):
     @property
     def text(self):
         path = "%s/%s_%s.txt" %( self.document.get_root_path(), self.document.slug, self.page)
-        f = codecs.open(path, 'r', 'ascii')
+        f = codecs.open(path, 'r')
         data = f.read()
         f.close()
-        return data
+        return data.decode('ascii', 'ignore')
+        
     
     
     def get_image(self, size):
