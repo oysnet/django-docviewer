@@ -26,6 +26,10 @@ class Document(TimeStampedModel, StatusModel):
     contributor = models.CharField(_('Contributor'), max_length=255, null=True, blank=True)
     contributor_organization = models.CharField(_('Contributor organization'), max_length=255, null=True, blank=True)
     
+    download = models.BooleanField(default=True)
+    
+    related_url = models.URLField(max_length=1024, null=True, blank=True)
+    
     task_id = models.CharField(_('Celery task ID'), max_length=50, null=True, blank=True)
     task_error = models.TextField(_('Celery error'), null=True, blank=True)
     

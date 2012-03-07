@@ -57,7 +57,8 @@ class JsonDocumentView(BaseDetailView):
         json['contributor_organization'] = document.contributor_organization
         
         json['resources'] = {}
-        json['resources']['pdf'] = get_absolute_url(document.pdf_url)
+        if document.download is True:
+            json['resources']['pdf'] = get_absolute_url(document.pdf_url)
         json['resources']['text'] = get_absolute_url(document.text_url)
         json['resources']['thumbnail'] = get_absolute_url(document.thumbnail_url)
         json['resources']['search'] = get_absolute_url(reverse("docviewer_search_view", kwargs = {'pk' : document.pk, 'slug' : document.slug})) + '?q={query}'
