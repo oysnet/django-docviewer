@@ -36,3 +36,28 @@ def create_document(filepath, doc_attributes):
     d.save()
     
     return d
+
+
+def generate_document(doc_id, filepath, task_id=None):
+    
+    document = Document.objects.get(pk=doc_id)
+        
+    if task_id is not None and document.task_id != task_id:
+        
+        raise Exception("Celery task ID doesn't match")
+    try:
+        docsplit(filepath)
+    
+        document.generate()
+        document.status = document.STATUS.ready
+        document.task_id = None
+        document.save()
+    except Exception, e:
+        
+        try:
+            document.task_error = str(e)
+            document.save()
+        except:
+            pass
+        
+        raise
