@@ -1,6 +1,7 @@
-from celery.decorators import task
-from django.core import management
+from celery.task import task
+
 
 @task()
-def generate_document(doc_id, filepath, task_id=None):
-    management.call_command('generate_document', doc_id, file=filepath, task=task_id, verbosity=0, interactive=False)
+def task_generate_document(doc_id, filepath, task_id=None):
+    from docviewer.helpers import generate_document    
+    generate_document(doc_id, filepath, task_id)
