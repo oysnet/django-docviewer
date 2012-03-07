@@ -23,7 +23,7 @@ class SearchDocumentView(View):
         
         query = request.GET.get('q')
         
-        results = SearchQuerySet().models(Page).auto_query(query)
+        results = SearchQuerySet().models(Page).narrow('document_id:%s' %  kwargs.get('pk')).auto_query(query)
         
         json = {
           'matches' : results.count(),
@@ -31,7 +31,6 @@ class SearchDocumentView(View):
           'query'   : query
         }
         
-        print json
         return HttpResponse(simplejson.dumps(json), content_type="application/json")
 
 class JsonDocumentView(BaseDetailView):
