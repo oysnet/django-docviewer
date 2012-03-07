@@ -31,6 +31,10 @@ class Document(TimeStampedModel, StatusModel):
     
     task_start = models.DateTimeField(_('Celery error'), null=True, blank=True)
     
+    
+    def __unicode__(self):
+        return u"%s %s (status:%s)" % (self.pk, self.title, self.status)
+    
     @property
     def text_url(self):
         return "%s/%s.txt" % (self.get_root_url(), self.slug)
