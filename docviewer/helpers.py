@@ -2,7 +2,7 @@ import os
 from subprocess import Popen, PIPE
 from docviewer.settings import IMAGE_FORMAT
 from docviewer.models import Document
-from docviewer.tasks import generate_document
+from docviewer.tasks import task_generate_document
 from datetime import datetime
 
 def docsplit(path):
@@ -31,7 +31,7 @@ def create_document(filepath, doc_attributes):
     filepath = d.set_file(filepath)
     
     
-    task = generate_document.apply_async(args=[d.pk, filepath], countdown=5)
+    task = task_generate_document.apply_async(args=[d.pk, filepath], countdown=5)
     
     d.task_id = task.task_id
     d.save()
