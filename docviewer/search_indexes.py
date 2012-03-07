@@ -11,7 +11,7 @@ class PageIndex(RealTimeSearchIndex):
     page = IntegerField(model_attr="page")
     
     
-    def prepare_body(self, obj):
+    def prepare_fulltext(self, obj):
         return obj.text
         
     def index_queryset(self):
