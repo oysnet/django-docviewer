@@ -13,7 +13,7 @@ RE_PAGE = re.compile(r'^.*_([0-9]+)\.txt')
 
 class Document(TimeStampedModel, StatusModel):
     
-    STATUS = Choices('waiting', 'ready')
+    STATUS = Choices('waiting', 'ready', 'running', 'failed')
         
     slug = AutoSlugField(_('Slug'),max_length=255, unique=True, populate_from='title')
     
@@ -28,6 +28,8 @@ class Document(TimeStampedModel, StatusModel):
     
     task_id = models.CharField(_('Celery task ID'), max_length=50, null=True, blank=True)
     task_error = models.TextField(_('Celery error'), null=True, blank=True)
+    
+    task_start = models.DateTimeField(_('Celery error'), null=True, blank=True)
     
     @property
     def text_url(self):

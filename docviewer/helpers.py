@@ -3,6 +3,7 @@ from subprocess import Popen, PIPE
 from docviewer.settings import IMAGE_FORMAT
 from docviewer.models import Document
 from docviewer.tasks import generate_document
+from datetime import datetime
 
 def docsplit(path):
     
@@ -43,8 +44,12 @@ def generate_document(doc_id, filepath, task_id=None):
     document = Document.objects.get(pk=doc_id)
         
     if task_id is not None and document.task_id != task_id:
-        
         raise Exception("Celery task ID doesn't match")
+    
+    document.status = Document.STATUS.running
+    document.task_start = datetime.now()
+    document.save()
+    
     try:
         docsplit(filepath)
     
@@ -56,6 +61,7 @@ def generate_document(doc_id, filepath, task_id=None):
         
         try:
             document.task_error = str(e)
+            document.status = document.STATUS.failed
             document.save()
         except:
             pass
