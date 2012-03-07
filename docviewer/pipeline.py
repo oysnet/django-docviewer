@@ -35,7 +35,20 @@ PIPELINE_CSS['docviewer-print'] = {
 }
 PIPELINE_JS['docviewer-template'] = {
     'source_filenames': (
-        'docviewer/js/views/*.jst',
+        'docviewer/js/views/annotation.jst',
+        'docviewer/js/views/annotationNav.jst',
+        'docviewer/js/views/chapterNav.jst',
+        'docviewer/js/views/descriptionContainer.jst',
+        'docviewer/js/views/footer.jst',
+        'docviewer/js/views/fullscreenControl.jst',
+        'docviewer/js/views/header.jst',
+        'docviewer/js/views/navControls.jst',
+        'docviewer/js/views/navigationExpander.jst',
+        'docviewer/js/views/pageAnnotation.jst',
+        'docviewer/js/views/pages.jst',
+        'docviewer/js/views/thumbnails.jst',
+        'docviewer/js/views/unsupported.jst',
+        'docviewer/js/views/viewer.jst',
     ),
     'output_filename': 'c/docviewer-template.r?.js',
 }

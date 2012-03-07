@@ -5,7 +5,7 @@
   line-height: normal;
 }
 .docviewer-headerHat, .docviewer-title, .docviewer-contentsHeader {
-  display: none !important;
+  display: none;
 }
 .docviewer-header {
   padding: 0;
