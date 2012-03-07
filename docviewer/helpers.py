@@ -30,7 +30,7 @@ def create_document(filepath, doc_attributes):
     filepath = d.set_file(filepath)
     
     
-    task = generate_document.apply_async(args=[d.pk], kwargs={"filepath": filepath}, countdown=5)
+    task = generate_document.apply_async(args=[d.pk, filepath], countdown=5)
     
     d.task_id = task.task_id
     d.save()
