@@ -66,7 +66,7 @@ class JsonDocumentView(BaseDetailView):
         json['resources']['page']['text'] = get_absolute_url(document.text_page_url % {'page' : '{page}'})
         json['resources']['page']['image'] = get_absolute_url(document.image_page_url % {'page' : '{page}', 'size' : '{size}'})
         
-        json['resources']['related_article'] = ""
+        json['resources']['related_article'] = document.related_url
         json['resources']['published_url'] = json['canonical_url']
         
         json['sections'] = list(document.sections_set.all().values('title', 'page'))
