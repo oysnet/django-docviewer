@@ -13,7 +13,7 @@ def docsplit(path):
                 "/usr/bin/docsplit text --pages all --output %s %s" % (output, path)]
     
     for command in commands:
-        result = Popen(command, shell=True, stderr=PIPE).stderr.read()
+        result = Popen(command, shell=True, stdout=PIPE).stdout.read()
         
         if len(result) > 0:
             raise Exception(result)
