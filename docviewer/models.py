@@ -51,7 +51,7 @@ class Document(TimeStampedModel, StatusModel):
     
     @property
     def doc_url(self):
-        return "%s/%s" % (self.get_root_url(),  self.filename)
+        return "%s/%s.pdf" % (self.get_root_url(),  self.slug)
     
     @property
     def text_page_url(self):
