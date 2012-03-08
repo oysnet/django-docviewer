@@ -11,4 +11,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         
         for d in Document.objects.filter(status = Document.STATUS.waiting):
+            
+            print "revoke task for %s" % d
+            
             revoke(d.task_id)
