@@ -3,7 +3,7 @@ from haystack import indexes
 from docviewer.models import Page
 
 
-class PageIndex(RealTimeSearchIndex, indexes.Indexable):
+class PageIndex(indexes.RealTimeSearchIndex, indexes.Indexable):
     
     text = indexes.CharField(document=True)
     document_id =  indexes.IntegerField(model_attr='document__id')
