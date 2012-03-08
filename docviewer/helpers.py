@@ -28,10 +28,9 @@ def create_document(filepath, doc_attributes):
     d = Document(**doc_attributes)
     d.save()
     
-    filepath = d.set_file(filepath)
+    d.set_file(filepath)
     
-    
-    task = task_generate_document.apply_async(args=[d.pk, filepath], countdown=5)
+    task = task_generate_document.apply_async(args=[d.pk], countdown=5)
     
     d.task_id = task.task_id
     d.save()
@@ -39,7 +38,7 @@ def create_document(filepath, doc_attributes):
     return d
 
 
-def generate_document(doc_id, filepath, task_id=None):
+def generate_document(doc_id,  task_id=None):
     
     document = Document.objects.get(pk=doc_id)
         
@@ -51,7 +50,7 @@ def generate_document(doc_id, filepath, task_id=None):
     document.save()
     
     try:
-        docsplit(filepath)
+        docsplit(document.get_file_path())
     
         document.generate()
         document.status = document.STATUS.ready

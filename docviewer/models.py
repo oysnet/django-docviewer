@@ -30,10 +30,12 @@ class Document(TimeStampedModel, StatusModel):
     
     related_url = models.URLField(max_length=1024, null=True, blank=True)
     
+    filename = models.CharField(_('PDF file name'), max_length=512, null=True, blank=True)
+    
     task_id = models.CharField(_('Celery task ID'), max_length=50, null=True, blank=True)
     task_error = models.TextField(_('Celery error'), null=True, blank=True)
     
-    task_start = models.DateTimeField(_('Celery error'), null=True, blank=True)
+    task_start = models.DateTimeField(_('Celery date start'), null=True, blank=True)
     
     
     def __unicode__(self):
@@ -83,6 +85,9 @@ class Document(TimeStampedModel, StatusModel):
         if create:
             os.makedirs(self.get_root_path())
     
+    def get_file_path(self):
+        return "%s/%s" (self.get_root_path(), self.filename)
+    
     def set_file(self, path):
         
         file = open(path, 'r')
@@ -91,7 +96,9 @@ class Document(TimeStampedModel, StatusModel):
         f.write(file.read())
         f.close()
         file.close()
-        return filepath
+        
+        self.filename = filepath.split('/')[-1]
+        
     
     def generate(self):
         

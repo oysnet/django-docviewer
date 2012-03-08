@@ -10,7 +10,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         
         doc = Document.objects.get(pk=args[0])
-        task = task_generate_document.apply_async(args=[doc.pk, "%s/%s" % (doc.get_root_path(), args[1])], countdown=5)
+        task = task_generate_document.apply_async(args=[doc.pk], countdown=5)
         
         doc.status = Document.STATUS.waiting
         doc.task_start = None
