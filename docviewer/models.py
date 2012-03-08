@@ -86,7 +86,7 @@ class Document(TimeStampedModel, StatusModel):
             os.makedirs(self.get_root_path())
     
     def get_file_path(self):
-        return "%s/%s" (self.get_root_path(), self.filename)
+        return "%s/%s" % (self.get_root_path(), self.filename)
     
     def set_file(self, path):
         
