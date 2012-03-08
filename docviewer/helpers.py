@@ -25,7 +25,7 @@ def docsplit(document):
     # rename directories
     os.rename("%s/%s" % (path, "1000x"), "%s/%s" % (path, "large"))
     os.rename("%s/%s" % (path, "700x"), "%s/%s" % (path, "normal"))
-    os.rename("%s/%s" % (path, "180x"), "%s/%s" % (path))    
+    os.rename("%s/%s" % (path, "180x"), "%s/%s" % (path, "small"))    
         
 def create_document(filepath, doc_attributes):
     
