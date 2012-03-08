@@ -9,7 +9,6 @@ class PageIndex(indexes.RealTimeSearchIndex, indexes.Indexable):
     document_id =  indexes.IntegerField(model_attr='document__id')
     page = indexes.IntegerField(model_attr="page")
     
-    
     def prepare_text(self, obj):
         return obj.text
 
