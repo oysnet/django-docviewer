@@ -1,20 +1,20 @@
 import datetime
-from haystack.indexes import RealTimeSearchIndex, CharField, IntegerField
-#from haystack import site
+from haystack import indexes
 from docviewer.models import Page
 
 
-class PageIndex(RealTimeSearchIndex):
+class PageIndex(RealTimeSearchIndex, indexes.Indexable):
     
-    fulltext = CharField(document=True)
-    document_id =  IntegerField(model_attr='document__id')
+    text = indexes.CharField(document=True)
+    document_id =  indexes.IntegerField(model_attr='document__id')
     page = IntegerField(model_attr="page")
     
     
-    def prepare_fulltext(self, obj):
+    def prepare_text(self, obj):
         return obj.text
-        
+
+    def get_model(self):
+        return Page
+            
     def index_queryset(self):
-        return Page.objects.all()
-        
-#site.register(Page, PageIndex)
+        return self.get_model().objects.all()
