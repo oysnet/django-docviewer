@@ -4,6 +4,7 @@ from docviewer.settings import IMAGE_FORMAT
 from docviewer.models import Document
 from docviewer.tasks import task_generate_document
 from datetime import datetime
+import shutil
 
 def docsplit(document):
     
@@ -23,8 +24,13 @@ def docsplit(document):
             raise Exception(result)
         
     # rename directories
+    shutil.rmtree("%s/%s" % (path, "large"), ignore_errors=True)
     os.rename("%s/%s" % (path, "1000x"), "%s/%s" % (path, "large"))
+    
+    shutil.rmtree("%s/%s" % (path, "normal"), ignore_errors=True)
     os.rename("%s/%s" % (path, "700x"), "%s/%s" % (path, "normal"))
+    
+    shutil.rmtree("%s/%s" % (path, "small"), ignore_errors=True)
     os.rename("%s/%s" % (path, "180x"), "%s/%s" % (path, "small"))    
         
 def create_document(filepath, doc_attributes):
