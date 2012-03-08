@@ -55,6 +55,7 @@ def generate_document(doc_id,  task_id=None):
         document.generate()
         document.status = document.STATUS.ready
         document.task_id = None
+        document.task_error = None
         document.save()
     except Exception, e:
         
