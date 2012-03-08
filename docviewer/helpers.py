@@ -5,12 +5,16 @@ from docviewer.models import Document
 from docviewer.tasks import task_generate_document
 from datetime import datetime
 
-def docsplit(path):
+def docsplit(document):
     
-    output = '/'.join(path.split('/')[:-1])
+    path = document.get_root_path()
     
-    commands = ["/usr/bin/docsplit images --size 700x,1000x,180x --format %s --output %s %s" % (IMAGE_FORMAT,output, path), 
-                "/usr/bin/docsplit text --pages all --output %s %s" % (output, path)]
+    commands = ["/usr/bin/docsplit images --size 700x,1000x,180x --format %s --output %s %s/%s.pdf" % (IMAGE_FORMAT,path, path,document.slug), 
+                "/usr/bin/docsplit text --pages all --output %s %s/%s.pdf" % (path, path,document.slug)]
+    
+    if document.filename.split('.')[-1].lower() != 'pdf':
+        cmd = "/usr/bin/docsplit pdf --output %s %s" % (path, document.get_file_path())
+        commands.insert(0, cmd)
     
     for command in commands:
         result = Popen(command, shell=True, stdout=PIPE).stdout.read()
@@ -19,9 +23,9 @@ def docsplit(path):
             raise Exception(result)
         
     # rename directories
-    os.rename("%s/%s" % (output, "1000x"), "%s/%s" % (output, "large"))
-    os.rename("%s/%s" % (output, "700x"), "%s/%s" % (output, "normal"))
-    os.rename("%s/%s" % (output, "180x"), "%s/%s" % (output, "small"))    
+    os.rename("%s/%s" % (path, "1000x"), "%s/%s" % (path, "large"))
+    os.rename("%s/%s" % (path, "700x"), "%s/%s" % (path, "normal"))
+    os.rename("%s/%s" % (path, "180x"), "%s/%s" % (path))    
         
 def create_document(filepath, doc_attributes):
     
@@ -50,7 +54,7 @@ def generate_document(doc_id,  task_id=None):
     document.save()
     
     try:
-        docsplit(document.get_file_path())
+        docsplit(document)
     
         document.generate()
         document.status = document.STATUS.ready
