@@ -37,6 +37,10 @@ class Document(TimeStampedModel, StatusModel):
     
     task_start = models.DateTimeField(_('Celery date start'), null=True, blank=True)
     
+    @models.permalink
+    def get_absolute_url(self):
+        return ("docviewer_viewer_view", (), {'slug' : self.slug, 'pk': self.pk})
+    
     
     def __unicode__(self):
         return u"%s %s (status:%s)" % (self.pk, self.title, self.status)
