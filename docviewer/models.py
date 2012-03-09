@@ -95,13 +95,13 @@ class Document(TimeStampedModel, StatusModel):
     def set_file(self, path):
         
         file = open(path, 'r')
-        filepath = "%s/%s.%s" % (self.get_root_path(), self.slug, path.split('.')[-1])
+        filepath = "%s/%s.%s" % (self.get_root_path(), self.slug, path.split('.')[-1].lower())
         f = open(filepath, "w")
         f.write(file.read())
         f.close()
         file.close()
         
-        self.filename = filepath.split('/')[-1]
+        self.filename = filepath.split('/')[-1].lower()
         
     
     def generate(self):
