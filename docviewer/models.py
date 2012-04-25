@@ -125,7 +125,10 @@ class Document(TimeStampedModel, StatusModel):
                 tmp_file.close()
                     
         all_txt.close()
-       
+        
+    class Meta:
+        verbose_name = _(u'Document')
+        verbose_name_plural = _(u'Document')
         
 class Page(models.Model):
     " Model used to index pages "
