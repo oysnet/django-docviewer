@@ -11,7 +11,7 @@ class DocumentAdmin(admin.ModelAdmin):
     readonly_fields = ('status', 'page_count', 'filename', 'task_id', 'task_error', 'task_start')
     
     fieldsets = (
-        (None, {'fields': ('title', 'description', 'source_url', 'related_url', 'contributor', 'contributor_organization', 'download')}),
+        (None, {'fields': ('title', 'description', 'file', 'source_url', 'related_url', 'contributor', 'contributor_organization', 'download')}),
         ('Meta', {'fields': ('filename', 'page_count',  'task_id', 'task_error', 'task_start')}),
     )
     
