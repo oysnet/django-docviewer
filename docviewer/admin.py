@@ -12,7 +12,7 @@ class DocumentAdmin(admin.ModelAdmin):
     
     fieldsets = (
         (None, {'fields': ('title', 'description', 'file', 'source_url', 'related_url', 'contributor', 'contributor_organization', 'download')}),
-        ('Meta', {'fields': ('filename', 'page_count',  'task_id', 'task_error', 'task_start')}),
+        ('Meta', {'fields': ('status', 'filename', 'page_count',  'task_id', 'task_error', 'task_start')}),
     )
     
     def save_model(self, request, obj, form, change):
