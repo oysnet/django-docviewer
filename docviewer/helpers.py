@@ -2,7 +2,6 @@ import os
 from subprocess import Popen, PIPE
 from docviewer.settings import IMAGE_FORMAT
 from docviewer.models import Document
-from docviewer.tasks import task_generate_document
 from datetime import datetime
 import shutil
 
@@ -39,11 +38,6 @@ def create_document(filepath, doc_attributes):
     d.save()
     
     d.set_file(filepath)
-    
-    task = task_generate_document.apply_async(args=[d.pk], countdown=5)
-    
-    d.task_id = task.task_id
-    d.save()
     
     return d
 

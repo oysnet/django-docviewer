@@ -7,6 +7,7 @@ from autoslug.fields import AutoSlugField
 import os, re, codecs
 
 from docviewer.settings import *
+from docviewer.tasks import task_generate_document
 
 
 RE_PAGE = re.compile(r'^.*_([0-9]+)\.txt')
@@ -21,14 +22,14 @@ class Document(TimeStampedModel, StatusModel):
     description = models.TextField(_('Description'), null=True, blank=True)
     
     source_url = models.URLField(_('Source URL of the document'), max_length=1024, null=True, blank=True)
-    page_count = models.PositiveIntegerField(null=True, blank=True)
+    page_count = models.PositiveIntegerField(null=True, blank=True, help_text=_('Total page in the document'))
     
     contributor = models.CharField(_('Contributor'), max_length=255, null=True, blank=True)
     contributor_organization = models.CharField(_('Contributor organization'), max_length=255, null=True, blank=True)
     
-    download = models.BooleanField(default=True)
+    download = models.BooleanField(_('Allow download'), default=True, help_text=_('Allow original document download'))
     
-    related_url = models.URLField(max_length=1024, null=True, blank=True)
+    related_url = models.URLField(_('Url where the document can be view'),max_length=1024, null=True, blank=True)
     
     filename = models.CharField(_('PDF file name'), max_length=512, null=True, blank=True)
     
@@ -92,17 +93,25 @@ class Document(TimeStampedModel, StatusModel):
     def get_file_path(self):
         return "%s/%s" % (self.get_root_path(), self.filename)
     
-    def set_file(self, path):
+    def set_file(self, path = None, file=None, filename = None):
         
-        file = open(path, 'r')
-        filepath = "%s/%s.%s" % (self.get_root_path(), self.slug, path.split('.')[-1].lower())
-        f = open(filepath, "w")
+        if path is not None:
+            file = open(path, 'r')
+            filepath = "%s/%s.%s" % (self.get_root_path(), self.slug, path.split('.')[-1].lower())
+        else:
+            filepath = "%s/%s.%s" % (self.get_root_path(), self.slug, filename.split('.')[-1].lower())
+            
+        f = open(filepath, "w")  
         f.write(file.read())
         f.close()
         file.close()
         
         self.filename = filepath.split('/')[-1].lower()
         
+        task = task_generate_document.apply_async(args=[self.pk], countdown=5)
+    
+        self.task_id = task.task_id
+        self.save()
     
     def generate(self):
         
