@@ -52,7 +52,7 @@ class Document(TimeStampedModel, StatusModel):
     
     @property
     def thumbnail_url(self):
-        return "%s/%s.%s" % (self.get_root_url(),  self.slug, IMAGE_FORMAT)
+        return "%s/small/%s_1.%s" % (self.get_root_url(),  self.slug, IMAGE_FORMAT)
     
     @property
     def doc_url(self):
