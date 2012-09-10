@@ -1,3 +1,4 @@
+PIPELINE_CSS = {}
 PIPELINE_CSS['docviewer-base'] = {
     'source_filenames': (
         'docviewer/css/components/reset.css',
@@ -33,6 +34,7 @@ PIPELINE_CSS['docviewer-print'] = {
     },
     'output_filename': 'c/docviewer-print.r?.css',
 }
+PIPELINE_JS = {}
 PIPELINE_JS['docviewer-template'] = {
     'source_filenames': (
         'docviewer/js/views/annotation.jst',

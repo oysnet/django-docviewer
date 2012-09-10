@@ -124,6 +124,7 @@ INSTALLED_APPS = (
 )
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+PIPELINE = False
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
 
@@ -179,5 +180,6 @@ HAYSTACK_SITECONF = 'docviewer.search_indexes'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = '/tmp'
 
-DOCVIEWER_DOCUMENT_ROOT = '/tmp/docs/'
+DOCVIEWER_DOCUMENT_ROOT = join(demoproject_dir, 'var/')
 
+from docviewer.pipeline import *

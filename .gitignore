@@ -4,3 +4,5 @@
 *.pyc
 *.mo
 django_docviewer.egg-info
+/env/
+/demo/demoproject/var/
