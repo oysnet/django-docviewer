@@ -1,0 +1,35 @@
+Demo project for django-docviewer
+=================================
+
+Install it
+==========
+
+::
+
+    $ sudo apt-get install rabbitmq-server rubygems graphicsmagick poppler-utils pdftk ghostscript tesseract-ocr yui-compressor
+    $ sudo gems install docsplit
+    $ sudo ln -s /usr/local/bin/docsplit /usr/bin/docsplit
+    $ sudo ln -s /usr/bin/yui-compressor /usr/local/bin/yuicompressor
+
+
+Try it
+======
+
+::
+
+    $ virtualenv env --no-site-packages --distribute
+    $ env/bin/python setup.py develop
+    $ env/bin/pip install Django
+    $ cd demo/demoserveur/
+    $ ../../env/bin/python manage.py syncdb
+	(Create an admin here)
+    $ ../../env/bin/python manage.py runserver
+
+* Connect to http://localhost:8000/admin/
+* Add a new document : http://localhost:8000/admin/docviewer/document/add/
+* Generate the document ::
+
+        $ ../../env/bin/python manage.py generate_document 1
+
+Access the document : http://localhost:8000/viewer/1/demo.html
+
