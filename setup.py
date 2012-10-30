@@ -17,10 +17,10 @@ setup(
                       'django-model-utils',
                       'celery',
                       #'django-haystack',
-                      'django-haystack>=2.0.0',
+                      'django-haystack>=2.0.0-beta',
                       'django-pipeline'],
     dependency_links = [
-        'http://github.com/toastdriven/django-haystack.git@master#egg=django-haystack-2.0.0'
+        'http://github.com/toastdriven/django-haystack.git@master#egg=django-haystack-2.0.0-beta'
     ],
     classifiers=[
         'Environment :: Web Environment',
