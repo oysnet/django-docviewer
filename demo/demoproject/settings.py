@@ -176,10 +176,21 @@ LOGGING = {
 }
 
 #haystack
-HAYSTACK_SITECONF = 'docviewer.search_indexes'
-HAYSTACK_SEARCH_ENGINE = 'whoosh'
-HAYSTACK_WHOOSH_PATH = '/tmp'
+import os
+HAYSTACK_CONNECTIONS = {
+	'default': {
+	    'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+	    'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+	},
+}
 
-DOCVIEWER_DOCUMENT_ROOT = join(demoproject_dir, 'var/')
+import haystack;
+if haystack.__version__[0] == 1:
+	HAYSTACK_CONNECTIONS = None
+	HAYSTACK_SITECONF = 'docviewer.search_indexes'
+	HAYSTACK_SEARCH_ENGINE = 'whoosh'
+	HAYSTACK_WHOOSH_PATH = join(PROJECT_ROOT,'var/')
+
+DOCVIEWER_DOCUMENT_ROOT = join(demoproject_dir, 'docs/')
 
 from docviewer.pipeline import *

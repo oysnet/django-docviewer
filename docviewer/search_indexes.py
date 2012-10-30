@@ -1,7 +1,8 @@
 from django.conf import settings
+import haystack
 from docviewer.models import Page
 
-if settings.HAYSTACK_VERSION == "2":
+if haystack.__version__[0] == 2:
 	from haystack import indexes
 
 	class PageIndex(indexes.SearchIndex, indexes.Indexable):
