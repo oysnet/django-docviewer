@@ -121,9 +121,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'docviewer',
     'pipeline',
-#    'haystack',
-#    'djcelery',
-#    'celery_haystack',
+    'djcelery', # run with python manage.py worker
 )
 
 
