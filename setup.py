@@ -18,7 +18,9 @@ setup(
                       'celery',
                       #'django-haystack',
                       'django-haystack>=2.0.0',
-                      'django-pipeline'],
+                      'django-pipeline',
+                      'djcelery',
+                      'celery-haystack'],
     dependency_links = [
         'http://github.com/toastdriven/django-haystack/tarball/master#egg=django-haystack-2.0.0'
     ],
