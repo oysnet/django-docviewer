@@ -15,8 +15,9 @@ NAME = 'django-docviewer-demo'
 README = read_relative_file('README')
 VERSION = 0.1
 PACKAGES = ['demoproject']
-REQUIRES = ['django-docviewer',
+REQUIRES = ['django-docviewer>=0.1',
             'Whoosh',]
+DEPENDS = ['http://github.com/robertour/django-docviewer/tarball/master#egg=django-docviewer-0.1',]
 
 
 setup(name=NAME,
@@ -38,6 +39,7 @@ setup(name=NAME,
       include_package_data=True,
       zip_safe=False,
       install_requires=REQUIRES,
+      dependency_links=DEPENDS,
       # entry_points={
       #     'console_scripts': [
       #         'demo = demoproject.manage:main',
