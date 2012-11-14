@@ -122,6 +122,8 @@ INSTALLED_APPS = (
     'docviewer',
     'pipeline',
     'djcelery', # run with python manage.py worker
+#    'haystack',
+#    'celery_haystack',
 )
 
 
