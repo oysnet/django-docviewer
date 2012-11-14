@@ -15,7 +15,8 @@ NAME = 'django-docviewer-demo'
 README = read_relative_file('README')
 VERSION = 0.1
 PACKAGES = ['demoproject']
-REQUIRES = ['django-docviewer>=0.1',
+REQUIRES = ['Django',
+            'django-docviewer>=0.1',
             'pyelasticsearch',]
 DEPENDS = ['http://github.com/robertour/django-docviewer/tarball/master#egg=django-docviewer-0.1',]
 
