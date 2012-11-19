@@ -119,11 +119,11 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'pipeline',        # necessary for compression and docviewer templates
+    'djcelery',        # necessary for python manage.py celery worker
+    'celery_haystack', # necessary for automatic rebuild_index
+    'haystack',        # necessary for manual rebuild_index
     'docviewer',
-    'pipeline',
-    'djcelery', # run with python manage.py worker
-#    'haystack',
-#    'celery_haystack',
 )
 
 
