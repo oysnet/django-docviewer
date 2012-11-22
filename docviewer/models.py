@@ -75,8 +75,8 @@ class Document(TimeStampedModel, StatusModel):
 
     @property
     def text(self):
-        path = "%sall.txt" %( self.document.get_root_path())
-        f = open(path, 'r').read()
+        path = "%s/%s.txt" %( self.get_root_path(),self.slug)
+        f = open(path, 'r')
         data = f.read()
         f.close()
         return data
@@ -122,6 +122,9 @@ class Document(TimeStampedModel, StatusModel):
                 tmp_file.close()
         all_txt.close()
 
+    def get_thumbnail(self):
+        return "%s/%s/%s_%s.%s" %( self.get_root_url(), "small", self.slug, 1, IMAGE_FORMAT)
+
     class Meta:
         verbose_name = _(u'Document')
         verbose_name_plural = _(u'Document')
@@ -140,7 +143,10 @@ class Page(models.Model):
         return data.decode('ascii', 'ignore')
 
     def get_image(self, size):
-        return "%s%s/%s.%s" %( self.document.get_root_url(), size, self.page, IMAGE_FORMAT)
+        return "%s/%s/%s_%s.%s" %( self.document.get_root_url(), size, self.document.slug, self.page, IMAGE_FORMAT)
+
+    def get_thumbnail(self):
+        return self.get_image("small");
 
 class Section(models.Model):
     document = models.ForeignKey(Document, verbose_name=_('Document'),related_name='sections_set')
