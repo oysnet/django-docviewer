@@ -4,10 +4,11 @@ from django.utils.translation import ugettext_lazy as _
 from model_utils.models import TimeStampedModel, StatusModel
 from model_utils import Choices
 from autoslug.fields import AutoSlugField
-import os, re, codecs
+import os, re, codecs, shutil
 
 from docviewer.settings import *
 from docviewer.tasks import task_generate_document
+
 
 
 RE_PAGE = re.compile(r'^.*_([0-9]+)\.txt')
@@ -86,6 +87,11 @@ class Document(TimeStampedModel, StatusModel):
         super(Document, self).save(*args, **kwargs)
         if create:
             os.makedirs(self.get_root_path())
+
+
+    def delete(self):
+        shutil.rmtree(self.get_root_path(), ignore_errors=True)
+        super(Document, self).delete()
 
     def get_file_path(self):
         return "%s/%s" % (self.get_root_path(), self.filename)

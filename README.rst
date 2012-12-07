@@ -139,6 +139,10 @@ Testing the installation:
 
     localhost:8000/admin/document/
 
-5) You will need to wait a few seconds while docsplit splits the document and elasticsearch index it. You can see the status in the admin interface. When the status is 'ready', you can search in the following URL::
+5) You will need to wait a few seconds while docsplit splits the document and elasticsearch index it. You can see the status in the admin interface. When the status is 'ready', you can search in the following URL (make sure you search with an appropiate term that is insider your pdf)::
 
     localhost:8000/search/
+
+6) You can also try accessing the document directly::
+
+    Access the document : http://localhost:8000/viewer/1/demo.html
