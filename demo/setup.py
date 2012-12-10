@@ -12,7 +12,7 @@ def read_relative_file(filename):
 
 
 NAME = 'django-docviewer-demo'
-README = read_relative_file('README')
+README = read_relative_file('README.rst')
 VERSION = 0.1
 PACKAGES = ['demoproject']
 REQUIRES = ['Django',
@@ -34,7 +34,7 @@ setup(name=NAME,
       keywords='docsplit, document-viewer',
       author='Rémy HUBSCHER',
       author_email='remy.hubscher@novapost.fr',
-      url='https://github.com/novagile/django-docviewer',
+      url='https://github.com/robertour/django-docviewer',
       license='BSD',
       packages=PACKAGES,
       include_package_data=True,
