@@ -128,7 +128,7 @@ Testing the installation:
 
 4) Add a scanned pdf document (for convenience, there is one in ~/git/django-docviewer/test.pdf) through the admin interface::
 
-    localhost:8000/admin/document/
+    http://localhost:8000/admin/docviewer/document/add/
 
 5) You will need to wait a few seconds while docsplit splits the document and elasticsearch index it. You can see the status in the admin interface. When the status is 'ready', you can search in the following URL (make sure you search with an appropiate term that is insider your pdf)::
 
