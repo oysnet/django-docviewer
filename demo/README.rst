@@ -81,19 +81,27 @@ Installation of the Demo Project:
 
     $ workon docviewer_env
 
-2) Go the folder of this file::
+2) Go to the folder::
 
-    $ cd path/to/django-docviewer/demo/
+    $ cd path/to/django-docviewer/
 
 3) Run the setup::
 
     $ python setup.py develop
 
-4) Got to the demo Root Project::
+4) Now go to the folder of the DEMO::
+
+    $ cd path/to/django-docviewer/demo/
+
+5) Run the 2nd setup::
+
+    $ python setup.py develop
+
+6) Got to the demo Root Project::
 
     $ cd demo/demoproject/
 
-5) Update your database and launch:
+7) Update your database and launch:
 
     a) Update database::
 
