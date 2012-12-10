@@ -12,14 +12,11 @@ def read_relative_file(filename):
 
 
 NAME = 'django-docviewer-demo'
-README = read_relative_file('README')
+README = read_relative_file('README.rst')
 VERSION = 0.1
 PACKAGES = ['demoproject']
 REQUIRES = ['Django',
-            'django-docviewer>=0.1',
             'pyelasticsearch',]
-DEPENDS = ['http://github.com/robertour/django-docviewer/tarball/master#egg=django-docviewer-0.1',]
-
 
 setup(name=NAME,
       version=VERSION,
@@ -32,15 +29,14 @@ setup(name=NAME,
                    'Framework :: Django',
                    ],
       keywords='docsplit, document-viewer',
-      author='Rémy HUBSCHER',
-      author_email='remy.hubscher@novapost.fr',
-      url='https://github.com/novagile/django-docviewer',
+      author='Roberto Ulloa',
+      author_email='roberto.ur@gmail.com',
+      url='https://github.com/robertour/django-docviewer',
       license='BSD',
       packages=PACKAGES,
       include_package_data=True,
       zip_safe=False,
       install_requires=REQUIRES,
-      dependency_links=DEPENDS,
       # entry_points={
       #     'console_scripts': [
       #         'demo = demoproject.manage:main',
