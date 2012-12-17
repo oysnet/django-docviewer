@@ -19,9 +19,7 @@ class DocViewerChangeList(ChangeList):
         request.GET = params
         super(DocViewerChangeList, self).__init__(request, *args, **kwargs)
         
-   
-    
-    
+
 
 class DocumentAdmin(admin.ModelAdmin):
     
