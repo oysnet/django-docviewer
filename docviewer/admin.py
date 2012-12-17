@@ -1,5 +1,5 @@
 from django.contrib import admin
-from docviewer.models import Document
+from docviewer.models import Document, Annotation
 from docviewer.forms import DocumentForm
 from docviewer.tasks import task_generate_document
 from django.contrib.admin.views.main import ChangeList
@@ -42,3 +42,4 @@ class DocumentAdmin(admin.ModelAdmin):
         obj.set_file(file = file, filename=file.name)
         
 admin.site.register(Document, DocumentAdmin)
+admin.site.register(Annotation)

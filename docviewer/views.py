@@ -74,5 +74,8 @@ class JsonDocumentView(BaseDetailView):
         
         json['annotations'] = list(document.annotations_set.all().values('location', 'title', 'id', 'page', 'content'))
         
+        for annotation in json['annotations']:
+            annotation['location'] = {"image":annotation['location']}
+        
         
         return HttpResponse(simplejson.dumps(json), content_type="application/json")
