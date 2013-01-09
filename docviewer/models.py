@@ -87,9 +87,6 @@ class Document(TimeStampedModel, StatusModel):
         super(Document, self).save(*args, **kwargs)
         if create:
             os.makedirs(self.get_root_path())
-        else:
-            for pag in self.pages_set.all():
-              pag.save()
 
 
     def delete(self):
