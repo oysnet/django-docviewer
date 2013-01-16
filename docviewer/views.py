@@ -1,6 +1,6 @@
 from django.views.generic.detail import  BaseDetailView
 from django.core.urlresolvers import reverse
-from docviewer.models import Document, Page
+from docviewer.models import Document, Page, Annotation
 from django.utils.feedgenerator import rfc2822_date
 from django.http import HttpResponse
 from django.utils import simplejson
@@ -17,6 +17,20 @@ def get_absolute_url(relative_url):
         return relative_url
     
     return "http://%s%s" % (SITE.domain, relative_url)
+
+def update_annotation(request,pk):
+
+#    import ipdb; ipdb.set_trace()
+    annotation = Annotation.objects.get(id = request.GET.get('id'))
+
+    if request.GET.has_key('title'):
+        annotation.title = request.GET.get('title')
+    if request.GET.has_key('content'):
+        annotation.content = request.GET.get('content')
+
+    annotation.save()
+
+    return HttpResponse({'status': 'ok'}, content_type="application/json") 
 
 class SearchDocumentView(View):
     

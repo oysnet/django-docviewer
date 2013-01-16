@@ -51,6 +51,7 @@ PIPELINE_JS['docviewer-template'] = {
         'docviewer/js/views/thumbnails.jst',
         'docviewer/js/views/unsupported.jst',
         'docviewer/js/views/viewer.jst',
+        'docviewer/js/editor/editor.js',
     ),
     'output_filename': 'c/docviewer-template.r?.js',
 }

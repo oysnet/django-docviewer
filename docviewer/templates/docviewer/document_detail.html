@@ -1,3 +1,5 @@
+{% load i18n static %}
+{% get_static_prefix as STATIC_PREFIX %}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -44,7 +46,8 @@
 
 <script type="text/javascript">
   docviewer.load("{% url "docviewer_json_view" pk=document.pk  %}", { container: '#documentviewer-container' });
+
 </script>
-    
+
 </body>
 </html>

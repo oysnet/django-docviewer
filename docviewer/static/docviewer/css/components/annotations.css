@@ -176,10 +176,11 @@
     color:#000;
     padding:0;
     max-width: 75%;
-    cursor: pointer;
+    /*cursor: pointer;*/
+    cursor: text;
   }
     .docviewer-annotationTitle:hover {
-      text-decoration: underline;
+      /*text-decoration: underline;*/
     }
 
   .docviewer-permalink {
