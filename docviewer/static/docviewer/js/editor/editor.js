@@ -8,6 +8,11 @@ $(document).ready(function(){
           'content', ev.target.innerText)
       ev.target.contentEditable='false';
     });
+    $('.docviewer-annotationBody').live('keypress', function(ev){
+      if (ev.keyCode == 13) {
+        ev.target.blur()
+      }
+    });
     $('.docviewer-annotationTitle').live('click', function(ev){
         ev.target.contentEditable='true';
     });
@@ -17,6 +22,12 @@ $(document).ready(function(){
           'title', ev.target.innerText)
       ev.target.contentEditable='false';
     });
+    $('.docviewer-annotationTitle').live('keypress', function(ev){
+      if (ev.keyCode == 13) {
+        ev.target.blur()
+      }
+    });
+
 });
 
 function update_anotation(id, field, value){
