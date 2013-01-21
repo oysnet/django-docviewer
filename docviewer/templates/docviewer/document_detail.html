@@ -33,6 +33,9 @@
 </head>
 <body>
 
+
+
+<div id="fixed-div" style="position: fixed; top: 1em;right: 1em;" >hola</div>
 <div id="documentviewer-container">
 
   <div class="documentviewer-loadingDocument"><span>Loading</span></div>
@@ -46,7 +49,6 @@
 
 <script type="text/javascript">
   docviewer.load("{% url "docviewer_json_view" pk=document.pk  %}", { container: '#documentviewer-container' });
-
 </script>
 
 </body>

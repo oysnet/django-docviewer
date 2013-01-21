@@ -20,7 +20,7 @@ def get_absolute_url(relative_url):
 
 def update_annotation(request,pk):
 
-#    import ipdb; ipdb.set_trace()
+    #import ipdb; ipdb.set_trace()
     annotation = Annotation.objects.get(id = request.GET.get('id'))
 
     if request.GET.has_key('title'):
@@ -30,7 +30,30 @@ def update_annotation(request,pk):
 
     annotation.save()
 
-    return HttpResponse({'status': 'ok'}, content_type="application/json") 
+    return HttpResponse(simplejson.dumps({'status': 'ok'}), 
+                      content_type="application/json") 
+
+
+def add_annotation(request,pk):
+
+    #import ipdb; ipdb.set_trace()
+    document = Document.objects.get(pk=pk)
+    annotation = Annotation(document = document,
+                            page = request.GET.get('page_id'))
+
+    if request.GET.has_key('title'):
+        annotation.title = request.GET.get('title')
+    if request.GET.has_key('content'):
+        annotation.content = request.GET.get('content')
+    if request.GET.has_key('location'):
+        annotation.location = request.GET.get('location')
+    annotation.save()
+    return HttpResponse(simplejson.dumps(
+              { 'status': 'ok', 
+                'url': document.get_absolute_url()+'#document/p'+
+                        str(document.pk)+'/a'+str(annotation.pk)}), 
+          content_type="application/json") 
+
 
 class SearchDocumentView(View):
     

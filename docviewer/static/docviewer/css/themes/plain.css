@@ -1,5 +1,72 @@
 /* DocumentCloud overrides to the DocViewer CSS go here: */
 
+.docviewer-editInput {
+  display: block;
+  border: 1px solid #999;
+  border-radius: 8px; -webkit-border-radius: 8px; -moz-border-radius: 8px;
+  font-family: Arial;
+  margin: 2px 5px 0 0;
+  padding: 4px 10px 3px;
+  width:100%;
+  font-size: 11px;
+  line-height: 14px;
+  outline: none;
+  background: #FFE325;
+  background: rgba(255, 227, 37, 0.2);
+}
+
+.docviewer-editInput:focus {
+  background: white;
+}
+
+.docviewer-editBox{
+  text-align: center;
+  width: 200px;
+
+}
+::-webkit-input-placeholder { font-style:italic }
+::-moz-placeholder { font-style:italic } 
+input:-moz-placeholder { font-style:italic }
+
+
+.docviewer-editButton {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #333;
+  color: #333;
+  display:inline-block;
+  text-decoration:none;
+  margin-top: 5px;
+  cursor:pointer;
+}
+
+.docviewer-editButton:hover { 
+  text-decoration:none; 
+  color:#666;
+  cursor:pointer;
+  border:1px solid #666;
+}
+
+#form-annotation, #cancel-annotation{
+  display: none;"
+}
+
+.annotation-area{
+  background: #FFE325;
+  background: rgba(255, 227, 37, 0.2);
+  border: 3px solid #E1C800;
+  border: 3px solid rgba(255, 227, 37, 0.5);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  position: absolute;
+  z-index: 10;
+  height: 100px;
+  width: 100px;
+  cursor: pointer;
+}
+
 .docviewer-docViewer {
   border: 1px solid #aaa;
   line-height: normal;
