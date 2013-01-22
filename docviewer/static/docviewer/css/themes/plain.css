@@ -52,7 +52,7 @@ input:-moz-placeholder { font-style:italic }
   display: none;"
 }
 
-.annotation-area{
+#annotation-area{
   background: #FFE325;
   background: rgba(255, 227, 37, 0.2);
   border: 3px solid #E1C800;
@@ -63,9 +63,15 @@ input:-moz-placeholder { font-style:italic }
   position: absolute;
   z-index: 10;
   height: 100px;
-  width: 100px;
+  width: 200px;
   cursor: pointer;
 }
+
+#annotation-area #instruction{
+  font: italic bold 11px Georgia, serif;
+  background: #FFE325;
+}
+
 
 .docviewer-docViewer {
   border: 1px solid #aaa;

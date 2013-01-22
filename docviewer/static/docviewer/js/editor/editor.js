@@ -1,44 +1,64 @@
 $(document).ready(function(){
-    //$( "#add-annotation" ).resizable().draggable();
-    //$( "#add-annotation" ).innerText("hola");
+    //$( "#add-annotation" ).resizable().draggable()
+    //$( "#add-annotation" ).innerText("hola")
+    title = ""
+    content = ""
     $('div.docviewer-annotationBody').live('click', function(ev){
-        ev.target.contentEditable='true';
+        content = ev.target.innerText
+        ev.target.contentEditable='true'
         $(ev.target).focus()
-    });
+    })
     $('.docviewer-annotationBody').live('blur', function(ev){
-      update_anotation(
-          ev.target.parentElement.parentElement.dataset.id, 
-          'content', ev.target.innerText)
-      ev.target.contentEditable='false';
-    });
+      if (content != ev.target.innerText)
+        update_anotation(
+            ev.target.parentElement.parentElement.dataset.id, 
+            'content', ev.target.innerText)
+      ev.target.contentEditable='false'
+    })
     $('.docviewer-annotationBody').live('keypress', function(ev){
       if (ev.keyCode == 13) {
         ev.target.blur()
       }
-    });
+    })
     $('.docviewer-annotationTitle').live('click', function(ev){
-        ev.target.contentEditable='true';
+        title = ev.target.innerText
+        ev.target.contentEditable='true'
         $(ev.target).focus()
-    });
+    })
     $('.docviewer-annotationTitle').live('blur', function(ev){
-      update_anotation(
-          ev.target.parentElement.parentElement.parentElement.dataset.id, 
-          'title', ev.target.innerText)
-      ev.target.contentEditable='false';
-    });
+      if (title != ev.target.innerText)
+        update_anotation(
+            $(ev.target).parents(".docviewer-annotation")[0].dataset.id, 
+            'title', ev.target.innerText)
+      ev.target.contentEditable='false'
+    })
     $('.docviewer-annotationTitle').live('keypress', function(ev){
       if (ev.keyCode == 13) {
         ev.target.blur()
       }
-    });
+    })
     $( "#add-annotation" ).live('click', function(ev){
-      enable_edition_mode();
-    });
+      enable_edition_mode()
+    })
     $( "#cancel-annotation" ).live('click', function(ev){
-      disable_edition_mode();
-    });
+      disable_edition_mode()
+    })
+    $( ".docviewer-remove" ).live('click', function(ev){
+      adata = { }
+      adata['id'] = $(ev.target).parents(".docviewer-annotation")[0].dataset.id
+      req = $.ajax({
+          url: "remove_annotation/",
+          data: adata,
+          success: function (payload ) {
+                   docviewer.load(reload_url, 
+                              { container: '#documentviewer-container' })
+               },
+          dataType: 'json',
+          type: 'GET'})
 
-});
+    })
+
+})
 
 docviewer_cover = ""
 function enable_edition_mode(){
@@ -51,7 +71,7 @@ function enable_edition_mode(){
     $('.docviewer-cover').live('click', function(ev){
 
         docviewer_set = $(ev.target).parents('.docviewer-set')
-        selection_area = $('.annotation-area')
+        selection_area = $('#annotation-area')
         if (ev.target.className == 'docviewer-cover')
           docviewer_cover = $(ev.target)
         else
@@ -60,36 +80,36 @@ function enable_edition_mode(){
 
         if (selection_area.length == 0)
           selection_area = jQuery('<div/>', {
-                            class: 'annotation-area',
-                            text: 'Page id: ' + docviewer_set[0].dataset.id[1]
+                            id: 'annotation-area',
+                            html: '<span id="instruction"> Drag and resize me</span>'
                           }).resizable().draggable({
                               drag: function(ev){
                                 $("#fixed-div").html(all_coords(selection_area,docviewer_cover,ev))
                               },
                               stop:function(){ 
-                                  //alert(get_coord(selection_area,docviewer_cover));
+                                  //alert(get_coord(selection_area,docviewer_cover))
                               }
-                          });
+                          })
 
         $("#fixed-div").html(all_coords(selection_area,docviewer_cover,ev))
         docviewer_cover.prepend(selection_area)
-        selection_area.css('top',ev.offsetY);
-        selection_area.css('left',ev.offsetX);
-        selection_area.css('position','absolute');
+        selection_area.css('top',ev.offsetY)
+        selection_area.css('left',ev.offsetX)
+        selection_area.css('position','absolute')
         $("#fixed-div").append(all_coords(selection_area,docviewer_cover,ev))
 
-    });
+    })
     
     $('#annotation-button').live('click', function(ev){
         ev.preventDefault()
-        selection_area = $('.annotation-area')
+        selection_area = $('#annotation-area')
 
         add_annotation($('#annotation-title').val(), 
                       $('#annotation-content').val(), 
                       get_coord(selection_area, 
                                 selection_area.parents('.docviewer-cover')), 
-                      parseInt(selection_area.parents('.docviewer-set')[0].dataset.id[1]) + 1);
-    });
+                      parseInt(selection_area.parents('.docviewer-set')[0].dataset.id[1]) + 1)
+    })
     
     $('#form-annotation').show()
 }
@@ -128,7 +148,7 @@ function disable_edition_mode(){
     $('.docviewer-annotations').show()
     $('.docviewer-pages').css('overflow', 'auto')
     $('.docviewer-cover').die('click')
-    $('.annotation-area').remove()
+    $('#annotation-area').remove()
     $('#form-annotation').hide()
 }
 
@@ -141,14 +161,14 @@ function update_anotation(id, field, value){
       url: "update_annotation/",
       data: adata,
       success: function (payload ) {
-         alert( "success " );
+         alert( "success " )
        },
        dataType: 'json',
        error: function (payload ) {
          alert("Error en el ajax request")
        },
       type: 'GET'
-    });
+    })
 }
 
 function add_annotation(title, content, location, page_id){
@@ -161,13 +181,14 @@ function add_annotation(title, content, location, page_id){
       url: "add_annotation/",
       data: adata,
       success: function (payload ) {
-                   window.location.replace(payload['url'])
+                   docviewer.load(reload_url, { container: '#documentviewer-container' })
+                   disable_edition_mode()
                },
       dataType: 'json',
       error: function (payload ) {
                    alert("Error en el ajax request")
                },
-      type: 'GET',});
+      type: 'GET',})
 
 }
 

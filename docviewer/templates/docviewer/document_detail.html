@@ -48,7 +48,8 @@
 </div>
 
 <script type="text/javascript">
-  docviewer.load("{% url "docviewer_json_view" pk=document.pk  %}", { container: '#documentviewer-container' });
+  reload_url = "{% url "docviewer_json_view" pk=document.pk  %}"
+  docviewer.load(reload_url, { container: '#documentviewer-container' });
 </script>
 
 </body>

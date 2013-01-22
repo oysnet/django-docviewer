@@ -55,6 +55,17 @@ def add_annotation(request,pk):
           content_type="application/json") 
 
 
+def remove_annotation(request,pk):
+
+    #import ipdb; ipdb.set_trace()
+    annotation = Annotation.objects.get(id = request.GET.get('id'))
+
+    annotation.delete()
+
+    return HttpResponse(simplejson.dumps({'status': 'ok'}), 
+                      content_type="application/json") 
+
+
 class SearchDocumentView(View):
     
     def get(self, request, **kwargs):
