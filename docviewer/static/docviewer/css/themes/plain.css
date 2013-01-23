@@ -49,7 +49,7 @@ input:-moz-placeholder { font-style:italic }
 }
 
 #form-annotation, #cancel-annotation{
-  display: none;"
+  display: none;
 }
 
 #annotation-area{
