@@ -1,5 +1,20 @@
 /* DocumentCloud overrides to the DocViewer CSS go here: */
-
+#fixed-div{
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  font-size: 11px;
+  font-family: Helvetica;
+  background: #FFE325;
+  background: rgba(255, 227, 37, 0.2);
+  border: 3px solid #E1C800;
+  border: 3px solid rgba(255, 227, 37, 0.5);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px;
+  display: none;
+}
 .docviewer-editInput {
   display: block;
   border: 1px solid #999;

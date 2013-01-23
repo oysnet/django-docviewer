@@ -52,6 +52,7 @@ $(document).ready(function(){
           success: function (payload ) {
                    docviewer.load(reload_url, 
                               { container: '#documentviewer-container' })
+                   animate_fixed("Annotation removed");
                },
           dataType: 'json',
           type: 'GET'})
@@ -77,7 +78,7 @@ function enable_edition_mode(){
         else
           docviewer_cover = $(ev.target).parents('.docviewer-cover')
 
-
+        $("#fixed-div").show();
         if (selection_area.length == 0)
           selection_area = jQuery('<div/>', {
                             id: 'annotation-area',
@@ -161,7 +162,7 @@ function update_anotation(id, field, value){
       url: "update_annotation/",
       data: adata,
       success: function (payload ) {
-         alert( "success " )
+         animate_fixed("Annotation updated");
        },
        dataType: 'json',
        error: function (payload ) {
@@ -181,9 +182,11 @@ function add_annotation(title, content, location, page_id){
       url: "add_annotation/",
       data: adata,
       success: function (payload ) {
-                   docviewer.load(reload_url, { container: '#documentviewer-container' })
-                   disable_edition_mode()
-               },
+               docviewer.load(reload_url, 
+                  { container: '#documentviewer-container' })
+               animate_fixed("Annotation saved");
+               disable_edition_mode()
+           },
       dataType: 'json',
       error: function (payload ) {
                    alert("Error en el ajax request")
@@ -192,3 +195,10 @@ function add_annotation(title, content, location, page_id){
 
 }
 
+
+function animate_fixed(message){
+  $("#fixed-div").html(message);
+  $("#fixed-div").fadeIn(1000);
+  $("#fixed-div").delay(2000);
+  $("#fixed-div").fadeOut(2000);
+}
