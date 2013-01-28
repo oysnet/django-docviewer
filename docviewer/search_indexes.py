@@ -1,5 +1,4 @@
 import datetime
-from haystack import site
 from haystack.indexes import *
 from docviewer.models import Page
 
@@ -18,5 +17,3 @@ class PageIndex(RealTimeSearchIndex):
             
     def index_queryset(self):
         return self.get_model().objects.all()
-
-site.register(Page, PageIndex)
