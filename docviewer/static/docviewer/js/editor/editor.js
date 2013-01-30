@@ -62,11 +62,13 @@ $(document).ready(function(){
 })
 
 docviewer_cover = ""
+watcher = null
 function enable_edition_mode(){
     $('#add-annotation').hide()
     $('#cancel-annotation').show()
-
     $('.docviewer-annotations').hide()
+    watcher = mydocviewer.dragReporter.toWatch
+    mydocviewer.dragReporter.destroy()
 //    $('.docviewer-pages').css('overflow', 'visible')
 
     $('.docviewer-cover').live('click', function(ev){
@@ -151,6 +153,8 @@ function disable_edition_mode(){
     $('.docviewer-cover').die('click')
     $('#annotation-area').remove()
     $('#form-annotation').hide()
+    mydocviewer.dragReporter.toWatch = watcher
+    mydocviewer.dragReporter.setBinding()
 }
 
 function update_anotation(id, field, value){
@@ -167,8 +171,7 @@ function update_anotation(id, field, value){
        dataType: 'json',
        error: function (payload ) {
          alert("Error en el ajax request")
-       },
-      type: 'GET'
+       }
     })
 }
 

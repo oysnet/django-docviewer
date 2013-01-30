@@ -49,7 +49,7 @@
 
 <script type="text/javascript">
   reload_url = "{% url "docviewer_json_view" pk=document.pk  %}"
-  docviewer.load(reload_url, { container: '#documentviewer-container' });
+  mydocviewer = docviewer.load(reload_url, { container: '#documentviewer-container' });
 </script>
 
 </body>
