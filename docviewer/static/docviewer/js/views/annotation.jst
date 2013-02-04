@@ -55,9 +55,14 @@
         <img class="docviewer-img" src="<%= image %>" style="top:-<%= imageTop %>px;" width="<%= imageWidth %>" />
       </div>
     </div>
-
     <div class="docviewer-annotationBody docviewer-editHidden">
-      <%= text %>
+      <% if (text) { %> 
+        <%= text %>
+      <% } else { %> 
+      <span class="empty">
+        Click here to add a description
+      </span>
+      <% } %>
     </div>
     <textarea class="docviewer-annotationTextArea docviewer-editVisible" style="width: <%= bWidth %>px;"><%= text %></textarea>
 

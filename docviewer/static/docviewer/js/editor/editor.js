@@ -19,7 +19,7 @@
 var docviewer_cover = "";
 (function () {
   "use strict";
-
+  
   function animate_fixed(message) {
     $("#fixed-div").html(message);
     $("#fixed-div").fadeIn(1000);
@@ -50,14 +50,14 @@ var docviewer_cover = "";
       url: "add_annotation/",
       data: adata,
       success: function (payload) {
-        var current_page = mydocviewer.api.currentPage(),
-        zoomLevel = mydocviewer.models.pages.zoomLevel;
+        var zoomLevel = mydocviewer.models.pages.zoomLevel;
         console.log(zoomLevel);
         mydocviewer = docviewer.load(reload_url,
           { container: '#documentviewer-container',
             afterLoad: function(){
-              //this.pageSet.zoom({zoomLevel: zoomLevel });
-              mydocviewer.api.setCurrentPage(current_page);
+              mydocviewer.pageSet.zoom({zoomLevel: zoomLevel });
+              mydocviewer.api.setCurrentPage(page_id);
+              disable_edition_mode();
               animate_fixed("Annotation saved");
             }
           });
@@ -75,7 +75,12 @@ var docviewer_cover = "";
     $('#cancel-annotation').show();
     $('.docviewer-annotations').hide();
     mydocviewer.dragReporter.unBind();
-    $('.docviewer-cover').live('click', function (ev) {
+    
+
+    $('.docviewer-cover').css('cursor','crosshair');
+    var ev_init = 0;
+    $('.docviewer-cover').live('mousedown', function (ev) {
+      ev_init = ev;
       var docviewer_set = $(ev.target).parents('.docviewer-set'),
         selection_area = $('#annotation-area');
       if (ev.target.className === 'docviewer-cover') {
@@ -88,23 +93,39 @@ var docviewer_cover = "";
         selection_area = jQuery('<div/>', {
           id: 'annotation-area',
           html: '<span id="instruction"> Drag and resize me</span>'
-        }).resizable().draggable();
+        })
       }
-      docviewer_cover.prepend(selection_area);
-      selection_area.css('top', ev.offsetY);
-      selection_area.css('left', ev.offsetX);
       selection_area.css('position', 'absolute');
+      docviewer_cover.prepend(selection_area);
+      
+      $('.docviewer-cover').live('mousemove', function (ev) {
+      
+        console.log(ev.target.className)
+        var height = Math.max(Math.abs(ev_init.pageY- ev.pageY),25);
+        var width = Math.max(Math.abs(ev_init.pageX - ev.pageX),25);
+        if (ev_init.pageY < ev.pageY)
+          selection_area.css('top', ev_init.offsetY);
+        else
+          selection_area.css('top', ev.offsetY);
+        if (ev_init.pageX < ev.pageX)
+          selection_area.css('left', ev_init.offsetX);
+        else
+          selection_area.css('left', ev.offsetX);
+          //Math.min(ev_init.offsetY, ev.offsetY));
+//        selection_area.css('left', ev_init.offsetX);
+//          Math.min(ev_init.offsetX, ev.offsetX));
+        selection_area.css('height', height);
+        selection_area.css('width', width);
+        
+      });
+
     });
-    $('#annotation-button').live('click', function (ev) {
-      ev.preventDefault();
-      var selection_area = $('#annotation-area');
-      add_annotation($('#annotation-title').val(),
-        $('#annotation-content').val(),
-        get_coord(selection_area,
-          selection_area.parents('.docviewer-cover')),
-          mydocviewer.api.currentPage());
+    $('.docviewer-cover').live('mouseup', function (ev) {
+      $('.docviewer-cover').die('mousedown');
+      $('.docviewer-cover').die('mousemove');
+      $('#annotation-area').resizable().draggable();
+      $('#form-annotation').show();
     });
-    $('#form-annotation').show();
   }
 
   function disable_edition_mode() {
@@ -112,7 +133,10 @@ var docviewer_cover = "";
     $('#cancel-annotation').hide();
     $('.docviewer-annotations').show();
     $('.docviewer-pages').css('overflow', 'auto');
-    $('.docviewer-cover').die('click');
+    $('.docviewer-cover').css('cursor','-webkit-grab');
+    $('.docviewer-cover').die('mousedown');
+    $('.docviewer-cover').die('drag');
+    $('.docviewer-cover').die('mouseup');
     $('#annotation-area').remove();
     $('#form-annotation').hide();
     mydocviewer.dragReporter.setBinding();
@@ -139,16 +163,26 @@ var docviewer_cover = "";
 
   $(document).ready(function () {
     var title = "",
-      content = "";
+      content = "",
+      empty = '<span class="empty"> Click here to add a description </span>';
     $('div.docviewer-annotationBody').live('click', function (ev) {
-      content = ev.target.innerText;
-      ev.target.contentEditable = 'true';
-      $(ev.target).focus();
+      var body = ev.target;
+      if (ev.target.className === "empty"){
+        body = ev.target.parentElement;
+        $(ev.target).remove();
+      }
+      content = body.innerText;
+      body.contentEditable = 'true';
+      $(body).focus();
     });
     $('.docviewer-annotationBody').live('blur', function (ev) {
       if (content !== ev.target.innerText) {
         update_anotation(ev.target.parentElement.parentElement.dataset.id,
-          'content', ev.target.innerText);
+          'content', ev.target.innerText.trim());
+      }
+      if (ev.target.innerText.trim() === ""){
+        $(ev.target).empty();
+        $(ev.target).append(empty);
       }
       ev.target.contentEditable = 'false';
     });
@@ -201,6 +235,15 @@ var docviewer_cover = "";
         dataType: 'json',
         type: 'GET'
       });
+    });
+    $('#annotation-button').live('click', function (ev) {
+      ev.preventDefault();
+      var selection_area = $('#annotation-area');
+      add_annotation($('#annotation-title').val(),
+        $('#annotation-content').val(),
+        get_coord(selection_area,
+          selection_area.parents('.docviewer-cover')),
+          mydocviewer.api.currentPage());
     });
   });
 }());
