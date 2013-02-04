@@ -1,4 +1,4 @@
-/*global alert,docviewer,reload_url,$*/
+/*global alert,docviewer,reload_url,$,mydocviewer:true*/
 /*global Ext*/
 /*global Jed*/
 /*global i18n*/
@@ -19,7 +19,7 @@
 var docviewer_cover = "";
 (function () {
   "use strict";
-  
+
   function animate_fixed(message) {
     $("#fixed-div").html(message);
     $("#fixed-div").fadeIn(1000);
@@ -40,44 +40,13 @@ var docviewer_cover = "";
     return y_initial + "," + x_end + "," + y_end + "," + x_initial;
   }
 
-  function add_annotation(title, content, location, page_id) {
-    var adata = { };
-    adata.title = title;
-    adata.content = content;
-    adata.location = location;
-    adata.page_id = page_id;
-    $.ajax({
-      url: "add_annotation/",
-      data: adata,
-      success: function (payload) {
-        var zoomLevel = mydocviewer.models.pages.zoomLevel;
-        console.log(zoomLevel);
-        mydocviewer = docviewer.load(reload_url,
-          { container: '#documentviewer-container',
-            afterLoad: function(){
-              mydocviewer.pageSet.zoom({zoomLevel: zoomLevel });
-              mydocviewer.api.setCurrentPage(page_id);
-              disable_edition_mode();
-              animate_fixed("Annotation saved");
-            }
-          });
-      },
-      dataType: 'json',
-      error: function (payload) {
-        alert("Error en el ajax request");
-      },
-      type: 'GET'
-    });
-  }
-
   function enable_edition_mode() {
     $('#add-annotation').hide();
     $('#cancel-annotation').show();
     $('.docviewer-annotations').hide();
     mydocviewer.dragReporter.unBind();
-    
 
-    $('.docviewer-cover').css('cursor','crosshair');
+    $('.docviewer-cover').css('cursor', 'crosshair');
     var ev_init = 0;
     $('.docviewer-cover').live('mousedown', function (ev) {
       ev_init = ev;
@@ -93,32 +62,27 @@ var docviewer_cover = "";
         selection_area = jQuery('<div/>', {
           id: 'annotation-area',
           html: '<span id="instruction"> Drag and resize me</span>'
-        })
+        });
       }
       selection_area.css('position', 'absolute');
       docviewer_cover.prepend(selection_area);
-      
+
       $('.docviewer-cover').live('mousemove', function (ev) {
-      
-        console.log(ev.target.className)
-        var height = Math.max(Math.abs(ev_init.pageY- ev.pageY),25);
-        var width = Math.max(Math.abs(ev_init.pageX - ev.pageX),25);
-        if (ev_init.pageY < ev.pageY)
+        var height = Math.max(Math.abs(ev_init.pageY - ev.pageY), 25),
+          width = Math.max(Math.abs(ev_init.pageX - ev.pageX), 25);
+        if (ev_init.pageY < ev.pageY) {
           selection_area.css('top', ev_init.offsetY);
-        else
+        } else {
           selection_area.css('top', ev.offsetY);
-        if (ev_init.pageX < ev.pageX)
+        }
+        if (ev_init.pageX < ev.pageX) {
           selection_area.css('left', ev_init.offsetX);
-        else
+        } else {
           selection_area.css('left', ev.offsetX);
-          //Math.min(ev_init.offsetY, ev.offsetY));
-//        selection_area.css('left', ev_init.offsetX);
-//          Math.min(ev_init.offsetX, ev.offsetX));
+        }
         selection_area.css('height', height);
         selection_area.css('width', width);
-        
       });
-
     });
     $('.docviewer-cover').live('mouseup', function (ev) {
       $('.docviewer-cover').die('mousedown');
@@ -133,7 +97,7 @@ var docviewer_cover = "";
     $('#cancel-annotation').hide();
     $('.docviewer-annotations').show();
     $('.docviewer-pages').css('overflow', 'auto');
-    $('.docviewer-cover').css('cursor','-webkit-grab');
+    $('.docviewer-cover').css('cursor', '-webkit-grab');
     $('.docviewer-cover').die('mousedown');
     $('.docviewer-cover').die('drag');
     $('.docviewer-cover').die('mouseup');
@@ -141,6 +105,38 @@ var docviewer_cover = "";
     $('#form-annotation').hide();
     mydocviewer.dragReporter.setBinding();
   }
+
+
+  function add_annotation(title, content, location, page_id) {
+    var adata = { };
+    adata.title = title;
+    adata.content = content;
+    adata.location = location;
+    adata.page_id = page_id;
+    $.ajax({
+      url: "add_annotation/",
+      data: adata,
+      success: function (payload) {
+        var zoomLevel = mydocviewer.models.pages.zoomLevel;
+        console.log(zoomLevel);
+        mydocviewer = docviewer.load(reload_url, {
+          container: '#documentviewer-container',
+          afterLoad: function () {
+            mydocviewer.pageSet.zoom({zoomLevel: zoomLevel });
+            mydocviewer.api.setCurrentPage(page_id);
+            disable_edition_mode();
+            animate_fixed("Annotation saved");
+          }
+        });
+      },
+      dataType: 'json',
+      error: function (payload) {
+        alert("Error en el ajax request");
+      },
+      type: 'GET'
+    });
+  }
+
 
   function update_anotation(id, field, value) {
     var adata = { };
@@ -167,7 +163,7 @@ var docviewer_cover = "";
       empty = '<span class="empty"> Click here to add a description </span>';
     $('div.docviewer-annotationBody').live('click', function (ev) {
       var body = ev.target;
-      if (ev.target.className === "empty"){
+      if (ev.target.className === "empty") {
         body = ev.target.parentElement;
         $(ev.target).remove();
       }
@@ -180,7 +176,7 @@ var docviewer_cover = "";
         update_anotation(ev.target.parentElement.parentElement.dataset.id,
           'content', ev.target.innerText.trim());
       }
-      if (ev.target.innerText.trim() === ""){
+      if (ev.target.innerText.trim() === "") {
         $(ev.target).empty();
         $(ev.target).append(empty);
       }
@@ -225,12 +221,12 @@ var docviewer_cover = "";
         data: adata,
         success: function (payload) {
           var current_page = mydocviewer.api.currentPage();
-          mydocviewer = docviewer.load(reload_url,
-            { container: '#documentviewer-container',
-              afterLoad: function(){
-                mydocviewer.api.setCurrentPage(current_page)
-              }
-            });
+          mydocviewer = docviewer.load(reload_url, {
+            container: '#documentviewer-container',
+            afterLoad: function () {
+              mydocviewer.api.setCurrentPage(current_page);
+            }
+          });
         },
         dataType: 'json',
         type: 'GET'
