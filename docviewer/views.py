@@ -24,7 +24,10 @@ def update_annotation(request,pk):
     annotation = Annotation.objects.get(id = request.GET.get('id'))
 
     if request.GET.has_key('title'):
-        annotation.title = request.GET.get('title')
+        if (request.GET.get('title').strip()) == "":
+            annotation.title = "Untitled"
+        else:
+            annotation.title = request.GET.get('title')
     if request.GET.has_key('content'):
         annotation.content = request.GET.get('content')
 
@@ -35,14 +38,15 @@ def update_annotation(request,pk):
 
 
 def add_annotation(request,pk):
-
-    #import ipdb; ipdb.set_trace()
     document = Document.objects.get(pk=pk)
     annotation = Annotation(document = document,
                             page = request.GET.get('page_id'))
 
     if request.GET.has_key('title'):
-        annotation.title = request.GET.get('title')
+        if (request.GET.get('title').strip()) == "":
+            annotation.title = "Untitled"
+        else:
+            annotation.title = request.GET.get('title')
     if request.GET.has_key('content'):
         annotation.content = request.GET.get('content')
     if request.GET.has_key('location'):
