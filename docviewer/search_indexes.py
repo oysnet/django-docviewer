@@ -17,4 +17,3 @@ class PageIndex(indexes.RealTimeSearchIndex, indexes.Indexable):
             
     def index_queryset(self):
         return self.get_model().objects.all()
-
