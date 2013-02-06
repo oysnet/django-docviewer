@@ -19,6 +19,7 @@
 var docviewer_cover = "";
 (function () {
   "use strict";
+  var annotation_page = 0;
 
   /** Utility function to indicate messages */
   function animate_msg(message) {
@@ -53,7 +54,6 @@ var docviewer_cover = "";
       });
     }
     $('.docviewer-cover').live('mousedown', function (ev_down) {
-      console.log("mousedown");
       var docviewer_set = $(ev_down.target).parents('.docviewer-set');
       if (ev_down.target.className === 'docviewer-cover') {
         docviewer_cover = $(ev_down.target);
@@ -64,9 +64,9 @@ var docviewer_cover = "";
       selection_area.css('position', 'absolute');
       selection_area.css('top', ev_down.offsetY);
       selection_area.css('left', ev_down.offsetX);
+      annotation_page = mydocviewer.api.currentPage();
       docviewer_cover.prepend(selection_area);
       $('.docviewer-cover').live('mousemove', function (ev) {
-        console.log("mousemove");
         var height = Math.max(Math.abs(ev_down.pageY - ev.pageY), 50),
           width = Math.max(Math.abs(ev_down.pageX - ev.pageX), 50);
         if (ev_down.pageY < ev.pageY) {
@@ -84,9 +84,9 @@ var docviewer_cover = "";
       });
     });
     $('.docviewer-cover').live('mouseup', function (ev) {
-      console.log("mouseup");
       $('.docviewer-cover').die('mousedown');
       $('.docviewer-cover').die('mousemove');
+      $('.docviewer-cover').css('cursor', 'default');
       $('#annotation-area').resizable().draggable();
       $('#form-annotation').show();
     });
@@ -255,6 +255,8 @@ var docviewer_cover = "";
     });
   }
 
+
+
   /** Bind the event to its respectives elements. */
   $(document).ready(function () {
     bind_content_events();
@@ -274,7 +276,19 @@ var docviewer_cover = "";
         $(ev.target).parents(".docviewer-annotation")[0].dataset.id
       );
     });
+    mydocviewer.states.events.observerPage = function (){
+      if (mydocviewer.state !== 'ViewDocument') return;
+      var anno = $('#annotation-area');
+      if (anno.length === 0) return ;
+      if (mydocviewer.api.currentPage() === annotation_page){
+        anno.show();
+      } else {
+        anno.hide();
+      }
+    };
+    mydocviewer.states.helpers.addObserver("observerPage");
   });
+
 }());
 
 

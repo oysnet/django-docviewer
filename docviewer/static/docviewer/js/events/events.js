@@ -53,6 +53,7 @@ docviewer.Schema.events = {
     var viewer = this.viewer;
     if(viewer.busy === false){
       viewer.busy = true;
+      
       for(var i = 0; i < this.viewer.observers.length; i++){
         this[viewer.observers[i]].call(this);
       }
