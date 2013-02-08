@@ -21,16 +21,13 @@ PIPELINE_CSS['docviewer-base'] = {
         'docviewer/css/components/view-thumbnails.css',
         'docviewer/css/components/unsupported.css',
         'docviewer/css/components/minimode.css',
-
-        'docviewer/css/themes/plain.css',
-        ),
+        'docviewer/css/themes/plain.css',),
     'output_filename': 'c/docviewer-base.r?.css',
 }
 
 PIPELINE_CSS['docviewer-print'] = {
     'source_filenames': (
-        'docviewer/css/print.css',
-        ),
+        'docviewer/css/print.css',),
     'extra_context': {
         'media': 'print',
     },
@@ -98,4 +95,3 @@ PIPELINE_JS['docviewer-base'] = {
     ),
     'output_filename': 'c/docviewer-base.r?.js',
 }
-
