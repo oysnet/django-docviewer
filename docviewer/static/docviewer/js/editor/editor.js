@@ -159,7 +159,7 @@ var docviewer_cover = "";
       success: function (payload) {
         animate_msg("Annotation updated");
         if (value.trim() === ""){
-          
+
         }
       },
       dataType: 'json',
@@ -255,7 +255,20 @@ var docviewer_cover = "";
     });
   }
 
-
+  /** Hide the annotation area when the page changes */
+  function hide_anno_on_page_change(){
+    mydocviewer.states.events.observerPage = function (){
+      if (mydocviewer.state !== 'ViewDocument') return;
+      var anno = $('#annotation-area');
+      if (anno.length === 0) return ;
+      if (mydocviewer.api.currentPage() === annotation_page){
+        anno.show();
+      } else {
+        anno.hide();
+      }
+    };
+    mydocviewer.states.helpers.addObserver("observerPage");
+  }
 
   /** Bind the event to its respectives elements. */
   $(document).ready(function () {
@@ -276,19 +289,7 @@ var docviewer_cover = "";
         $(ev.target).parents(".docviewer-annotation")[0].dataset.id
       );
     });
-    mydocviewer.states.events.observerPage = function (){
-      if (mydocviewer.state !== 'ViewDocument') return;
-      var anno = $('#annotation-area');
-      if (anno.length === 0) return ;
-      if (mydocviewer.api.currentPage() === annotation_page){
-        anno.show();
-      } else {
-        anno.hide();
-      }
-    };
-    mydocviewer.states.helpers.addObserver("observerPage");
+    hide_anno_on_page_change();
   });
 
 }());
-
-
