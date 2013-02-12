@@ -16,10 +16,11 @@
 */
 
 
-var docviewer_cover = "";
+
 (function () {
   "use strict";
-  var annotation_page = 0;
+  var annotation_page = 0,
+    docviewer_cover = "";
 
   /** Utility function to indicate messages */
   function animate_msg(message) {
@@ -43,10 +44,10 @@ var docviewer_cover = "";
   }
 
   /** Binds the events of the mouse for the selection mode */
-  function bind_mouse_events(){
+  function bind_mouse_events() {
     $('.docviewer-cover').css('cursor', 'crosshair');
     var ev_down = 0,
-       selection_area = $('#annotation-area');
+      selection_area = $('#annotation-area');
     if (selection_area.length === 0) {
       selection_area = jQuery('<div/>', {
         id: 'annotation-area',
@@ -158,9 +159,9 @@ var docviewer_cover = "";
       data: adata,
       success: function (payload) {
         animate_msg("Annotation updated");
-        if (value.trim() === ""){
-
-        }
+        value.trim();
+//        if (value.trim() === "") {
+//        }
       },
       dataType: 'json',
       error: function (payload) {
@@ -201,10 +202,12 @@ var docviewer_cover = "";
     $('.docviewer-annotationTitle').live('blur', function (ev) {
       if (title !== ev.target.innerText) {
         // avoid null annotations
-        if (ev.target.innerText.trim() !== ""){
+        if (ev.target.innerText.trim() !== "") {
           update_annotation(
             $(ev.target).parents(".docviewer-annotation")[0].dataset.id,
-            'title', ev.target.innerText.trim());
+            'title',
+            ev.target.innerText.trim()
+          );
         } else {
           ev.target.innerText = title;
           animate_msg("Cannot have annotations without a title");
@@ -223,9 +226,9 @@ var docviewer_cover = "";
   function bind_content_events() {
     var content = "",
       empty = $('<span/>', {
-          class: 'empty',
-          text: 'Click here to add a description'
-        });
+        'class': 'empty',
+        text: 'Click here to add a description'
+      });
     $('div.docviewer-annotationBody').live('click', function (ev) {
       var body = ev.target;
       if (ev.target.className === "empty") {
@@ -240,7 +243,9 @@ var docviewer_cover = "";
       if (content !== ev.target.innerText) {
         update_annotation(
           $(ev.target).parents(".docviewer-annotation")[0].dataset.id,
-          'content', ev.target.innerText.trim());
+          'content',
+          ev.target.innerText.trim()
+        );
       }
       if (ev.target.innerText.trim() === "") {
         $(ev.target).empty();
@@ -256,12 +261,13 @@ var docviewer_cover = "";
   }
 
   /** Hide the annotation area when the page changes */
-  function hide_anno_on_page_change(){
-    mydocviewer.states.events.observerPage = function (){
-      if (mydocviewer.state !== 'ViewDocument') return;
+  function hide_anno_on_page_change() {
+    mydocviewer.states.events.observerPage = function () {
+      if (mydocviewer.state !== 'ViewDocument') { return; }
       var anno = $('#annotation-area');
-      if (anno.length === 0) return ;
-      if (mydocviewer.api.currentPage() === annotation_page){
+      if (anno.length === 0) { return; }
+      if (mydocviewer.api.currentPage() >= annotation_page - 1 &
+          mydocviewer.api.currentPage() <= annotation_page + 1) {
         anno.show();
       } else {
         anno.hide();
