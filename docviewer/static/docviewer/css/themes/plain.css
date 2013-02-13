@@ -1,21 +1,26 @@
 /* DocumentCloud overrides to the DocViewer CSS go here: */
-#fixed-div{
-  position: fixed;
-  top: 1em;
-  right: 1em;
-  font-size: 11px;
+#notification-bar{
+margin-top: -22px;
+text-align: center;
+}
+.docviewer-chaptersContainer{
+  max-height: 200px;
+  overflow: auto;
+}
+span#fixed-div{
+  font-size: 10px;
   font-family: Helvetica;
   background: #FFE325;
   background: rgba(255, 227, 37, 0.2);
-  border: 3px solid #E1C800;
-  border: 3px solid rgba(255, 227, 37, 0.5);
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  padding: 3px;
+  border: 1px solid #E1C800;
+  border: 1px solid rgba(255, 227, 37, 0.5);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  padding: 0px 15px;
   display: none;
 }
-.docviewer-editInput {
+input.docviewer-editInput, .docviewer-editInput {
   display: block;
   border: 1px solid #999;
   border-radius: 8px; -webkit-border-radius: 8px; -moz-border-radius: 8px;
@@ -29,6 +34,28 @@
   background: #FFE325;
   background: rgba(255, 227, 37, 0.2);
 }
+input[type="button"].docviewer-editButton {
+  font: 12px Arial, Helvetica, sans-serif;
+  font-weight:bold;
+  height:26px;
+}
+.docviewer-docViewer .docviewer-searchInput {
+display: block;
+border: 1px solid #777;
+font-family: Arial;
+margin: 2px 5px 0 0;
+padding: 4px 20px 3px;
+width: 210px;
+font-size: 11px;
+line-height: 14px;
+background: #FFF url(../../img/embed/search_icon.png) no-repeat 5px 5px;
+outline: none;
+height: 14px;
+border: 1px solid #999;
+border-radius: 12px;
+-webkit-border-radius: 12px;
+-moz-border-radius: 12px;
+}
 .docviewer-editInput:focus {
   background: white;
 }
@@ -37,7 +64,7 @@
   width: 200px;
 }
 ::-webkit-input-placeholder { font-style:italic, font-size:10px; }
-::-moz-placeholder { font-style:italic } 
+::-moz-placeholder { font-style:italic }
 input:-moz-placeholder { font-style:italic }
 .docviewer-editButton {
   -webkit-border-radius: 5px;
@@ -50,8 +77,8 @@ input:-moz-placeholder { font-style:italic }
   margin-top: 5px;
   cursor:pointer;
 }
-.docviewer-editButton:hover { 
-  text-decoration:none; 
+.docviewer-editButton:hover {
+  text-decoration:none;
   color:#666;
   cursor:pointer;
   border:1px solid #666;

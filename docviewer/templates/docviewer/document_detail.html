@@ -14,28 +14,53 @@
   body {
     margin: 0;
   }
+
   .docviewer-headerHat, .docviewer-title, .docviewer-contentsHeader {
-    display: none;
+    display: block;
   }
   .docviewer-docViewer-Container{
     position:absolute;
-    top: 37px;
+    top: 76px;
   }
-  hr, footer {
+  .docviewer-headerHat {
+    padding: 10px 0 5px;
+    margin: 0 10px 0px 15px;
+    position: relative;
+  }
+  hr, footer, .docviewer-storyLink {
     display: none;
   }
   </style>
   <script type="text/javascript">
-    reload_url = "{% url "docviewer_json_view" pk=document.pk  %}"
-    mydocviewer = docviewer.load(reload_url, 
-      { container: '#documentviewer-container' });
+    function load_document(afterLoad){
+      reload_url = "{% url "docviewer_json_view" pk=document.pk  %}"
+      mydocviewer = docviewer.load(reload_url,
+        { container: '#documentviewer-container',
+          afterLoad: function(){
+            jQuery('<h4/>', {
+              class: 'media-heading'
+            }).append(
+            jQuery('<a/>', {
+              href: '{{ object.get_absolute_url }}',
+              text: '{{object.title}}, {{object.document.author}}',
+            })).append(
+            jQuery('<small/>', {
+              text: ' @{{ object.document.owner }}',
+            })).appendTo($('.docviewer-title').empty());
+            if (afterLoad){
+              afterLoad();
+            }
+          }
+        });
+    }
+    load_document(null);
   </script>
 {% endblock %}
 
 
 
 {% block content %}
-<div id="fixed-div" ></div>
+<div id="notification-bar" class="container" >&nbsp;<span id="fixed-div" ></span></div>
 <div id="documentviewer-container">
 
   <div class="documentviewer-loadingDocument"><span>Loading</span></div>

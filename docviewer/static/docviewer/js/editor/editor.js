@@ -61,7 +61,6 @@
       } else {
         docviewer_cover = $(ev_down.target).parents('.docviewer-cover');
       }
-      $("#fixed-div").show();
       selection_area.css('position', 'absolute');
       selection_area.css('top', ev_down.offsetY);
       selection_area.css('left', ev_down.offsetX);
@@ -130,14 +129,11 @@
       success: function (payload) {
         var zoomLevel = mydocviewer.models.pages.zoomLevel;
         console.log(zoomLevel);
-        mydocviewer = docviewer.load(reload_url, {
-          container: '#documentviewer-container',
-          afterLoad: function () {
-            mydocviewer.pageSet.zoom({zoomLevel: zoomLevel });
-            mydocviewer.api.setCurrentPage(adata.page_id);
-            disable_selection_mode();
-            animate_msg("Annotation saved");
-          }
+        load_document(function () {
+          mydocviewer.pageSet.zoom({zoomLevel: zoomLevel });
+          mydocviewer.api.setCurrentPage(adata.page_id);
+          disable_selection_mode();
+          animate_msg("Annotation saved");
         });
       },
       dataType: 'json',
@@ -178,18 +174,19 @@
       url: "remove_annotation/",
       data: adata,
       success: function (payload) {
-        var current_page = mydocviewer.api.currentPage();
-        mydocviewer = docviewer.load(reload_url, {
-          container: '#documentviewer-container',
-          afterLoad: function () {
-            mydocviewer.api.setCurrentPage(current_page);
-          }
+        var current_page = mydocviewer.api.currentPage(),
+          zoomLevel = mydocviewer.models.pages.zoomLevel;
+        load_document(function () {
+          mydocviewer.pageSet.zoom({zoomLevel: zoomLevel });
+          mydocviewer.api.setCurrentPage(current_page);
+          animate_msg("Annotation removed");
         });
       },
       dataType: 'json',
       type: 'GET'
     });
   }
+
 
   /** Bind the events for editing the title of an annotation. */
   function bind_title_events() {
