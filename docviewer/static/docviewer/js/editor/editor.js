@@ -156,8 +156,6 @@
       success: function (payload) {
         animate_msg("Annotation updated");
         value.trim();
-//        if (value.trim() === "") {
-//        }
       },
       dataType: 'json',
       error: function (payload) {
