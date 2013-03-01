@@ -146,3 +146,25 @@ Testing the installation:
 6) You can also try accessing the document directly::
 
     Access the document : http://localhost:8000/viewer/1/demo.html
+
+
+Disabling stop words:
+---------------------
+
+1) Open the elasticsearch.yml::
+
+    $ sudo nano /etc/elasticsearch/elasticsearch.yml
+
+2) Add the following to the configuration file (in the Index section)
+
+    index:
+      analysis:
+        analyzer:
+        # set standard analyzer with no stop words as the default for both indexing and searching
+        default:
+            type: standard
+            stopwords: _none_
+
+3) Restart the elasticsearch service::
+
+    sudo service elasticsearch restart
