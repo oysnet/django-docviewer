@@ -158,13 +158,17 @@ Disabling stop words:
 2) Add the following to the configuration file (in the Index section)
 
     index:
-      analysis:
-        analyzer:
-        # set standard analyzer with no stop words as the default for both indexing and searching
-        default:
-            type: standard
-            stopwords: _none_
+        analysis:
+            analyzer:
+            # set standard analyzer with no stop words as the default for both indexing and searching
+            default:
+                type: standard
+                stopwords: _none_
 
-3) Restart the elasticsearch service::
+3) Delete the haystack index (Warning, this is going to delete all the index)::
+
+    curl -XDELETE 'http://localhost:9200/haystack/'
+
+4) Restart the elasticsearch service::
 
     sudo service elasticsearch restart
