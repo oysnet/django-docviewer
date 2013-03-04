@@ -14,5 +14,5 @@ class PageIndex(CelerySearchIndex, indexes.Indexable):
     def get_model(self):
         return Page
 
-    def index_queryset(self):
+    def index_queryset(self, using=None):
         return self.get_model().objects.all()
