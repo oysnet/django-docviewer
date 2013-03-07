@@ -1,4 +1,3 @@
-
  .docviewer-annotations{
     position:relative;
     left:1px;
@@ -299,6 +298,7 @@
     box-shadow: inset 0 0 5px rgb(0,0,0);
     box-shadow: inset 0 0 5px rgba(0,0,0,.3);
     position:absolute;
+    max-width: none; 
   }
 
   .docviewer-annotationBody{
