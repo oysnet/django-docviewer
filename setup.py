@@ -19,10 +19,13 @@ setup(
                       #'django-haystack',
                       'django-haystack==2.0.0-beta',
                       'django-pipeline',
+                      #'django-celery',
                       'django-celery',
-                      'celery-haystack'],
+                      #'celery-haystack',
+                      'celery-haystack==2.0.0-stefanw'],
     dependency_links = [
-        'http://github.com/toastdriven/django-haystack/tarball/master#egg=django-haystack-2.0.0-beta'
+        'http://github.com/toastdriven/django-haystack/tarball/master#egg=django-haystack-2.0.0-beta',
+        'http://github.com/stefanw/celery-haystack/tarball/signal-processor#egg=celery-haystack-2.0.0-stefanw'
     ],
     classifiers=[
         'Environment :: Web Environment',
