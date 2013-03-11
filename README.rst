@@ -25,22 +25,22 @@ Installation of system dependencies:
 
 1) Install all the packages (the next line has been tried only in Ubuntu 12.04 64b and 12.10 64b)::
 
-    $ sudo apt-get install rabbitmq-server rubygems graphicsmagick poppler-utils pdftk ghostscript tesseract-ocr yui-compressor git python-pip python-dev build-essential npm openjdk-7-jre -y
+sudo apt-get install rabbitmq-server rubygems graphicsmagick poppler-utils pdftk ghostscript tesseract-ocr yui-compressor git python-pip python-dev build-essential npm openjdk-7-jre -y
 
 2) You need to install docsplit:
 
-    a) Install::
+   a) Install::
 
-        $ sudo gem install docsplit
+        sudo gem install docsplit
 
-    b) Try it::
+   b) Try it::
 
-        $ docsplit
+        docsplit
 
-    c) This is part of the oxys-net/django-docviewer configuration::
+   c) This is part of the oxys-net/django-docviewer configuration::
 
-        $ sudo ln -s /usr/local/bin/docsplit /usr/bin/docsplit
-        $ sudo ln -s /usr/bin/yui-compressor /usr/local/bin/yuicompressor
+        sudo ln -s /usr/local/bin/docsplit /usr/bin/docsplit
+        sudo ln -s /usr/bin/yui-compressor /usr/local/bin/yuicompressor
 
 3) Install yuglify (need it for production)::
 
@@ -48,16 +48,16 @@ Installation of system dependencies:
 
 4) Install the elasticsearch::
   
-    $ cd ~
-    $ wget https://github.com/downloads/elasticsearch/elasticsearch/elasticsearch-0.19.11.deb
-    $ sudo dpkg -i elasticsearch-0.19.11.deb
+    cd ~
+    wget https://github.com/downloads/elasticsearch/elasticsearch/elasticsearch-0.19.11.deb
+    sudo dpkg -i elasticsearch-0.19.11.deb
 
 Install the django-docviewer:
 -----------------------------
 
 1) Run the following in pip (inside your virtualenv)::
 
-    $ pip install -e git+git://github.com/robertour/django-docviewer.git#egg=django-docviewer
+    pip install -e git+git://github.com/robertour/django-docviewer.git#egg=django-docviewer
 
 2) Add the following apps to the INSTALLED_APPS of your Django settings::
 
@@ -81,6 +81,7 @@ Install the django-docviewer:
     BROKER_URL='amqp://guest:guest@localhost:5672//'
 
 5) Add the haystack configuration to your Django settings::
+
     #Haystack configuration
 
     HAYSTACK_CONNECTIONS = {
@@ -104,24 +105,24 @@ Install the django-docviewer:
 
 7) Update your database and launch:
 
-    a) Update database::
+   a) Update database::
 
-        $ python manage.py syncdb
+        python manage.py syncdb
 
-    b) Launch your site::
+   b) Launch your site::
 
-        $ python manage.py runserver localhost:8000
+        python manage.py runserver localhost:8000
 
-    c) Access the site in the URL http://localhost:8000/admin/
+   c) Access the site in the URL http://localhost:8000/admin/
 
-    d) Logging with the user created in syncdb or any other admin
+   d) Logging with the user created in syncdb or any other admin
 
-    e) Go to the following address::
+   e) Go to the following address::
 
         localhost:8000/admin/sites/site/1/
 
-    f) Check the domain name is correct ("localhost:8000" if you are developing). Or change it to the your real domain name. This is mandatory for the docviewer to find the images of your pdfs. You will need to restart the server::
-        $ python manage.py runserver localhost:8000
+   f) Check the domain name is correct ("localhost:8000" if you are developing). Or change it to the your real domain name. This is mandatory for the docviewer to find the images of your pdfs. You will need to restart the server::
+    python manage.py runserver localhost:8000
 
 
 Testing the installation:
@@ -129,23 +130,23 @@ Testing the installation:
 
 1) Start the server::
 
-    $ python manage.py runserver localhost:8000
+    python manage.py runserver localhost:8000
 
-3) In another terminal run the celery service::
+2) In another terminal run the celery service::
 
-    $ python manage.py celery worker
+    python manage.py celery worker
 
-4) Add a scanned pdf document (for convenience, there is one in ~/git/django-docviewer/test.pdf) through the admin interface::
+3) Add a scanned pdf document (for convenience, there is one in ~/git/django-docviewer/test.pdf) through the admin interface::
 
     localhost:8000/admin/document/
 
-5) You will need to wait a few seconds while docsplit splits the document and elasticsearch index it. You can see the status in the admin interface. When the status is 'ready', you can search in the following URL (make sure you search with an appropiate term that is insider your pdf)::
+4) You will need to wait a few seconds while docsplit splits the document and elasticsearch index it. You can see the status in the admin interface. When the status is 'ready', you can search in the following URL (make sure you search with an appropiate term that is insider your pdf)::
 
     localhost:8000/search/
 
-6) You can also try accessing the document directly::
+5) You can also try accessing the document directly::
 
-    Access the document : http://localhost:8000/viewer/1/demo.html
+   access the document : http://localhost:8000/viewer/1/demo.html
 
 
 Disabling stop words:
@@ -153,15 +154,15 @@ Disabling stop words:
 
 1) Open the elasticsearch.yml::
 
-    $ sudo nano /etc/elasticsearch/elasticsearch.yml
+    sudo nano /etc/elasticsearch/elasticsearch.yml
 
-2) Add the following to the configuration file (in the Index section)
+2) Add the following to the configuration file (in the Index section)::
 
     index:
-        analysis:
-            analyzer:
+       analysis:
+           analyzer:
             # set standard analyzer with no stop words as the default for both indexing and searching
-            default:
+           default:
                 type: standard
                 stopwords: _none_
 
