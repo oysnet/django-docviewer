@@ -34,6 +34,7 @@
   <script type="text/javascript">
     function load_document(afterLoad){
       reload_url = "{% url "docviewer_json_view" pk=document.pk  %}"
+      docviewer.History.count = 0; // Bug, does not clear when reloads.
       mydocviewer = docviewer.load(reload_url,
         { container: '#documentviewer-container',
           afterLoad: function(){
