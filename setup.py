@@ -21,10 +21,10 @@ setup(
                       'django-pipeline',
                       #'django-celery',
                       'django-celery',
-                      'celhay-ferumfey'],
+                      'celery-haystack-1.7.1-beta'],
     dependency_links = [
         'http://github.com/toastdriven/django-haystack/tarball/master#egg=django-haystack-2.0.0-beta',
-        'http://github.com/FerumFlex/celhay-ferumfey/tarball/master#egg=celhay-ferumfey'
+        'http://github.com/FerumFlex/celery-haystack/tarball/develop#egg=celery-haystack-1.7.1-beta'
     ],
     classifiers=[
         'Environment :: Web Environment',
