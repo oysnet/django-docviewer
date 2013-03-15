@@ -21,11 +21,10 @@ setup(
                       'django-pipeline',
                       #'django-celery',
                       'django-celery',
-                      #'celery-haystack'],
-                      'celery-haystack==0.6.2-old'],
+                      'celery-haystack==0.7.1-FerumFlex'],
     dependency_links = [
         'http://github.com/toastdriven/django-haystack/tarball/6065c8525bea4b9a116c7fa279b9e3e26ac7362f#egg=django-haystack-2.0.0-beta',
-        'http://github.com/jezdez/celery-haystack/tarball/795d37450815c680e4f936f2ba2ff77d882dd3a0#egg=celery-haystack-0.6.2-old'
+        'http://github.com/FerumFlex/celery-haystack/tarball/master#egg=celery-haystack-0.7.1-FerumFlex'
     ],
     classifiers=[
         'Environment :: Web Environment',
