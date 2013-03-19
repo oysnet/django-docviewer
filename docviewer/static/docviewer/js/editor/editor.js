@@ -312,7 +312,6 @@
       );
     });
     hide_anno_on_page_change();
-    show_hide_addannotation_on_tab_change();
   });
 
 }());
