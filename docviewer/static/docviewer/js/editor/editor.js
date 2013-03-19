@@ -271,6 +271,27 @@
     mydocviewer.states.helpers.addObserver("observerPage");
   }
 
+  /** Hide the annotation area when the page changes */
+  function hide_anno_on_page_change() {
+    mydocviewer.states.events.observerPage = function () {
+      if (mydocviewer.state !== 'ViewDocument') {
+        $('#annotation-options').hide();
+      } else {
+        $('#annotation-options').show();
+        var anno = $('#annotation-area');
+        if (anno.length === 0) { return; }
+        if (mydocviewer.api.currentPage() >= annotation_page - 1 &
+            mydocviewer.api.currentPage() <= annotation_page + 1) {
+          anno.show();
+        } else {
+          anno.hide();
+        }
+      }
+    };
+    mydocviewer.states.helpers.addObserver("observerPage");
+  }
+
+
   /** Bind the event to its respectives elements. */
   $(document).ready(function () {
     bind_content_events();
@@ -291,6 +312,7 @@
       );
     });
     hide_anno_on_page_change();
+    show_hide_addannotation_on_tab_change();
   });
 
 }());

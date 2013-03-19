@@ -169,4 +169,3 @@ docviewer.load = function(documentRep, options) {
 // If the document viewer has been loaded dynamically, allow the external
 // script to specify the onLoad behavior.
 if (docviewer.onload) _.defer(docviewer.onload);
-
