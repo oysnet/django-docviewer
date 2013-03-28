@@ -118,6 +118,7 @@ class Document(TimeStampedModel, StatusModel):
         f.close()
         file.close()
 
+        self.title = filename.split('/')[-1].lower()
         self.filename = filepath.split('/')[-1].lower()
         task = task_generate_document.apply_async(args=[self.pk], countdown=5)
         self.task_id = task.task_id
