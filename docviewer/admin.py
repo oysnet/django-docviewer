@@ -21,8 +21,9 @@ class DocumentAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {'fields': (
-            'title', 'description', 'file', 'source_url', 'related_url',
-            'contributor', 'contributor_organization', 'download')}),
+            'title', 'description', 'file', 'language', 'source_url',
+            'related_url', 'contributor', 'contributor_organization',
+            'download')}),
         ('Meta', {'fields': (
             'status', 'filename', 'page_count',
             'task_id', 'task_error', 'task_start')}),

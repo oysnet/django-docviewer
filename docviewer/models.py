@@ -19,6 +19,10 @@ RE_PAGE = re.compile(r'^.*_([0-9]+)\.txt')
 class Document(TimeStampedModel, StatusModel):
 
     STATUS = Choices('waiting', 'ready', 'running', 'failed')
+    LANGUAGES = Choices(
+        ("eng","English"),
+        ("spa","Spanish"),
+        ("spa_old","Old Spanish"))
 
     slug = AutoSlugField(
         _('Slug'), max_length=255, unique=True, populate_from='title')
@@ -27,6 +31,8 @@ class Document(TimeStampedModel, StatusModel):
     source_url = models.URLField(
         _('Source URL of the document'), max_length=1024, null=True,
         blank=True)
+    language = models.CharField(_('Language'), choices=LANGUAGES,
+        default='spa', max_length=7)
     page_count = models.PositiveIntegerField(
         null=True, blank=True, help_text=_('Total page in the document'))
     contributor = models.CharField(
