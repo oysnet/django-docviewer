@@ -2,6 +2,11 @@
 {% load compressed %}
 {% load url from future %}
 {% load zotero_tags from zotero_extras %}
+
+{% block extra_metas %}
+  {% zotero_tags mod=Document oid=document.id voc=dc out=meta %}
+{% endblock %}
+
 {% block extra_css %}
   {% compressed_css 'docviewer-base' %}
   {% compressed_css 'docviewer-print' %}
