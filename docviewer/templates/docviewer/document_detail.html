@@ -1,72 +1,21 @@
-{% extends 'base.html' %}
-{% load compressed %}
-{% load url from future %}
-{% load zotero_tags from zotero_extras %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="ClearType" content="true">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <title>{{document.title}}</title>
 
-{% block extra_metas %}
-  {% zotero_tags mod=Document oid=document.id voc=dc out=meta %}
-{% endblock %}
-
-{% block extra_css %}
-  {% compressed_css 'docviewer-base' %}
-  {% compressed_css 'docviewer-print' %}
-{% endblock %}
-{% block extra_js %}
+  {% load compressed %}
+  {% load url from future %}
   <script src="//code.jquery.com/jquery-1.7.1.min.js"></script>
   <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/libs/jquery-1.7.1.min.js"><\/script>')</script>
-  {% compressed_js 'docviewer-base' %}
+  {% compressed_css 'docviewer-base' %}
+  {% compressed_css 'docviewer-print' %}
   {% compressed_js 'docviewer-template' %}
-  <style>
-  body {
-    margin: 0;
-  }
-
-  .docviewer-headerHat, .docviewer-title, .docviewer-contentsHeader {
-    display: block;
-  }
-  .docviewer-docViewer-Container{
-    position:absolute;
-    top: 76px;
-  }
-  .docviewer-headerHat {
-    padding: 10px 0 5px;
-    margin: 0 10px 0px 15px;
-    position: relative;
-  }
-  hr, footer, .docviewer-storyLink {
-    display: none;
-  }
-  </style>
-  <script type="text/javascript">
-    function load_document(afterLoad){
-      reload_url = "{% url "docviewer_json_view" pk=document.pk  %}"
-      docviewer.History.count = 0; // Bug, does not clear when reloads.
-      mydocviewer = docviewer.load(reload_url,
-        { container: '#documentviewer-container',
-          afterLoad: function(){
-            jQuery('<h4/>', {
-              class: 'media-heading'
-            }).append(
-            jQuery('<a/>', {
-              href: '{{ object.get_absolute_url }}',
-              text: '{{object.title}}, {{object.document.author}}',
-            })).append(
-            jQuery('<small/>', {
-              text: ' @{{ object.document.owner }}',
-            })).appendTo($('.docviewer-title').empty());
-            if (afterLoad){
-              afterLoad();
-            }
-          }
-        });
-    }
-    load_document(null);
-  </script>
-{% endblock %}
-
-
-
-{% block content %}
+  {% compressed_js 'docviewer-base' %}
+</head>
+<body>
 <div id="notification-bar" class="container" >&nbsp;<span id="fixed-div" ></span></div>
 <div id="documentviewer-container">
 
@@ -78,4 +27,21 @@
   </noscript>
 
 </div>
-{% endblock %}
+
+<script type="text/javascript">
+
+  var reload_url = "{% url "docviewer_json_view" pk=document.pk  %}";
+  function load_document(afterLoad){
+    /** Bug in docviewer: does not clear when reloads.
+        A better approach should be solving this in the load function itself
+        I will fix this when django-docviewer would survive by itself.
+    **/
+    docviewer.History.count = 0;
+    mydocviewer = docviewer.load(reload_url,
+      { container: '#documentviewer-container' });
+  }
+  load_document(null);
+</script>
+
+</body>
+</html>

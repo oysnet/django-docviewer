@@ -50,7 +50,6 @@ PIPELINE_JS['docviewer-template'] = {
         'docviewer/js/views/thumbnails.jst',
         'docviewer/js/views/unsupported.jst',
         'docviewer/js/views/viewer.jst',
-        'docviewer/js/editor/editor.js',
     ),
     'output_filename': 'c/docviewer-template.r?.js',
 }
@@ -92,6 +91,7 @@ PIPELINE_JS['docviewer-base'] = {
         'docviewer/js/states/states.js',
         'docviewer/js/controllers/document_viewer.js',
         'docviewer/js/controllers/api.js',
+        'docviewer/js/editor/editor.js',
     ),
     'output_filename': 'c/docviewer-base.r?.js',
 }

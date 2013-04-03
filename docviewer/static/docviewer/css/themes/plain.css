@@ -216,3 +216,24 @@ docviewer-cancelEdit {
 .docviewer-views .docviewer-last span {
   -webkit-border-top-right-radius: 5px; -moz-border-radius-topright: 5px;
 }
+
+/** Final tweaks to the document_detail **/
+body {
+  margin: 0;
+}
+
+.docviewer-headerHat, .docviewer-title, .docviewer-contentsHeader {
+  display: block;
+}
+.docviewer-docViewer-Container{
+  position:absolute;
+  top: 76px;
+}
+.docviewer-headerHat {
+  padding: 10px 0 5px;
+  margin: 0 10px 0px 15px;
+  position: relative;
+}
+hr, footer, .docviewer-storyLink {
+  display: none;
+}
