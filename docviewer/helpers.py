@@ -14,7 +14,7 @@ def docsplit(document):
         "/usr/bin/docsplit text --pages all -l %s --no-clean --output %s %s/%s.pdf" % (
             document.language, path, path, document.slug)]
 
-    print "/usr/bin/docsplit text --pages all -l %s --output %s %s/%s.pdf" % (
+    print "/usr/bin/docsplit text --pages all -l %s --no-clean--output %s %s/%s.pdf" % (
             document.language, path, path, document.slug)
 
     if document.docfile_basename.split('.')[-1].lower() != 'pdf':
