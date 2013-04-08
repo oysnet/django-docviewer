@@ -10,6 +10,7 @@ import codecs
 import shutil
 
 from docviewer.settings import IMAGE_FORMAT, DOCUMENT_ROOT, DOCUMENT_URL
+from django.conf import settings
 from docviewer.tasks import task_generate_document
 
 
@@ -32,7 +33,7 @@ class Document(TimeStampedModel, StatusModel):
         _('Source URL of the document'), max_length=1024, null=True,
         blank=True)
     language = models.CharField(_('Language'), choices=LANGUAGES,
-        default='spa', max_length=7)
+        default='spa', max_length=7, null=False, blank=False)
     page_count = models.PositiveIntegerField(
         null=True, blank=True, help_text=_('Total page in the document'))
     contributor = models.CharField(
@@ -46,8 +47,9 @@ class Document(TimeStampedModel, StatusModel):
     related_url = models.URLField(
         _('Url where the document can be view'),
         max_length=1024, null=False, blank=True, default='')
-    filename = models.CharField(
-        _('PDF file name'), max_length=512, null=True, blank=True)
+    docfile = models.FileField(
+        _('PDF Document File'), upload_to='pdfs/%Y/%m/%d', max_length=512,
+        null=False, blank =False)
     task_id = models.CharField(
         _('Celery task ID'), max_length=50, null=True, blank=True)
     task_error = models.TextField(
@@ -93,8 +95,7 @@ class Document(TimeStampedModel, StatusModel):
 
     @property
     def text(self):
-        path = "%s/%s.txt" % (self.get_root_path(), self.slug)
-        f = open(path, 'r')
+        f = open(self.text_url, 'r')
         data = f.read()
         f.close()
         return data
@@ -104,31 +105,29 @@ class Document(TimeStampedModel, StatusModel):
         super(Document, self).save(*args, **kwargs)
         if create:
             os.makedirs(self.get_root_path())
-
-    def delete(self):
-        shutil.rmtree(self.get_root_path(), ignore_errors=True)
-        super(Document, self).delete()
+            self.process_file()
 
     def get_file_path(self):
-        return "%s/%s" % (self.get_root_path(), self.filename)
+        return "%s/%s" % (self.get_root_path(), self.docfile_basename)
 
-    def set_file(self, path=None, file=None, filename=None):
-        if path is not None:
-            file = open(path, 'r')
-            filepath = "%s/%s.%s" % (self.get_root_path(), self.slug, path.split('.')[-1].lower())
-        else:
-            filepath = "%s/%s.%s" % (self.get_root_path(), self.slug, filename.split('.')[-1].lower())
-
+    def process_file(self):
+        file = open(os.path.join(settings.MEDIA_ROOT,self.docfile.name), 'r')
+        filepath = "%s/%s.%s" % (
+            self.get_root_path(), self.slug,
+            self.docfile_basename.split('.')[-1].lower())
         f = open(filepath, "w")
         f.write(file.read())
         f.close()
         file.close()
 
-        self.title = filename.split('/')[-1].lower()
-        self.filename = filepath.split('/')[-1].lower()
+        self.title = self.docfile_basename
         task = task_generate_document.apply_async(args=[self.pk], countdown=5)
         self.task_id = task.task_id
         self.save()
+
+    @property
+    def docfile_basename(self):
+        return os.path.basename(self.docfile.name)
 
     def generate(self):
         # concatenate all text files
@@ -189,3 +188,19 @@ class Annotation(models.Model):
     location = models.CommaSeparatedIntegerField(_('Coordinates'), max_length=50)
     page = models.PositiveIntegerField(_('Page ID'))
     content = models.TextField(_('Content'))
+
+
+from django.db.models.signals import post_delete, post_save
+from django.dispatch.dispatcher import receiver
+
+@receiver(post_delete, sender=Document)
+def document_delete(sender, instance, **kwargs):
+    shutil.rmtree(instance.get_root_path(), ignore_errors=True)
+    instance.docfile.delete(False)
+
+@receiver(post_save, sender=Document)
+def document_post_save(sender, instance, created, **kwargs):
+    print "this is never called"
+    if created:
+        os.makedirs(instance.get_root_path())
+        instance.process_file()

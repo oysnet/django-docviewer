@@ -17,25 +17,20 @@ class DocViewerChangeList(ChangeList):
 
 class DocumentAdmin(admin.ModelAdmin):
     form = DocumentForm
-    readonly_fields = ('status', 'page_count', 'filename', 'task_id', 'task_error', 'task_start')
+    readonly_fields = ('status', 'page_count', 'task_id', 'task_error', 'task_start')
 
     fieldsets = (
         (None, {'fields': (
-            'title', 'description', 'file', 'language', 'source_url',
+            'title', 'description', 'docfile', 'language', 'source_url',
             'related_url', 'contributor', 'contributor_organization',
             'download')}),
         ('Meta', {'fields': (
-            'status', 'filename', 'page_count',
+            'status', 'page_count',
             'task_id', 'task_error', 'task_start')}),
     )
 
     def get_changelist(self, request, **kwargs):
         return DocViewerChangeList
-
-    def save_model(self, request, obj, form, change):
-        obj.save()
-        file = form.cleaned_data['file']
-        obj.set_file(file=file, filename=file.name)
 
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(Annotation)
