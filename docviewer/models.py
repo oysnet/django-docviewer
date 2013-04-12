@@ -9,6 +9,7 @@ import os
 import re
 import codecs
 import shutil
+import uuid
 
 from docviewer.settings import IMAGE_FORMAT, DOCUMENT_ROOT, DOCUMENT_URL
 from docviewer.tasks import task_generate_document
@@ -100,12 +101,12 @@ class Document(TimeStampedModel, StatusModel):
         f.close()
         return data
 
-    def save(self, *args, **kwargs):
-        create = self.pk is None
-        super(Document, self).save(*args, **kwargs)
-        if create:
-            os.makedirs(self.get_root_path())
-            self.process_file()
+#    def save(self, *args, **kwargs):
+#        create = self.pk is None
+#        super(Document, self).save(*args, **kwargs)
+#        if create:
+#            os.makedirs(self.get_root_path())
+#            self.process_file()
 
     def get_file_path(self):
         return "%s/%s" % (self.get_root_path(), self.docfile_basename)
@@ -198,9 +199,10 @@ def document_delete(sender, instance, **kwargs):
     shutil.rmtree(instance.get_root_path(), ignore_errors=True)
     instance.docfile.delete(False)
 
-#@receiver(post_save, sender=Document)
-#def document_save(sender, instance, created, **kwargs):
-#    print "this is never called"
-#    if created:
-#        os.makedirs(instance.get_root_path())
-#        instance.process_file()
+#receiver(post_save, sender=Document)
+def document_save(sender, instance, created, **kwargs):
+    if created and issubclass(sender, Document):
+        os.makedirs(instance.get_root_path())
+        instance.process_file()
+
+post_save.connect(document_save, dispatch_uid=str(uuid.uuid1()))
