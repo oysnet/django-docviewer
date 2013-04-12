@@ -1,9 +1,4 @@
-.project
-.pydevproject
-.settings
+.gitignore
+*~
 *.pyc
-*.mo
-django_docviewer.egg-info
-/demo/demoproject/test.sqlite3
-/env/
-/demo/demoproject/var/
+*.sqlite*

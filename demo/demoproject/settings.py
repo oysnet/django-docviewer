@@ -118,11 +118,19 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'docviewer',
     'django.contrib.admin',
-    'pipeline',
+    'pipeline',        # necessary for compression and docviewer templates
+    'djcelery',        # necessary for python manage.py celery worker
+    'celery_haystack', # necessary for automatic rebuild_index
+    'haystack',        # necessary for manual rebuild_index
+    'docviewer',
 )
 
+
+#Pipeline Configuration
+# Make sure you have yuglify install:
+# $ sudo apt-get install npm
+# $ npm install yuglify
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 PIPELINE = False
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
@@ -175,11 +183,31 @@ LOGGING = {
     }
 }
 
-#haystack
-HAYSTACK_SITECONF = 'docviewer.search_indexes'
-HAYSTACK_SEARCH_ENGINE = 'whoosh'
-HAYSTACK_WHOOSH_PATH = '/tmp'
+#Haystack Configuration for Whoosh
+#import os
+#HAYSTACK_CONNECTIONS = {
+#	'default': {
+#	    'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+#	    'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+#	},
+#}
 
-DOCVIEWER_DOCUMENT_ROOT = join(demoproject_dir, 'var/')
+#Haystack Configuration for ElasticSearch
+import os
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
+    },
+}
+
+# Celery configuration
+BROKER_URL='amqp://guest:guest@localhost:5672//'
+
+# Configuration for Docviewer
+DOCVIEWER_DOCUMENT_ROOT = join(demoproject_dir, 'docs/')
+DOCVIEWER_DOCUMENT_URL = '/docs/'
+DOCVIEWER_IMAGE_FORMAT =  'png'
 
 from docviewer.pipeline import *

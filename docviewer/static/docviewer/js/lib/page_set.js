@@ -141,7 +141,8 @@ docviewer.PageSet.prototype.draw = function(pageCollection){
 
 docviewer.PageSet.prototype.redraw = function(stopResetOfPosition, redrawAnnotations) {
   if (this.pages['p0']) this.pages['p0'].draw({ force: true, forceAnnotationRedraw : redrawAnnotations });
-  if (this.pages['p1']) this.pages['p1'].draw({ force: true, forceAnnotationRedraw : redrawAnnotations });
+  if (this.pages['p1']) 
+    this.pages['p1'].draw({ force: true, forceAnnotationRedraw : redrawAnnotations });
   if (this.pages['p2']) this.pages['p2'].draw({ force: true, forceAnnotationRedraw : redrawAnnotations });
 
   if(redrawAnnotations && this.viewer.activeAnnotation){

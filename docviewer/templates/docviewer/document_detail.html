@@ -12,25 +12,11 @@
   <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/libs/jquery-1.7.1.min.js"><\/script>')</script>
   {% compressed_css 'docviewer-base' %}
   {% compressed_css 'docviewer-print' %}
-  {% compressed_js 'docviewer-base' %}
   {% compressed_js 'docviewer-template' %}
-  <style>
-  body {
-    margin: 0;
-  }
-  
-  .docviewer-headerHat, .docviewer-title, .docviewer-contentsHeader {
-    display: block;
-  }
-  .docviewer-docViewer-Container{
-    position:absolute;
-    top: 110px;
-  }
-  </style>
-
+  {% compressed_js 'docviewer-base' %}
 </head>
 <body>
-
+<div id="notification-bar" class="container" >&nbsp;<span id="fixed-div" ></span></div>
 <div id="documentviewer-container">
 
   <div class="documentviewer-loadingDocument"><span>Loading</span></div>
@@ -43,8 +29,19 @@
 </div>
 
 <script type="text/javascript">
-  docviewer.load("{% url "docviewer_json_view" pk=document.pk  %}", { container: '#documentviewer-container' });
+
+  var reload_url = "{% url "docviewer_json_view" pk=document.pk  %}";
+  function load_document(afterLoad){
+    /** Bug in docviewer: does not clear when reloads.
+        A better approach should be solving this in the load function itself
+        I will fix this when django-docviewer would survive by itself.
+    **/
+    docviewer.History.count = 0;
+    mydocviewer = docviewer.load(reload_url,
+      { container: '#documentviewer-container' });
+  }
+  load_document(null);
 </script>
-    
+
 </body>
 </html>

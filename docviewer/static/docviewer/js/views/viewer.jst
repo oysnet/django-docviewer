@@ -73,6 +73,21 @@
                 <div class="docviewer-contributor">Contributed by: <%= contributors %></div>
               <% } %>
             </div>
+            <div class="docviewer-supplemental" id="annotation-options">
+              <div class="docviewer-annotationLink" id="add-annotation">
+                <a href="#"> Add Annotation</a>
+              </div>
+              <div class="docviewer-annotationLink" id="cancel-annotation" >
+                <a href="#"> Cancel "Add Annotation"</a>
+              </div>
+              <div id="form-annotation" class="docviewer-editBox">
+                <form action="#" method="get" class="docviewer-editAnnotation">
+                    <input id="annotation-title" class="docviewer-editInput" type="text"  placeholder="Title of Annotation">
+                    <textarea id="annotation-content" rows="6" class="docviewer-editInput" placeholder="Description"></textarea>
+                    <input id="annotation-button" class="docviewer-editButton" type="button" value="Add Annotation">
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </div>

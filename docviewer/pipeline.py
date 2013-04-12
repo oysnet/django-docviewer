@@ -12,6 +12,7 @@ PIPELINE_CSS['docviewer-base'] = {
         'docviewer/css/components/ui-navigation.css',
         'docviewer/css/components/ui-search.css',
         'docviewer/css/components/ui-text.css',
+        'docviewer/css/vendor/jquery-ui-1.9.2.css',
         'docviewer/css/components/ui-zoom.css',
         'docviewer/css/components/view-annotations.css',
         'docviewer/css/components/view-document.css',
@@ -20,15 +21,13 @@ PIPELINE_CSS['docviewer-base'] = {
         'docviewer/css/components/view-thumbnails.css',
         'docviewer/css/components/unsupported.css',
         'docviewer/css/components/minimode.css',
-        'docviewer/css/themes/plain.css',
-        ),
+        'docviewer/css/themes/plain.css',),
     'output_filename': 'c/docviewer-base.r?.css',
 }
 
 PIPELINE_CSS['docviewer-print'] = {
     'source_filenames': (
-        'docviewer/css/print.css',
-        ),
+        'docviewer/css/print.css',),
     'extra_context': {
         'media': 'print',
     },
@@ -57,7 +56,7 @@ PIPELINE_JS['docviewer-template'] = {
 PIPELINE_JS['docviewer-base'] = {
     'source_filenames': (
         'docviewer/js/vendor/jquery-1.5.1.js',
-        'docviewer/js/vendor/jquery-ui-1.8.1.custom.min.js',
+        'docviewer/js/vendor/jquery-ui.1.9.2.js',
         'docviewer/js/vendor/underscore.js',
         'docviewer/js/vendor/jquery.acceptInput.js',
         'docviewer/js/vendor/jquery.placeholder.js',
@@ -92,7 +91,7 @@ PIPELINE_JS['docviewer-base'] = {
         'docviewer/js/states/states.js',
         'docviewer/js/controllers/document_viewer.js',
         'docviewer/js/controllers/api.js',
+        'docviewer/js/editor/editor.js',
     ),
     'output_filename': 'c/docviewer-base.r?.js',
 }
-

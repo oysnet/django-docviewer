@@ -24,7 +24,6 @@
 
 
   <div class="docviewer-annotationContent">
-
     <div class="docviewer-annotationHeader docviewer-clearfix">
       <div class="docviewer-pagination docviewer-editHidden">
         <span class="docviewer-trigger docviewer-annotationPrevious" title="Previous Annotation">Previous</span>
@@ -39,6 +38,7 @@
         <div class="docviewer-privateLock docviewer-editHidden" title="Private note"></div>
       <% } %>
       <span class="docviewer-permalink docviewer-editHidden" title="Link to this note"></span>
+      <span class="docviewer-remove docviewer-editHidden" title="Remove this note"></span>
       <div class="docviewer-showEdit docviewer-editHidden <%= accessClass %>"></div>
     </div>
 
@@ -53,9 +53,14 @@
         <img class="docviewer-img" src="<%= image %>" style="top:-<%= imageTop %>px;" width="<%= imageWidth %>" />
       </div>
     </div>
-
     <div class="docviewer-annotationBody docviewer-editHidden">
-      <%= text %>
+      <% if (text) { %>
+        <%= text %>
+      <% } else { %>
+      <span class="empty">
+        Click here to add a description
+      </span>
+      <% } %>
     </div>
     <textarea class="docviewer-annotationTextArea docviewer-editVisible" style="width: <%= bWidth %>px;"><%= text %></textarea>
 

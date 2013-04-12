@@ -35,20 +35,25 @@ docviewer.Schema.events = {
     var first = index == 0;
     var last  = index == this.models.document.totalPages - 1;
     if (first) index += 1;
-    var pages = [
-      { label: pageIds[0], index: index - 1 },
-      { label: pageIds[1], index: index },
-      { label: pageIds[2], index: index + 1 }
-    ];
-    if (last) pages.pop();
-    pages[first ? 0 : pages.length - 1].currentPage = true;
-    this.viewer.pageSet.draw(pages);
+
+    if (pageIds !== undefined && pageIds[0] !== undefined ){
+      var pages = [
+        { label: pageIds[0], index: index - 1 },
+        { label: pageIds[1], index: index },
+        { label: pageIds[2], index: index + 1 }
+      ];
+
+      if (last) pages.pop();
+      pages[first ? 0 : pages.length - 1].currentPage = true;
+      this.viewer.pageSet.draw(pages);
+    }
   },
 
   check: function(){
     var viewer = this.viewer;
     if(viewer.busy === false){
       viewer.busy = true;
+      
       for(var i = 0; i < this.viewer.observers.length; i++){
         this[viewer.observers[i]].call(this);
       }

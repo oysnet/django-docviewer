@@ -1,5 +1,113 @@
 /* DocumentCloud overrides to the DocViewer CSS go here: */
-
+#notification-bar{
+margin-top: -22px;
+text-align: center;
+}
+.docviewer-chaptersContainer{
+  max-height: 200px;
+  overflow: auto;
+}
+span#fixed-div{
+  font-size: 10px;
+  font-family: Helvetica;
+  background: #FFE325;
+  background: rgba(255, 227, 37, 0.2);
+  border: 1px solid #E1C800;
+  border: 1px solid rgba(255, 227, 37, 0.5);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  padding: 0px 15px;
+  display: none;
+}
+input.docviewer-editInput, .docviewer-editInput {
+  display: block;
+  border: 1px solid #999;
+  border-radius: 8px; -webkit-border-radius: 8px; -moz-border-radius: 8px;
+  font-family: Arial;
+  margin: 2px 5px 0 0;
+  padding: 4px 10px 3px;
+  width:100%;
+  font-size: 11px;
+  line-height: 14px;
+  outline: none;
+  background: #FFE325;
+  background: rgba(255, 227, 37, 0.2);
+}
+input[type="button"].docviewer-editButton {
+  text-decoration: none;
+  font: 10px Arial, Helvetica, sans-serif;
+  text-shadow: 0px 1px 0px #fff;
+  height:26px;
+  border: 1px solid #777;
+  text-transform: uppercase;
+  color: #000;
+}
+.docviewer-docViewer .docviewer-searchInput {
+display: block;
+border: 1px solid #777;
+font-family: Arial;
+margin: 2px 5px 0 0;
+padding: 4px 20px 3px;
+width: 210px;
+font-size: 11px;
+line-height: 14px;
+background: #FFF url(../../img/embed/search_icon.png) no-repeat 5px 5px;
+outline: none;
+height: 14px;
+border: 1px solid #999;
+border-radius: 12px;
+-webkit-border-radius: 12px;
+-moz-border-radius: 12px;
+}
+.docviewer-editInput:focus {
+  background: white;
+}
+.docviewer-editBox{
+  text-align: center;
+  width: 200px;
+}
+::-webkit-input-placeholder { font-style:italic, font-size:10px; }
+::-moz-placeholder { font-style:italic }
+input:-moz-placeholder { font-style:italic }
+.docviewer-editButton {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #333;
+  color: #333;
+  display:inline-block;
+  text-decoration:none;
+  margin-top: 5px;
+  cursor:pointer;
+}
+.docviewer-editButton:hover {
+  text-decoration:none;
+  color:#666;
+  cursor:pointer;
+  border:1px solid #666;
+}
+#form-annotation, #cancel-annotation{
+  display: none;
+}
+#annotation-area{
+  background: #FFE325;
+  background: rgba(255, 227, 37, 0.2);
+  border: 3px solid #E1C800;
+  border: 3px solid rgba(255, 227, 37, 0.5);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  position: absolute;
+  z-index: 10;
+  height: 100px;
+  width: 200px;
+  cursor: pointer;
+}
+#annotation-area #instruction{
+  font: italic bold 11px Georgia, serif;
+  background: #FFE325;
+}
 .docviewer-docViewer {
   border: 1px solid #aaa;
   line-height: normal;
@@ -21,23 +129,20 @@
     text-shadow: 0px 1px 0px #ddd;
     color: #000;
   }
-    .docviewer-searchInput {
-      border: 1px solid #999;
-      border-radius: 16px; -webkit-border-radius: 16px; -moz-border-radius: 16px;
-    }
-
+.docviewer-searchInput {
+  border: 1px solid #999;
+  border-radius: 16px; -webkit-border-radius: 16px; -moz-border-radius: 16px;
+}
 .docviewer-docViewer-Container {
   margin: 0;
   border: 0;
 }
-
 .docviewer-pages, .docviewer-paper {
   background: #f5f6f7 url(../../img/embed/pagesbg.jpg);
 }
-  .docviewer-paper {
-    padding-top: 1px; /* needed to uncollapse the margin */
-  }
-
+.docviewer-paper {
+  padding-top: 1px; /* needed to uncollapse the margin */
+}
 .docviewer-privateLock, .docviewer-showEdit, .docviewer-permalink {
   width: 16px; height: 16px;
   float: left;
@@ -57,7 +162,6 @@
   margin-left: 10px;
   left: 0; top: 0;
 }
-
 .docviewer-annotationTitleInput,
 .docviewer-annotationTextArea {
   border: 1px solid #D0D0D0;
@@ -65,28 +169,32 @@
   font: 12px/15px Arial;
   outline: 0;
 }
-  .docviewer-annotationTextArea {
-    padding: 7px;
-    margin: 10px 0;
-    height: 110px;
-    outline: 0;
-    resize: none;
-  }
-  .docviewer-annotationTitleInput {
-    padding: 4px;
-    width: 300px;
-  }
+.docviewer-annotationTextArea {
+  padding: 7px;
+  margin: 10px 0;
+  height: 110px;
+  outline: 0;
+  resize: none;
+}
+.docviewer-annotationTitleInput {
+  padding: 4px;
+  width: 300px;
+}
 .docviewer-annotationEditControls .minibutton {
   width: 60px;
 }
-  .docviewer-cancelEdit {
-    margin-right: 10px;
-  }
-
+.docviewer-annotationBody{
+  font: 12px Arial, Helvetica, sans-serif;
+}
+.docviewer-annotationBody .empty{
+  font-style:italic;
+}
+docviewer-cancelEdit {
+  margin-right: 10px;
+}
 .docviewer-overlay {
   left: 0; right: 282px; bottom: 0;
 }
-
 .docviewer-well {
   padding-bottom: 16px;
 }
@@ -98,14 +206,34 @@
   background: white;
   padding: 5px 14px 10px;
 }
-
 .docviewer-views {
   position: relative;
   z-index: 10;
 }
-  .docviewer-views .docviewer-first span {
-    -webkit-border-top-left-radius: 5px; -moz-border-radius-topleft: 5px;
-  }
-  .docviewer-views .docviewer-last span {
-    -webkit-border-top-right-radius: 5px; -moz-border-radius-topright: 5px;
-  }
+.docviewer-views .docviewer-first span {
+  -webkit-border-top-left-radius: 5px; -moz-border-radius-topleft: 5px;
+}
+.docviewer-views .docviewer-last span {
+  -webkit-border-top-right-radius: 5px; -moz-border-radius-topright: 5px;
+}
+
+/** Final tweaks to the document_detail **/
+body {
+  margin: 0;
+}
+
+.docviewer-headerHat, .docviewer-title, .docviewer-contentsHeader {
+  display: block;
+}
+.docviewer-docViewer-Container{
+  position:absolute;
+  top: 76px;
+}
+.docviewer-headerHat {
+  padding: 10px 0 5px;
+  margin: 0 10px 0px 15px;
+  position: relative;
+}
+hr, footer, .docviewer-storyLink {
+  display: none;
+}
