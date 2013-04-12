@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 from model_utils.models import TimeStampedModel, StatusModel
 from model_utils import Choices
@@ -10,7 +11,6 @@ import codecs
 import shutil
 
 from docviewer.settings import IMAGE_FORMAT, DOCUMENT_ROOT, DOCUMENT_URL
-from django.conf import settings
 from docviewer.tasks import task_generate_document
 
 
@@ -199,7 +199,7 @@ def document_delete(sender, instance, **kwargs):
     instance.docfile.delete(False)
 
 #@receiver(post_save, sender=Document)
-#def document_post_save(sender, instance, created, **kwargs):
+#def document_save(sender, instance, created, **kwargs):
 #    print "this is never called"
 #    if created:
 #        os.makedirs(instance.get_root_path())
