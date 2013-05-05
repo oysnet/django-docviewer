@@ -3,13 +3,11 @@ Demo project for django-docviewer
 
 Install it
 ==========
-first line code is about 70mb
-
 
 ::
 
     $ sudo apt-get install rabbitmq-server rubygems graphicsmagick poppler-utils pdftk ghostscript tesseract-ocr yui-compressor
-    $ sudo gems install docsplit
+    $ sudo gem install docsplit
     $ sudo ln -s /usr/local/bin/docsplit /usr/bin/docsplit
     $ sudo ln -s /usr/bin/yui-compressor /usr/local/bin/yuicompressor
 
