@@ -20,7 +20,8 @@ Try it
     $ virtualenv env --no-site-packages --distribute
     $ env/bin/python setup.py develop
     $ env/bin/pip install Django
-    $ cd demo/demoserveur/
+	$ env/bin/pip install Whoosh
+    $ cd demo/demoproject/
     $ ../../env/bin/python manage.py syncdb
 	(Create an admin here)
     $ ../../env/bin/python manage.py runserver
