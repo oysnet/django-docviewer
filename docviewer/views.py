@@ -7,15 +7,22 @@ from django.utils import simplejson
 from django.contrib.sites.models import Site
 from django.views.generic.base import View
 from haystack.query import EmptySearchQuerySet, SearchQuerySet
-
-SITE = Site.objects.get_current()
-
-def get_absolute_url(relative_url):
+from urlparse import urlsplit, urlunsplit
+from .settings import HAYSTACK_CONNECTION
+def get_absolute_url(request, relative_url):
     
-    if relative_url[0:7] == 'http://' or relative_url[0:8] == 'https://':
-        return relative_url
     
-    return "http://%s%s" % (SITE.domain, relative_url)
+    s =  list(urlsplit(relative_url))
+
+    if s[0] not in ['http', 'https']:
+        if request.is_secure():
+            s[0] = 'https'
+        else:
+            s[0] = 'http'
+        s[1] = request.get_host()
+        return urlunsplit(s)
+
+    return relative_url
 
 class SearchDocumentView(View):
     
@@ -23,7 +30,7 @@ class SearchDocumentView(View):
         
         query = request.GET.get('q')
         
-        results = SearchQuerySet().models(Page).narrow('document_id:%s' %  kwargs.get('pk')).auto_query(query)
+        results = SearchQuerySet().using(HAYSTACK_CONNECTION).models(Page).narrow('document_id:%s' %  kwargs.get('pk')).auto_query(query)
         
         json = {
           'matches' : results.count(),
@@ -40,6 +47,8 @@ class JsonDocumentView(BaseDetailView):
     def get(self, request, **kwargs):
         document = self.get_object()
         
+        print request.get_host()
+
         json = {}
         json['id'] = "doc-%s" % (document.id,)
         json['title'] = document.title
@@ -50,23 +59,23 @@ class JsonDocumentView(BaseDetailView):
         json['created_at'] = rfc2822_date(document.created)
         json['updated_at'] = rfc2822_date(document.modified)
         
-        json['canonical_url'] = get_absolute_url(reverse("docviewer_viewer_view", kwargs = {'pk' : document.pk, 'slug' : document.slug}))
+        json['canonical_url'] = get_absolute_url(request, reverse("docviewer_viewer_view", kwargs = {'pk' : document.pk, 'slug' : document.slug}))
         
         json['contributor'] = document.contributor
         json['contributor_organization'] = document.contributor_organization
         
         json['resources'] = {}
         if document.download is True:
-            json['resources']['pdf'] = get_absolute_url(document.doc_url)
-        json['resources']['text'] = get_absolute_url(document.text_url)
-        json['resources']['thumbnail'] = get_absolute_url(document.thumbnail_url)
-        json['resources']['search'] = get_absolute_url(reverse("docviewer_search_view", kwargs = {'pk' : document.pk, 'slug' : document.slug})) + '?q={query}'
-        json['resources']['print_annotations'] = get_absolute_url(reverse("docviewer_printannotations_view", kwargs = {'pk' : document.pk, 'slug' : document.slug}))
+            json['resources']['pdf'] = get_absolute_url(request, document.doc_url)
+        json['resources']['text'] = get_absolute_url(request, document.text_url)
+        json['resources']['thumbnail'] = get_absolute_url(request, document.thumbnail_url)
+        json['resources']['search'] = get_absolute_url(request, reverse("docviewer_search_view", kwargs = {'pk' : document.pk, 'slug' : document.slug})) + '?q={query}'
+        json['resources']['print_annotations'] = get_absolute_url(request, reverse("docviewer_printannotations_view", kwargs = {'pk' : document.pk, 'slug' : document.slug}))
         json['resources']['page'] = {}
-        json['resources']['page']['text'] = get_absolute_url(document.text_page_url % {'page' : '{page}'})
-        json['resources']['page']['image'] = get_absolute_url(document.image_page_url % {'page' : '{page}', 'size' : '{size}'})
+        json['resources']['page']['text'] = get_absolute_url(request, document.text_page_url % {'page' : '{page}'})
+        json['resources']['page']['image'] = get_absolute_url(request, document.image_page_url % {'page' : '{page}', 'size' : '{size}'})
         
-        json['resources']['related_article'] = get_absolute_url(document.related_url)
+        json['resources']['related_article'] = get_absolute_url(request, document.related_url)
         json['resources']['published_url'] = json['canonical_url']
         
         json['sections'] = list(document.sections_set.all().values('title', 'page'))
