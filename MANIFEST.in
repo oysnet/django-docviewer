@@ -1,1 +1,2 @@
-recursive-include docviewer *.py *.html *.js *.jst *.css
+recursive-include docviewer/templates *
+recursive-include docviewer/static *
