@@ -1,0 +1,1 @@
+recursive-include docviewer *.py *.html *.js *.jst *.css
