@@ -47,7 +47,6 @@ class JsonDocumentView(BaseDetailView):
     def get(self, request, **kwargs):
         document = self.get_object()
         
-        print request.get_host()
 
         json = {}
         json['id'] = "doc-%s" % (document.id,)
