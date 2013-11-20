@@ -8,10 +8,13 @@ from django.contrib.sites.models import Site
 from django.views.generic.base import View
 from haystack.query import EmptySearchQuerySet, SearchQuerySet
 from urlparse import urlsplit, urlunsplit
-from .settings import HAYSTACK_CONNECTION
-def get_absolute_url(request, relative_url):
+from .settings import HAYSTACK_CONNECTION, DOCUMENT_MEDIAS_HOST
+
+def get_absolute_url(request, relative_url, host=None):
     
-    
+    if not host:
+        host = request.get_host()
+
     s =  list(urlsplit(relative_url))
 
     if s[0] not in ['http', 'https']:
@@ -19,7 +22,7 @@ def get_absolute_url(request, relative_url):
             s[0] = 'https'
         else:
             s[0] = 'http'
-        s[1] = request.get_host()
+        s[1] = host
         return urlunsplit(s)
 
     return relative_url
@@ -65,14 +68,14 @@ class JsonDocumentView(BaseDetailView):
         
         json['resources'] = {}
         if document.download is True:
-            json['resources']['pdf'] = get_absolute_url(request, document.doc_url)
-        json['resources']['text'] = get_absolute_url(request, document.text_url)
-        json['resources']['thumbnail'] = get_absolute_url(request, document.thumbnail_url)
+            json['resources']['pdf'] = get_absolute_url(request, document.doc_url, host=DOCUMENT_MEDIAS_HOST)
+        json['resources']['text'] = get_absolute_url(request, document.text_url, host=DOCUMENT_MEDIAS_HOST)
+        json['resources']['thumbnail'] = get_absolute_url(request, document.thumbnail_url, host=DOCUMENT_MEDIAS_HOST)
         json['resources']['search'] = get_absolute_url(request, reverse("docviewer_search_view", kwargs = {'pk' : document.pk, 'slug' : document.slug})) + '?q={query}'
         json['resources']['print_annotations'] = get_absolute_url(request, reverse("docviewer_printannotations_view", kwargs = {'pk' : document.pk, 'slug' : document.slug}))
         json['resources']['page'] = {}
-        json['resources']['page']['text'] = get_absolute_url(request, document.text_page_url % {'page' : '{page}'})
-        json['resources']['page']['image'] = get_absolute_url(request, document.image_page_url % {'page' : '{page}', 'size' : '{size}'})
+        json['resources']['page']['text'] = get_absolute_url(request, document.text_page_url % {'page' : '{page}'}, host=DOCUMENT_MEDIAS_HOST)
+        json['resources']['page']['image'] = get_absolute_url(request, document.image_page_url % {'page' : '{page}', 'size' : '{size}'}, host=DOCUMENT_MEDIAS_HOST)
         
         json['resources']['related_article'] = get_absolute_url(request, document.related_url)
         json['resources']['published_url'] = json['canonical_url']
