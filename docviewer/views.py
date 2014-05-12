@@ -82,4 +82,7 @@ class JsonDocumentView(BaseDetailView):
         json['annotations'] = list(document.annotations_set.all().values('location', 'title', 'id', 'page', 'content'))
         
         
-        return HttpResponse(simplejson.dumps(json), content_type="application/json")
+        if request.GET.get('callback', None) is not None:
+            return HttpResponse("%s(%s);" % (request.GET.get('callback'),simplejson.dumps(json)), content_type="application/javascript")
+        else :
+            return HttpResponse(simplejson.dumps(json), content_type="application/json")
